@@ -15,6 +15,8 @@ ogImage: "../../assets/images/ebbinghaus-forgetting-curve.png"
 ---
 
 import EbbinghausChart from '../../components/EbbinghausChart.jsx';
+import FrictionHunterDashboard from '../../components/FrictionHunterDashboard.jsx';
+
 
 ![The Ebbinghaus Forgetting Curve: How spaced repetition resets memory retention back to 100%](../../assets/images/ebbinghaus-forgetting-curve.png)
 
@@ -149,7 +151,16 @@ Now, try to fix it without looking back at your original tutorial.
 
 ---
 
+## Live System Architecture: Autonomous Pipeline Telemetry
+
+Below is a live rendering of the actual **Friction Hunter** backend running serverless on Google Cloud Run. This React component fetches live telemetry data directly from the read-only public API (`/api/public/opportunities`), serving isolated software axioms and Total Addressable Pain (TAP) valuations without authentication constraints.
+
+<FrictionHunterDashboard client:load />
+
+---
+
 ## The Final Takeaway
+
 
 Tools, syntax, and cloud providers will constantly change — but your learning methodology shouldn’t have to. When you align your technical study with how the brain naturally acquires language, everything shifts:
 
