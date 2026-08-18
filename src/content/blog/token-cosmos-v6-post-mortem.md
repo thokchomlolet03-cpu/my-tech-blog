@@ -1,6 +1,6 @@
 ---
 title: "Post-Mortem: Overcoming WebGPU VRAM Exhaustion and Securing the Edge-AI Telemetry Pipeline"
-pubDatetime: 2026-08-18T10:00:00Z
+pubDatetime: 2026-08-18T05:00:00Z
 featured: true
 draft: false
 tags:
