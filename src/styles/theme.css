@@ -7,30 +7,30 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
+  --font-sans: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Roboto Mono', 'IBM Plex Mono', monospace;
   --font-app: var(--font-sans);
 }
 
 /* Light theme values */
 :root,
 [data-theme="light"] {
-  --background: rgb(252, 252, 253);
-  --foreground: rgb(24, 28, 38);
-  --accent: rgb(37, 99, 235);
+  --background: #ffffff;
+  --foreground: #000000;
+  --accent: #3f51b5; /* Indigo */
   --accent-foreground: #ffffff;
-  --muted: #e6e6e6;
-  --muted-foreground: #6b7280;
-  --border: #ece9e9;
+  --muted: #f0f0f0;
+  --muted-foreground: #757575;
+  --border: #e0e0e0;
 }
 
 /* Dark theme values */
 [data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
+  --background: #1e1e2e; /* Slate background */
+  --foreground: #cdd6f4;
+  --accent: #6c5ce7; /* Deep Purple */
   --accent-foreground: #ffffff;
-  --muted: #343f60;
-  --muted-foreground: #afb9ca;
-  --border: #ab4b08;
+  --muted: #313244;
+  --muted-foreground: #a6adc8;
+  --border: #45475a;
 }
