@@ -7,30 +7,35 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --font-sans: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'Roboto Mono', 'IBM Plex Mono', monospace;
+  --color-cyan-glow: #00f0ff;
+  --color-emerald-glow: #10b981;
+  --color-amber-glow: #f59e0b;
+  --color-rose-glow: #f43f5e;
+  --color-violet-glow: #8b5cf6;
+  --font-sans: 'Inter', 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Roboto Mono', 'Fira Code', monospace;
   --font-app: var(--font-sans);
 }
 
 /* Light theme values */
 :root,
 [data-theme="light"] {
-  --background: #ffffff;
-  --foreground: #000000;
-  --accent: #3f51b5; /* Indigo */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --accent: #0284c7; /* Cyan-blue */
   --accent-foreground: #ffffff;
-  --muted: #f0f0f0;
-  --muted-foreground: #757575;
-  --border: #e0e0e0;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
 }
 
-/* Dark theme values */
+/* Dark theme values — Space Void & HUD Telemetry */
 [data-theme="dark"] {
-  --background: #1e1e2e; /* Slate background */
-  --foreground: #cdd6f4;
-  --accent: #6c5ce7; /* Deep Purple */
-  --accent-foreground: #ffffff;
-  --muted: #313244;
-  --muted-foreground: #a6adc8;
-  --border: #45475a;
+  --background: #06080e; /* Base Void */
+  --foreground: #cbd5e1; /* Slate text */
+  --accent: #00f0ff; /* Electric Cyan */
+  --accent-foreground: #06080e;
+  --muted: rgba(19, 26, 43, 0.6); /* Translucent Card */
+  --muted-foreground: #94a3b8;
+  --border: rgba(0, 240, 255, 0.18); /* Hairline Cyan Border */
 }

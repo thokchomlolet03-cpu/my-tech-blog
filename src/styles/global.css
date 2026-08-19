@@ -9,9 +9,24 @@
 @layer base {
   * {
     @apply border-border outline-accent/75;
-    scrollbar-width: auto;
-    scrollbar-color: var(--color-muted) transparent;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 240, 255, 0.25) transparent;
   }
+  
+  body {
+    min-height: 100vh;
+    background-color: var(--background);
+    color: var(--foreground);
+    background-attachment: fixed;
+  }
+
+  html[data-theme="dark"] body {
+    background-image: 
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 240, 255, 0.08), transparent 70%),
+      radial-gradient(circle 600px at 100% 40%, rgba(139, 92, 246, 0.05), transparent 80%),
+      radial-gradient(circle 500px at 0% 80%, rgba(0, 240, 255, 0.04), transparent 70%);
+  }
+
   a,
   button {
     @apply outline-accent outline-offset-1 focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
@@ -31,9 +46,34 @@
 }
 
 @utility active-nav {
-  @apply underline decoration-wavy decoration-2 underline-offset-8;
+  @apply text-[#00f0ff] font-bold shadow-[0_0_12px_rgba(0,240,255,0.4)] border-b-2 border-[#00f0ff];
+}
+
+/* ===== HUD & Cyber Spatial Utilities ===== */
+@utility hud-card {
+  @apply bg-[#0d121e]/75 dark:bg-[#0d121e]/75 backdrop-blur-md border border-[rgba(0,240,255,0.15)] rounded-xl transition-all duration-300;
+}
+
+@utility hud-card-interactive {
+  @apply hud-card hover:border-[rgba(0,240,255,0.45)] hover:shadow-[0_0_25px_rgba(0,240,255,0.12)] hover:-translate-y-0.5;
+}
+
+@utility hud-badge {
+  @apply font-mono text-xs uppercase tracking-wider px-2.5 py-0.5 rounded border border-[rgba(0,240,255,0.3)] bg-[rgba(0,240,255,0.06)] text-[#00f0ff] inline-flex items-center gap-1;
+}
+
+@utility hud-badge-alert {
+  @apply font-mono text-xs uppercase tracking-wider px-2.5 py-0.5 rounded border border-rose-500/40 bg-rose-950/40 text-rose-300 inline-flex items-center gap-1;
+}
+
+@utility hud-badge-emerald {
+  @apply font-mono text-xs uppercase tracking-wider px-2.5 py-0.5 rounded border border-emerald-500/40 bg-emerald-950/40 text-emerald-300 inline-flex items-center gap-1;
+}
+
+@utility hud-glow-text {
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
 }
 
 :target {
-  scroll-margin-block: 1rem;
+  scroll-margin-block: 5rem;
 }

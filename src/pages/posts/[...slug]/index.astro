@@ -108,54 +108,63 @@ const ogImage = ogImageUrl
 
   <main
     id="main-content"
-    class:list={["app-layout", { "mt-8": !config.features.showBackButton }]}
+    class:list={["w-full", { "mt-4": !config.features.showBackButton }]}
     data-pagefind-body
   >
-    <h1
-      style={{ viewTransitionName: toTransitionName(title) }}
-      class="text-accent inline-block text-2xl font-bold sm:text-3xl"
-    >
-      {title}
-    </h1>
+    <div class="hud-card p-6 sm:p-8 mb-8">
+      <div class="flex items-center gap-2 pb-3 mb-3 border-b border-[rgba(0,240,255,0.15)] font-mono text-[11px] text-[#00f0ff]">
+        <span class="size-2 rounded-full bg-[#00f0ff] animate-pulse shadow-[0_0_6px_#00f0ff]"></span>
+        <span>// ARTICLE TELEMETRY RECORD</span>
+      </div>
 
-    <div class="my-2 flex items-center gap-2">
-      <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
-      <span
-        aria-hidden="true"
-        class:list={[
-          "text-muted-foreground max-sm:hidden",
-          { hidden: !config.features.editPost?.enabled || hideEditPost },
-        ]}
+      <h1
+        style={{ viewTransitionName: toTransitionName(title) }}
+        class="font-mono text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight"
       >
-        |
-      </span>
-      <EditPost {hideEditPost} {post} class="max-sm:hidden" />
+        {title}
+      </h1>
+
+      <div class="mt-4 pt-3 border-t border-[rgba(0,240,255,0.1)] flex flex-wrap items-center gap-3">
+        <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
+        <span
+          aria-hidden="true"
+          class:list={[
+            "text-slate-600 max-sm:hidden",
+            { hidden: !config.features.editPost?.enabled || hideEditPost },
+          ]}
+        >
+          |
+        </span>
+        <EditPost {hideEditPost} {post} class="max-sm:hidden" />
+      </div>
+
+      <ul class="mt-4 flex flex-wrap gap-2">
+        {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
+      </ul>
     </div>
 
     <article
       id="article"
       class:list={[
-        "mt-8 w-full",
-        "app-prose max-w-app",
+        "w-full",
+        "app-prose",
         "prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)",
       ]}
     >
       <Content />
     </article>
 
-    <hr class="my-8 border-dashed" />
+    <hr class="my-8 border-[rgba(0,240,255,0.15)]" />
 
     <EditPost class="sm:hidden" {hideEditPost} {post} />
 
     <BackToTopButton />
 
-    <ul class="mt-4 mb-8 flex flex-wrap gap-4 sm:my-8">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
-    </ul>
+    <div class="my-6">
+      <ShareLinks />
+    </div>
 
-    <ShareLinks />
-
-    <hr class="my-8 border-dashed" />
+    <hr class="my-8 border-[rgba(0,240,255,0.15)]" />
 
     <AdjacentPostNav {prevPost} {nextPost} />
 

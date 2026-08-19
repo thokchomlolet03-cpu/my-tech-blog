@@ -3,23 +3,23 @@
 @layer base {
   /* ===== Override default Tailwind Typography styles ===== */
   .app-prose {
-    @apply prose;
+    @apply prose max-w-none;
 
     h1 {
-      @apply text-foreground mb-3 font-extrabold;
+      @apply text-foreground mb-4 font-mono font-extrabold tracking-tight;
     }
     
     h2 {
-      @apply text-slate-900 dark:text-slate-100 font-bold border-b border-border pb-2 mb-4 mt-8;
+      @apply text-slate-900 dark:text-slate-100 font-mono font-bold border-b border-[rgba(0,240,255,0.2)] pb-2 mb-4 mt-10 tracking-tight flex items-center gap-2;
     }
 
     h3 {
-      @apply text-slate-800 dark:text-slate-200 font-bold mt-6 mb-3;
+      @apply text-slate-800 dark:text-cyan-300 font-mono font-semibold mt-8 mb-3 tracking-tight;
     }
     
     h4,
     th {
-      @apply text-foreground mb-3 font-semibold;
+      @apply text-foreground mb-3 font-mono font-semibold;
     }
 
     p,
@@ -27,13 +27,16 @@
     ol,
     ul,
     figcaption,
-    table,
-    code {
-      @apply text-foreground;
+    table {
+      @apply text-foreground leading-relaxed;
+    }
+
+    strong {
+      @apply text-slate-900 dark:text-white font-semibold;
     }
 
     a {
-      @apply text-foreground hover:text-accent wrap-break-word decoration-dashed underline-offset-4 focus-visible:no-underline;
+      @apply text-accent hover:underline wrap-break-word decoration-dashed underline-offset-4 focus-visible:no-underline;
     }
 
     ul {
@@ -45,11 +48,11 @@
     }
 
     hr {
-      @apply border-border;
+      @apply border-[rgba(0,240,255,0.15)] my-8;
     }
 
     img {
-      @apply border-border mx-auto border;
+      @apply border border-[rgba(0,240,255,0.2)] rounded-xl mx-auto shadow-2xl;
     }
 
     img[role="button"] {
@@ -61,68 +64,69 @@
     }
 
     figcaption {
-      @apply opacity-75;
+      @apply font-mono text-xs opacity-75 mt-2 text-center;
     }
 
     table {
+      @apply border border-[rgba(0,240,255,0.15)] rounded-lg overflow-hidden;
+      
       th,
       td {
-        @apply border-border border p-2;
+        @apply border border-[rgba(0,240,255,0.12)] p-3 text-sm;
       }
 
       th {
-        @apply py-1.5;
+        @apply py-2 bg-[rgba(0,240,255,0.06)] font-mono text-xs uppercase tracking-wider text-[#00f0ff];
       }
     }
 
-    code {
-      @apply bg-muted/75 text-foreground rounded p-1 wrap-break-word before:content-none after:content-none;
+    code:not(pre code) {
+      @apply font-mono text-xs bg-[rgba(0,240,255,0.08)] text-[#00f0ff] border border-[rgba(0,240,255,0.2)] rounded px-1.5 py-0.5 wrap-break-word before:content-none after:content-none;
     }
 
     .astro-code code {
-      @apply flex-[1_0_100%] bg-inherit p-0;
+      @apply flex-[1_0_100%] bg-inherit p-0 font-mono text-sm;
     }
 
     blockquote {
-      @apply border-s-accent/80 wrap-break-word opacity-80;
+      @apply border-s-2 border-s-[#00f0ff] bg-[rgba(0,240,255,0.03)] rounded-r-lg p-4 my-4 font-sans italic text-slate-300;
     }
 
     details:not(.callout) {
-      @apply text-foreground inline-block cursor-pointer select-none [&_p]:hidden [&_ul]:my-0!;
+      @apply text-foreground inline-block cursor-pointer select-none [&_p]:hidden [&_ul]:my-0! hud-card p-4;
     }
 
     summary {
-      @apply focus-visible:outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-dashed;
+      @apply font-mono text-sm focus-visible:outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-dashed text-[#00f0ff];
     }
 
     pre {
-      @apply focus-visible:outline-accent focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-dashed;
+      @apply focus-visible:outline-accent focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-dashed my-6 rounded-xl overflow-hidden border border-[rgba(0,240,255,0.2)] shadow-2xl;
     }
   }
 
   /* ===== Code Blocks & Syntax Highlighting ===== */
   .astro-code {
-    @apply flex border border-border bg-[#f8fafc] rounded-md text-(--shiki-light) [&_span]:text-(--shiki-light);
+    @apply flex border border-[rgba(0,240,255,0.2)] bg-[#0c1017] rounded-xl text-(--shiki-light) [&_span]:text-(--shiki-light) p-4 shadow-xl;
   }
 
   html[data-theme="dark"] .astro-code {
-    @apply bg-[#1e1e2e] text-(--shiki-dark) [&_span]:text-(--shiki-dark);
+    @apply bg-[#06080e] border border-[rgba(0,240,255,0.2)] text-(--shiki-dark) [&_span]:text-(--shiki-dark);
   }
 
   /* Styles for Shiki transformers */
-  /* https://shiki.style/packages/transformers */
   .astro-code {
     .line.diff.add {
-      @apply relative inline-block w-full bg-green-400/20 before:absolute before:-left-3 before:text-green-500 before:content-['+'];
+      @apply relative inline-block w-full bg-emerald-500/15 before:absolute before:-left-3 before:text-emerald-400 before:content-['+'];
     }
     .line.diff.remove {
-      @apply relative inline-block w-full bg-red-500/20 before:absolute before:-left-3 before:text-red-500 before:content-['-'];
+      @apply relative inline-block w-full bg-rose-500/15 before:absolute before:-left-3 before:text-rose-400 before:content-['-'];
     }
     .line.highlighted {
-      @apply inline-block w-full bg-slate-400/20;
+      @apply inline-block w-full bg-cyan-500/15;
     }
     .highlighted-word {
-      @apply border-border rounded-sm border px-0.5 py-px;
+      @apply border border-cyan-400/40 rounded px-1 py-0.5 bg-cyan-500/10;
     }
   }
 }

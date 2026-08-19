@@ -14,17 +14,22 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer
-  class:list={["app-layout", { "mt-auto": !noMarginTop }, className]}
+  class:list={["w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8", { "mt-auto": !noMarginTop }, className]}
   {...attrs}
 >
   <div
-    class="border-border flex flex-col items-center justify-between border-t py-6 sm:flex-row-reverse sm:py-4"
+    class="border-t border-[rgba(0,240,255,0.15)] flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4 gap-4 text-xs font-mono text-slate-400"
   >
     <Socials />
-    <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
-      <span>{t.footer.copyright} &#169; {currentYear}</span>
-      <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
-      <span>{t.footer.allRightsReserved}</span>
+    <div class="flex flex-col sm:flex-row items-center gap-2">
+      <span class="flex items-center gap-1.5 text-emerald-400">
+        <span class="size-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#10b981]"></span>
+        <span>// SYSTEM STATUS: OPERATIONAL</span>
+      </span>
+      <span class="hidden sm:inline text-slate-600">|</span>
+      <span>{t.footer.copyright} &#169; {currentYear} FRICTION HUNTER</span>
+      <span class="hidden sm:inline text-slate-600">|</span>
+      <span class="text-[11px] text-[#00f0ff]/70">EDGE_TELEMETRY_V6</span>
     </div>
   </div>
 </footer>

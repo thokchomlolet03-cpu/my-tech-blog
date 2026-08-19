@@ -14,39 +14,74 @@ const pathWithoutTrailingSlash =
   relativePath.endsWith("/") && relativePath !== "/"
     ? relativePath.slice(0, -1)
     : relativePath;
-
-// Basic grouping
 ---
-<nav class="py-6 pe-6">
-  <h2 class="mb-4 text-sm font-bold uppercase tracking-wider text-muted-foreground">Navigation</h2>
-  <ul class="space-y-2 text-sm font-medium">
+<nav class="hud-card p-4 text-xs font-mono">
+  <div class="flex items-center justify-between pb-3 mb-3 border-b border-[rgba(0,240,255,0.15)]">
+    <span class="font-bold uppercase tracking-wider text-[#00f0ff] flex items-center gap-1.5">
+      <span class="size-1.5 rounded-full bg-[#00f0ff] shadow-[0_0_6px_#00f0ff]"></span>
+      // NAVIGATION
+    </span>
+    <span class="text-[10px] text-slate-500">HUD_V6</span>
+  </div>
+
+  <ul class="space-y-1">
     <li>
       <a 
         href={getRelativeLocaleUrl(locale, "")} 
-        class:list={["block w-full rounded-md px-3 py-2 transition-colors", pathWithoutTrailingSlash === "" ? "bg-accent/10 text-accent font-semibold" : "hover:bg-muted/50 hover:text-foreground text-foreground/80"]}
+        class:list={[
+          "block w-full rounded px-2.5 py-1.5 transition-all flex items-center gap-2", 
+          pathWithoutTrailingSlash === "" ? "bg-[rgba(0,240,255,0.12)] text-[#00f0ff] font-semibold border-l-2 border-[#00f0ff]" : "hover:bg-[rgba(0,240,255,0.05)] hover:text-[#00f0ff] text-slate-300"
+        ]}
       >
-        Home
+        <span>&gt;</span>
+        <span>INDEX_OVERVIEW</span>
       </a>
     </li>
     <li>
       <a 
         href={getRelativeLocaleUrl(locale, "posts")} 
-        class:list={["block w-full rounded-md px-3 py-2 transition-colors", pathWithoutTrailingSlash === "/posts" ? "bg-accent/10 text-accent font-semibold" : "hover:bg-muted/50 hover:text-foreground text-foreground/80"]}
+        class:list={[
+          "block w-full rounded px-2.5 py-1.5 transition-all flex items-center gap-2", 
+          pathWithoutTrailingSlash === "/posts" ? "bg-[rgba(0,240,255,0.12)] text-[#00f0ff] font-semibold border-l-2 border-[#00f0ff]" : "hover:bg-[rgba(0,240,255,0.05)] hover:text-[#00f0ff] text-slate-300"
+        ]}
       >
-        All Posts
+        <span>&gt;</span>
+        <span>ALL_DISPATCHES</span>
       </a>
     </li>
+    <li>
+      <a 
+        href={getRelativeLocaleUrl(locale, "tags/post-mortem")} 
+        class:list={[
+          "block w-full rounded px-2.5 py-1.5 transition-all flex items-center gap-2", 
+          pathWithoutTrailingSlash === "/tags/post-mortem" ? "bg-rose-950/40 text-rose-300 font-semibold border-l-2 border-rose-500" : "hover:bg-rose-950/20 hover:text-rose-300 text-rose-400/80"
+        ]}
+      >
+        <span>&gt;</span>
+        <span>POST_MORTEMS</span>
+      </a>
+    </li>
+
     <li class="pt-4">
-      <h3 class="mb-2 px-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">Recent Posts</h3>
+      <div class="flex items-center justify-between pb-2 mb-2 border-b border-[rgba(0,240,255,0.1)]">
+        <span class="font-bold uppercase tracking-wider text-slate-400 text-[10px] flex items-center gap-1.5">
+          // RECENT LOGS
+        </span>
+      </div>
       <ul class="space-y-1">
-        {posts.slice(0, 10).map((post) => {
+        {posts.slice(0, 8).map((post) => {
            const postPath = `/posts/${getPostSlug(post.id, post.filePath)}`;
            const isActive = pathWithoutTrailingSlash === postPath;
+           const isPostMortem = post.data.tags?.includes("post-mortem");
            return (
              <li>
                <a 
                  href={getRelativeLocaleUrl(locale, postPath)} 
-                 class:list={["block w-full rounded-md px-3 py-1.5 transition-colors line-clamp-2", isActive ? "bg-accent/10 text-accent font-semibold" : "hover:bg-muted/50 hover:text-foreground text-foreground/80"]}
+                 class:list={[
+                   "block w-full rounded px-2 py-1.5 transition-all line-clamp-1 font-sans text-xs", 
+                   isActive ? "bg-[rgba(0,240,255,0.12)] text-[#00f0ff] font-semibold border-l-2 border-[#00f0ff]" : "hover:bg-[rgba(0,240,255,0.05)] hover:text-[#00f0ff] text-slate-400",
+                   isPostMortem && !isActive ? "text-rose-400/80 hover:text-rose-300" : ""
+                 ]}
                  title={post.data.title}
                >
                  {post.data.title}

@@ -19,10 +19,16 @@ const backUrl = config.features.showBackButton
 <main
   data-backUrl={backUrl}
   id="main-content"
-  class:list={["app-layout pb-4", className]}
+  class:list={["w-full pb-6", className]}
 >
-  <h1 class="text-2xl font-semibold sm:text-3xl">{pageTitle}</h1>
-  <p class="mt-2 mb-6 italic">{pageDesc}</p>
+  <div class="hud-card p-6 mb-6">
+    <div class="flex items-center gap-2 pb-2 mb-2 border-b border-[rgba(0,240,255,0.15)] font-mono text-[11px] text-[#00f0ff]">
+      <span class="size-2 rounded-full bg-[#00f0ff] animate-pulse"></span>
+      <span>// TELEMETRY VIEW</span>
+    </div>
+    <h1 class="font-mono text-2xl sm:text-3xl font-extrabold text-white tracking-tight">{pageTitle}</h1>
+    {pageDesc && <p class="mt-2 text-sm text-slate-300 font-sans">{pageDesc}</p>}
+  </div>
   <slot />
 </main>
 
