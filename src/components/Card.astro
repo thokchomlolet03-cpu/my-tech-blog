@@ -10,65 +10,39 @@ type Props = {
 
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
-const { title, description, tags = [], featured = false, ...props } = data;
-const isPostMortem = tags.includes("post-mortem");
+const { title, description, tags = [], ...props } = data;
 ---
 
-<li class="my-4 list-none">
-  <div class="doc-card-interactive p-6 relative group">
-    <!-- Top right label -->
-    <div class="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-slate-800/80 text-xs font-mono">
-      <div class="flex items-center gap-2">
-        <span class:list={["size-2 rounded-full", isPostMortem ? "bg-rose-400" : featured ? "bg-sky-400" : "bg-slate-400"]}></span>
-        <span class={isPostMortem ? "text-rose-400 font-semibold" : featured ? "text-sky-400 font-semibold" : "text-slate-400"}>
-          {isPostMortem ? "INCIDENT REPORT" : featured ? "FEATURED ARCHITECTURE" : "TECHNICAL SPECIFICATION"}
-        </span>
-      </div>
-      <span class="text-[11px] text-slate-500">
-        STATUS: VERIFIED
-      </span>
-    </div>
-
+<li class="border-b border-slate-800 py-6 first:pt-2 list-none">
+  <article class="flex flex-col gap-2">
     <!-- Title -->
     <a
       href={getPostUrl(id, filePath, Astro.currentLocale)}
-      class="block focus-visible:outline-accent"
+      class="block group focus-visible:outline-accent"
     >
       <Heading
         transition:name={toTransitionName(title)}
-        class="font-sans text-lg sm:text-xl font-bold tracking-tight text-white group-hover:text-sky-400 transition-colors duration-150"
+        class="font-sans text-xl font-bold tracking-tight text-white group-hover:text-indigo-400 transition-colors duration-150"
       >
         {title}
       </Heading>
     </a>
 
-    <!-- Datetime & Tags -->
-    <div class="my-3 flex flex-wrap items-center gap-2">
+    <!-- Metadata: Date & Tags -->
+    <div class="flex flex-wrap items-center gap-3 text-sm text-slate-400 my-1">
       <Datetime {...props} />
-      {tags.slice(0, 3).map(tag => (
-        <span class={tag === "post-mortem" ? "doc-badge-alert text-[11px]" : "doc-badge text-[11px]"}>
-          #{tag}
-        </span>
-      ))}
+      <div class="flex flex-wrap items-center gap-1.5">
+        {tags.map(tag => (
+          <span class={tag === "post-mortem" ? "bg-rose-950/50 text-rose-300 px-2 py-0.5 rounded text-xs border border-rose-800/40" : "bg-slate-800 text-slate-300 px-2 py-0.5 rounded text-xs border border-slate-700/60"}>
+            #{tag}
+          </span>
+        ))}
+      </div>
     </div>
 
-    <!-- Excerpt / Description -->
-    <p class="text-sm text-slate-300 leading-relaxed font-sans mt-2 line-clamp-3">
+    <!-- Excerpt / Body Copy -->
+    <p class="text-sm text-slate-300 leading-relaxed font-sans mt-1">
       {description}
     </p>
-
-    <!-- Footer Action -->
-    <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
-      <a
-        href={getPostUrl(id, filePath, Astro.currentLocale)}
-        class="font-mono text-sky-400 hover:text-sky-300 flex items-center gap-1.5 group-hover:translate-x-0.5 transition-transform"
-      >
-        <span>Read Article</span>
-        <span aria-hidden="true">&rarr;</span>
-      </a>
-      <span class="font-mono text-[11px] text-slate-500">
-        THE TOKEN COSMOS
-      </span>
-    </div>
-  </div>
+  </article>
 </li>

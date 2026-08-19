@@ -41,37 +41,34 @@ const isActive = (path: string) => {
 </a>
 
 <header
-  class="fixed top-0 z-50 w-full bg-[#0f172a]/95 dark:bg-[#0f172a]/95 backdrop-blur-md border-b border-white/[0.08] text-white shadow-sm transition-colors"
+  class="fixed top-0 z-50 w-full bg-[#3f51b5] text-white shadow-md transition-colors"
 >
   <div
     class="relative flex w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 items-center justify-between py-3"
   >
-    <!-- Brand / Logo -->
+    <!-- Brand Title -->
     <a
       href={getRelativeLocaleUrl(locale, "")}
-      class="flex items-center gap-2.5 font-sans text-base sm:text-lg font-bold tracking-tight text-white hover:text-sky-400 transition-colors"
+      class="flex items-center gap-2.5 font-sans text-lg font-bold tracking-tight text-white hover:opacity-90 transition-opacity"
     >
-      <div class="size-6 rounded bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-sky-400 text-xs font-mono font-bold">
+      <div class="size-7 rounded bg-white/20 flex items-center justify-center text-white text-xs font-mono font-bold">
         FH
       </div>
-      <span>{site.title}</span>
-      <span class="text-[11px] font-mono font-normal px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700 hidden sm:inline-block">
-        DOCS
-      </span>
+      <span class="text-white">{site.title}</span>
     </a>
 
-    <!-- Embedded Search Pill (Desktop) -->
+    <!-- Translucent Search Pill (Desktop) -->
     {
       features.search !== false && (
         <a
           href={getRelativeLocaleUrl(locale, "search")}
-          class="hidden md:flex items-center justify-between gap-3 px-3 py-1.5 w-64 lg:w-80 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200 transition-all text-xs font-sans"
+          class="hidden md:flex items-center justify-between gap-3 px-4 py-1.5 w-64 lg:w-80 rounded-full bg-white/20 hover:bg-white/25 text-white placeholder-white/70 transition-all text-xs font-sans"
         >
           <div class="flex items-center gap-2">
-            <IconSearch class="size-4 text-slate-400" />
-            <span>Search documentation...</span>
+            <IconSearch class="size-4 text-white/80" />
+            <span class="text-white/90">Search docs...</span>
           </div>
-          <kbd class="px-1.5 py-0.5 text-[10px] font-mono bg-slate-800 border border-slate-700 rounded text-slate-400">
+          <kbd class="px-1.5 py-0.5 text-[10px] font-mono bg-black/20 rounded text-white/90">
             ⌘K
           </kbd>
         </a>
@@ -85,7 +82,7 @@ const isActive = (path: string) => {
     >
       <button
         id="menu-btn"
-        class="focus-outline p-2 sm:hidden text-slate-300 hover:text-white"
+        class="focus-outline p-2 sm:hidden text-white hover:opacity-80"
         aria-label={t.a11y.openMenu}
         aria-expanded="false"
         aria-controls="menu-items"
@@ -98,14 +95,14 @@ const isActive = (path: string) => {
 
       <ul
         id="menu-items"
-        class="font-sans text-sm font-medium mt-4 sm:mt-0 hidden absolute sm:static top-full left-0 w-full sm:w-auto bg-[#0f172a] sm:bg-transparent border-b sm:border-0 border-slate-800 p-4 sm:p-0 sm:flex sm:items-center sm:gap-1 shadow-lg sm:shadow-none"
+        class="font-sans text-sm font-medium mt-4 sm:mt-0 hidden absolute sm:static top-full left-0 w-full sm:w-auto bg-[#3f51b5] sm:bg-transparent border-b sm:border-0 border-white/20 p-4 sm:p-0 sm:flex sm:items-center sm:gap-1 shadow-lg sm:shadow-none"
       >
         <li>
           <a
             href={getRelativeLocaleUrl(locale, "posts")}
             class:list={[
-              "block px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors",
-              { "text-sky-400 font-semibold bg-slate-800/80 border border-slate-700": isActive("/posts") }
+              "block px-3 py-1.5 rounded-md text-white/90 hover:text-white hover:bg-white/15 transition-colors",
+              { "text-white font-semibold bg-white/20": isActive("/posts") }
             ]}
           >
             Posts
@@ -115,8 +112,8 @@ const isActive = (path: string) => {
           <a
             href={getRelativeLocaleUrl(locale, "tags/post-mortem")}
             class:list={[
-              "block px-3 py-1.5 rounded-md text-rose-300/90 hover:text-rose-200 hover:bg-rose-950/30 transition-colors",
-              { "text-rose-300 font-semibold bg-rose-950/50 border border-rose-800/50": isActive("/tags/post-mortem") }
+              "block px-3 py-1.5 rounded-md text-white/90 hover:text-white hover:bg-white/15 transition-colors",
+              { "text-white font-semibold bg-white/20": isActive("/tags/post-mortem") }
             ]}
           >
             Post-Mortems
@@ -126,8 +123,8 @@ const isActive = (path: string) => {
           <a
             href={getRelativeLocaleUrl(locale, "tags")}
             class:list={[
-              "block px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors",
-              { "text-sky-400 font-semibold bg-slate-800/80 border border-slate-700": isActive("/tags") && !isActive("/tags/post-mortem") }
+              "block px-3 py-1.5 rounded-md text-white/90 hover:text-white hover:bg-white/15 transition-colors",
+              { "text-white font-semibold bg-white/20": isActive("/tags") && !isActive("/tags/post-mortem") }
             ]}
           >
             Tags
@@ -137,8 +134,8 @@ const isActive = (path: string) => {
           <a
             href={getRelativeLocaleUrl(locale, "about")}
             class:list={[
-              "block px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors",
-              { "text-sky-400 font-semibold bg-slate-800/80 border border-slate-700": isActive("/about") }
+              "block px-3 py-1.5 rounded-md text-white/90 hover:text-white hover:bg-white/15 transition-colors",
+              { "text-white font-semibold bg-white/20": isActive("/about") }
             ]}
           >
             About
@@ -150,8 +147,8 @@ const isActive = (path: string) => {
               <LinkButton
                 href={getRelativeLocaleUrl(locale, "archives")}
                 class:list={[
-                  "focus-outline flex items-center justify-center px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/60",
-                  { "text-sky-400 bg-slate-800/80 border border-slate-700": isActive("/archives") },
+                  "focus-outline flex items-center justify-center px-3 py-1.5 rounded-md text-white/90 hover:text-white hover:bg-white/15",
+                  { "text-white bg-white/20": isActive("/archives") },
                 ]}
                 title={t.nav.archives}
                 aria-label={t.nav.archives}
@@ -168,8 +165,8 @@ const isActive = (path: string) => {
               <LinkButton
                 href={getRelativeLocaleUrl(locale, "search")}
                 class:list={[
-                  "focus-outline flex items-center justify-center px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/60",
-                  { "text-sky-400 bg-slate-800/80 border border-slate-700": isActive("/search") }
+                  "focus-outline flex items-center justify-center px-3 py-1.5 rounded-md text-white/90 hover:text-white hover:bg-white/15",
+                  { "text-white bg-white/20": isActive("/search") }
                 ]}
                 title={t.nav.search}
                 aria-label={t.nav.search}
@@ -185,7 +182,7 @@ const isActive = (path: string) => {
             <li>
               <button
                 id="theme-btn"
-                class="focus-outline p-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors"
+                class="focus-outline p-1.5 rounded-md text-white/90 hover:text-white hover:bg-white/15 transition-colors"
                 title={t.a11y.toggleTheme}
                 aria-label="auto"
                 aria-live="polite"
