@@ -17,7 +17,6 @@ const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
 
 // Strip the base prefix so isActive comparisons work regardless of deploy subdirectory.
-// e.g. with base "/blog": "/blog/posts/slug" → "/posts/slug"
 const relativePath = stripBase(Astro.url.pathname);
 const pathWithoutTrailingSlash =
   relativePath.endsWith("/") && relativePath !== "/"
@@ -42,131 +41,157 @@ const isActive = (path: string) => {
 </a>
 
 <header
-  class="fixed top-0 z-50 w-full bg-[#06080e]/85 dark:bg-[#06080e]/85 backdrop-blur-md border-b border-[rgba(0,240,255,0.2)] text-slate-100 shadow-[0_4px_25px_rgba(0,0,0,0.6)] transition-colors"
+  class="fixed top-0 z-50 w-full bg-[#0f172a]/95 dark:bg-[#0f172a]/95 backdrop-blur-md border-b border-white/[0.08] text-white shadow-sm transition-colors"
 >
   <div
-    class="relative flex w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 items-baseline justify-between py-3 sm:items-center sm:py-3.5"
+    class="relative flex w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 items-center justify-between py-3"
   >
+    <!-- Brand / Logo -->
     <a
       href={getRelativeLocaleUrl(locale, "")}
-      class="flex items-center gap-2.5 font-mono text-base sm:text-lg font-bold tracking-wider uppercase text-slate-100 hover:text-[#00f0ff] transition-all group"
+      class="flex items-center gap-2.5 font-sans text-base sm:text-lg font-bold tracking-tight text-white hover:text-sky-400 transition-colors"
     >
-      <span class="size-2 rounded-full bg-[#00f0ff] shadow-[0_0_8px_#00f0ff] animate-pulse"></span>
-      <span class="group-hover:hud-glow-text">{site.title}</span>
-      <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[rgba(0,240,255,0.08)] text-[#00f0ff] border border-[rgba(0,240,255,0.25)]">v6.0</span>
+      <div class="size-6 rounded bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-sky-400 text-xs font-mono font-bold">
+        FH
+      </div>
+      <span>{site.title}</span>
+      <span class="text-[11px] font-mono font-normal px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700 hidden sm:inline-block">
+        DOCS
+      </span>
     </a>
+
+    <!-- Embedded Search Pill (Desktop) -->
+    {
+      features.search !== false && (
+        <a
+          href={getRelativeLocaleUrl(locale, "search")}
+          class="hidden md:flex items-center justify-between gap-3 px-3 py-1.5 w-64 lg:w-80 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200 transition-all text-xs font-sans"
+        >
+          <div class="flex items-center gap-2">
+            <IconSearch class="size-4 text-slate-400" />
+            <span>Search documentation...</span>
+          </div>
+          <kbd class="px-1.5 py-0.5 text-[10px] font-mono bg-slate-800 border border-slate-700 rounded text-slate-400">
+            ⌘K
+          </kbd>
+        </a>
+      )
+    }
+
+    <!-- Navigation Menu -->
     <nav
       id="nav-menu"
-      class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-2 sm:py-0"
+      class="flex items-center sm:space-x-1"
     >
       <button
         id="menu-btn"
-        class="focus-outline self-end p-2 sm:hidden text-slate-300 hover:text-[#00f0ff]"
+        class="focus-outline p-2 sm:hidden text-slate-300 hover:text-white"
         aria-label={t.a11y.openMenu}
         aria-expanded="false"
         aria-controls="menu-items"
         data-label-open={t.a11y.openMenu}
         data-label-close={t.a11y.closeMenu}
       >
-        <IconX id="close-icon" class="hidden" />
-        <IconMenuDeep id="menu-icon" />
+        <IconX id="close-icon" class="hidden size-6" />
+        <IconMenuDeep id="menu-icon" class="size-6" />
       </button>
+
       <ul
         id="menu-items"
-        class="font-mono text-xs uppercase tracking-wider mt-4 hidden w-44 grid-cols-2 place-content-center gap-2 sm:mt-0 sm:flex sm:w-auto sm:gap-x-1 sm:gap-y-0 sm:[&>li]:h-8 [&>li>a]:block [&>li>a]:px-3 [&>li>a]:py-1.5 [&>li>a]:text-center [&>li>a]:rounded sm:[&>li>a]:px-2.5 sm:[&>li>a]:py-1"
+        class="font-sans text-sm font-medium mt-4 sm:mt-0 hidden absolute sm:static top-full left-0 w-full sm:w-auto bg-[#0f172a] sm:bg-transparent border-b sm:border-0 border-slate-800 p-4 sm:p-0 sm:flex sm:items-center sm:gap-1 shadow-lg sm:shadow-none"
       >
-        <li class="col-span-2">
+        <li>
           <a
             href={getRelativeLocaleUrl(locale, "posts")}
             class:list={[
-              "text-slate-300 hover:text-[#00f0ff] hover:bg-[rgba(0,240,255,0.06)] hover:shadow-[0_0_10px_rgba(0,240,255,0.2)] transition-all",
-              { "text-[#00f0ff] font-bold bg-[rgba(0,240,255,0.1)] border border-[rgba(0,240,255,0.3)] shadow-[0_0_12px_rgba(0,240,255,0.3)]": isActive("/posts") }
+              "block px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors",
+              { "text-sky-400 font-semibold bg-slate-800/80 border border-slate-700": isActive("/posts") }
             ]}
           >
-            [POSTS]
+            Posts
           </a>
         </li>
-        <li class="col-span-2">
+        <li>
           <a
             href={getRelativeLocaleUrl(locale, "tags/post-mortem")}
             class:list={[
-              "text-rose-400 hover:text-rose-300 hover:bg-rose-950/30 transition-all",
-              { "text-rose-300 font-bold bg-rose-950/50 border border-rose-500/40 shadow-[0_0_12px_rgba(244,63,94,0.3)]": isActive("/tags/post-mortem") }
+              "block px-3 py-1.5 rounded-md text-rose-300/90 hover:text-rose-200 hover:bg-rose-950/30 transition-colors",
+              { "text-rose-300 font-semibold bg-rose-950/50 border border-rose-800/50": isActive("/tags/post-mortem") }
             ]}
           >
-            [POST-MORTEMS]
+            Post-Mortems
           </a>
         </li>
-        <li class="col-span-2">
+        <li>
           <a
             href={getRelativeLocaleUrl(locale, "tags")}
             class:list={[
-              "text-slate-300 hover:text-[#00f0ff] hover:bg-[rgba(0,240,255,0.06)] hover:shadow-[0_0_10px_rgba(0,240,255,0.2)] transition-all",
-              { "text-[#00f0ff] font-bold bg-[rgba(0,240,255,0.1)] border border-[rgba(0,240,255,0.3)] shadow-[0_0_12px_rgba(0,240,255,0.3)]": isActive("/tags") && !isActive("/tags/post-mortem") }
+              "block px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors",
+              { "text-sky-400 font-semibold bg-slate-800/80 border border-slate-700": isActive("/tags") && !isActive("/tags/post-mortem") }
             ]}
           >
-            [TELEMETRY]
+            Tags
           </a>
         </li>
-        <li class="col-span-2">
+        <li>
           <a
             href={getRelativeLocaleUrl(locale, "about")}
             class:list={[
-              "text-slate-300 hover:text-[#00f0ff] hover:bg-[rgba(0,240,255,0.06)] hover:shadow-[0_0_10px_rgba(0,240,255,0.2)] transition-all",
-              { "text-[#00f0ff] font-bold bg-[rgba(0,240,255,0.1)] border border-[rgba(0,240,255,0.3)] shadow-[0_0_12px_rgba(0,240,255,0.3)]": isActive("/about") }
+              "block px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors",
+              { "text-sky-400 font-semibold bg-slate-800/80 border border-slate-700": isActive("/about") }
             ]}
           >
-            [ABOUT]
+            About
           </a>
         </li>
         {
           features.showArchives && (
-            <li class="col-span-2">
+            <li>
               <LinkButton
                 href={getRelativeLocaleUrl(locale, "archives")}
                 class:list={[
-                  "focus-outline flex size-full justify-center p-2 text-slate-300 hover:text-[#00f0ff] sm:relative sm:size-8 sm:p-0",
-                  { "text-[#00f0ff]": isActive("/archives") },
+                  "focus-outline flex items-center justify-center px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/60",
+                  { "text-sky-400 bg-slate-800/80 border border-slate-700": isActive("/archives") },
                 ]}
                 title={t.nav.archives}
                 aria-label={t.nav.archives}
               >
-                <IconArchive class="hidden sm:absolute sm:top-1/2 sm:left-1/2 sm:block sm:size-5 sm:-translate-x-1/2 sm:-translate-y-1/2" />
-                <span class="sm:sr-only">{t.nav.archives}</span>
+                <IconArchive class="size-4" />
+                <span class="sm:sr-only ml-2 sm:ml-0">{t.nav.archives}</span>
               </LinkButton>
             </li>
           )
         }
         {
           features.search !== false && (
-            <li class="col-span-1 flex items-center justify-center">
+            <li class="md:hidden">
               <LinkButton
                 href={getRelativeLocaleUrl(locale, "search")}
                 class:list={[
-                  "focus-outline relative size-8 text-slate-300 hover:text-[#00f0ff]",
-                  { "text-[#00f0ff]": isActive("/search") }
+                  "focus-outline flex items-center justify-center px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/60",
+                  { "text-sky-400 bg-slate-800/80 border border-slate-700": isActive("/search") }
                 ]}
                 title={t.nav.search}
                 aria-label={t.nav.search}
               >
-                <IconSearch class="absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2" />
-                <span class="sr-only">{t.nav.search}</span>
+                <IconSearch class="size-4" />
+                <span class="ml-2">{t.nav.search}</span>
               </LinkButton>
             </li>
           )
         }
         {
           features.lightAndDarkMode && (
-            <li class="col-span-1 flex items-center justify-center">
+            <li>
               <button
                 id="theme-btn"
-                class="focus-outline hover:[&>svg]:stroke-accent relative size-8 p-1 text-slate-300 hover:text-[#00f0ff]"
+                class="focus-outline p-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors"
                 title={t.a11y.toggleTheme}
                 aria-label="auto"
                 aria-live="polite"
               >
-                <IconMoon class="absolute top-[50%] left-[50%] translate-[-50%] size-5 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-                <IconSunHigh class="absolute top-[50%] left-[50%] translate-[-50%] size-5 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+                <IconMoon class="size-4 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90 hidden dark:block" />
+                <IconSunHigh class="size-4 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0 block dark:hidden" />
               </button>
             </li>
           )
@@ -195,13 +220,29 @@ const isActive = (path: string) => {
       menuBtn.setAttribute("aria-label", openMenu ? openLabel : closeLabel);
 
       menuItems.classList.toggle("hidden");
-      menuItems.classList.toggle("grid");
       menuIcon.classList.toggle("hidden");
       closeIcon.classList.toggle("hidden");
     });
   }
 
-  toggleNav();
+  // Keyboard shortcut listener for Command+K / Ctrl+K search
+  function setupSearchShortcut() {
+    document.addEventListener("keydown", (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        const searchLink = document.querySelector<HTMLAnchorElement>("a[href*='/search']");
+        if (searchLink) {
+          searchLink.click();
+        }
+      }
+    });
+  }
 
-  document.addEventListener("astro:after-swap", toggleNav);
+  toggleNav();
+  setupSearchShortcut();
+
+  document.addEventListener("astro:after-swap", () => {
+    toggleNav();
+    setupSearchShortcut();
+  });
 </script>

@@ -111,25 +111,25 @@ const ogImage = ogImageUrl
     class:list={["w-full", { "mt-4": !config.features.showBackButton }]}
     data-pagefind-body
   >
-    <div class="hud-card p-6 sm:p-8 mb-8">
-      <div class="flex items-center gap-2 pb-3 mb-3 border-b border-[rgba(0,240,255,0.15)] font-mono text-[11px] text-[#00f0ff]">
-        <span class="size-2 rounded-full bg-[#00f0ff] animate-pulse shadow-[0_0_6px_#00f0ff]"></span>
-        <span>// ARTICLE TELEMETRY RECORD</span>
+    <div class="doc-card p-6 sm:p-8 mb-8">
+      <div class="flex items-center gap-2 pb-3 mb-3 border-b border-slate-800 font-mono text-xs text-sky-400">
+        <span class="size-1.5 rounded-full bg-sky-400"></span>
+        <span>TECHNICAL ARTICLE</span>
       </div>
 
       <h1
         style={{ viewTransitionName: toTransitionName(title) }}
-        class="font-mono text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight"
+        class="font-sans text-2xl sm:text-3xl font-bold text-white tracking-tight leading-tight"
       >
         {title}
       </h1>
 
-      <div class="mt-4 pt-3 border-t border-[rgba(0,240,255,0.1)] flex flex-wrap items-center gap-3">
+      <div class="mt-4 pt-3 border-t border-slate-800 flex flex-wrap items-center gap-3">
         <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
         <span
           aria-hidden="true"
           class:list={[
-            "text-slate-600 max-sm:hidden",
+            "text-slate-700 max-sm:hidden",
             { hidden: !config.features.editPost?.enabled || hideEditPost },
           ]}
         >
@@ -154,7 +154,7 @@ const ogImage = ogImageUrl
       <Content />
     </article>
 
-    <hr class="my-8 border-[rgba(0,240,255,0.15)]" />
+    <hr class="my-8 border-slate-800" />
 
     <EditPost class="sm:hidden" {hideEditPost} {post} />
 
@@ -164,7 +164,7 @@ const ogImage = ogImageUrl
       <ShareLinks />
     </div>
 
-    <hr class="my-8 border-[rgba(0,240,255,0.15)]" />
+    <hr class="my-8 border-slate-800" />
 
     <AdjacentPostNav {prevPost} {nextPost} />
 

@@ -10,21 +10,17 @@
   * {
     @apply border-border outline-accent/75;
     scrollbar-width: thin;
-    scrollbar-color: rgba(0, 240, 255, 0.25) transparent;
+    scrollbar-color: rgba(56, 189, 248, 0.2) transparent;
   }
   
   body {
     min-height: 100vh;
     background-color: var(--background);
     color: var(--foreground);
-    background-attachment: fixed;
   }
 
   html[data-theme="dark"] body {
-    background-image: 
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 240, 255, 0.08), transparent 70%),
-      radial-gradient(circle 600px at 100% 40%, rgba(139, 92, 246, 0.05), transparent 80%),
-      radial-gradient(circle 500px at 0% 80%, rgba(0, 240, 255, 0.04), transparent 70%);
+    background-color: #0f172a;
   }
 
   a,
@@ -38,7 +34,7 @@
 }
 
 @utility max-w-app {
-  @apply max-w-3xl;
+  @apply max-w-4xl;
 }
 
 @utility app-layout {
@@ -46,32 +42,53 @@
 }
 
 @utility active-nav {
-  @apply text-[#00f0ff] font-bold shadow-[0_0_12px_rgba(0,240,255,0.4)] border-b-2 border-[#00f0ff];
+  @apply text-sky-400 font-semibold bg-slate-800/80 border border-slate-700;
 }
 
-/* ===== HUD & Cyber Spatial Utilities ===== */
+/* ===== Material for MkDocs Slate Documentation Utilities ===== */
+@utility doc-card {
+  @apply bg-slate-900/60 border border-slate-800 rounded-lg transition-all duration-200;
+}
+
+@utility doc-card-interactive {
+  @apply doc-card hover:border-sky-500/40 hover:bg-slate-900/80 hover:-translate-y-0.5;
+}
+
+@utility doc-badge {
+  @apply font-mono text-xs px-2.5 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700 inline-flex items-center gap-1.5;
+}
+
+@utility doc-badge-alert {
+  @apply font-mono text-xs px-2.5 py-1 rounded bg-rose-950/40 text-rose-300 border border-rose-800/50 inline-flex items-center gap-1.5;
+}
+
+@utility doc-badge-emerald {
+  @apply font-mono text-xs px-2.5 py-1 rounded bg-emerald-950/40 text-emerald-300 border border-emerald-800/50 inline-flex items-center gap-1.5;
+}
+
+@utility doc-badge-sky {
+  @apply font-mono text-xs px-2.5 py-1 rounded bg-sky-950/40 text-sky-300 border border-sky-800/50 inline-flex items-center gap-1.5;
+}
+
+/* Backward compatibility aliases */
 @utility hud-card {
-  @apply bg-[#0d121e]/75 dark:bg-[#0d121e]/75 backdrop-blur-md border border-[rgba(0,240,255,0.15)] rounded-xl transition-all duration-300;
+  @apply doc-card;
 }
 
 @utility hud-card-interactive {
-  @apply hud-card hover:border-[rgba(0,240,255,0.45)] hover:shadow-[0_0_25px_rgba(0,240,255,0.12)] hover:-translate-y-0.5;
+  @apply doc-card-interactive;
 }
 
 @utility hud-badge {
-  @apply font-mono text-xs uppercase tracking-wider px-2.5 py-0.5 rounded border border-[rgba(0,240,255,0.3)] bg-[rgba(0,240,255,0.06)] text-[#00f0ff] inline-flex items-center gap-1;
+  @apply doc-badge;
 }
 
 @utility hud-badge-alert {
-  @apply font-mono text-xs uppercase tracking-wider px-2.5 py-0.5 rounded border border-rose-500/40 bg-rose-950/40 text-rose-300 inline-flex items-center gap-1;
+  @apply doc-badge-alert;
 }
 
 @utility hud-badge-emerald {
-  @apply font-mono text-xs uppercase tracking-wider px-2.5 py-0.5 rounded border border-emerald-500/40 bg-emerald-950/40 text-emerald-300 inline-flex items-center gap-1;
-}
-
-@utility hud-glow-text {
-  text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+  @apply doc-badge-emerald;
 }
 
 :target {

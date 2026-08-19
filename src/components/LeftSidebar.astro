@@ -15,13 +15,13 @@ const pathWithoutTrailingSlash =
     ? relativePath.slice(0, -1)
     : relativePath;
 ---
-<nav class="hud-card p-4 text-xs font-mono">
-  <div class="flex items-center justify-between pb-3 mb-3 border-b border-[rgba(0,240,255,0.15)]">
-    <span class="font-bold uppercase tracking-wider text-[#00f0ff] flex items-center gap-1.5">
-      <span class="size-1.5 rounded-full bg-[#00f0ff] shadow-[0_0_6px_#00f0ff]"></span>
-      // NAVIGATION
+<nav class="doc-card p-4 text-xs font-sans">
+  <div class="flex items-center justify-between pb-2.5 mb-3 border-b border-slate-800">
+    <span class="font-bold uppercase tracking-wider text-slate-200 font-mono text-[11px] flex items-center gap-2">
+      <span class="size-1.5 rounded-full bg-sky-400"></span>
+      Navigation
     </span>
-    <span class="text-[10px] text-slate-500">HUD_V6</span>
+    <span class="text-[10px] font-mono text-slate-500">MKDOCS</span>
   </div>
 
   <ul class="space-y-1">
@@ -29,46 +29,54 @@ const pathWithoutTrailingSlash =
       <a 
         href={getRelativeLocaleUrl(locale, "")} 
         class:list={[
-          "block w-full rounded px-2.5 py-1.5 transition-all flex items-center gap-2", 
-          pathWithoutTrailingSlash === "" ? "bg-[rgba(0,240,255,0.12)] text-[#00f0ff] font-semibold border-l-2 border-[#00f0ff]" : "hover:bg-[rgba(0,240,255,0.05)] hover:text-[#00f0ff] text-slate-300"
+          "block w-full rounded px-2.5 py-1.5 transition-colors flex items-center gap-2", 
+          pathWithoutTrailingSlash === "" ? "bg-sky-950/40 text-sky-400 font-semibold border-l-2 border-sky-400" : "hover:bg-slate-800/60 hover:text-white text-slate-300"
         ]}
       >
-        <span>&gt;</span>
-        <span>INDEX_OVERVIEW</span>
+        <span>Overview</span>
       </a>
     </li>
     <li>
       <a 
         href={getRelativeLocaleUrl(locale, "posts")} 
         class:list={[
-          "block w-full rounded px-2.5 py-1.5 transition-all flex items-center gap-2", 
-          pathWithoutTrailingSlash === "/posts" ? "bg-[rgba(0,240,255,0.12)] text-[#00f0ff] font-semibold border-l-2 border-[#00f0ff]" : "hover:bg-[rgba(0,240,255,0.05)] hover:text-[#00f0ff] text-slate-300"
+          "block w-full rounded px-2.5 py-1.5 transition-colors flex items-center gap-2", 
+          pathWithoutTrailingSlash === "/posts" ? "bg-sky-950/40 text-sky-400 font-semibold border-l-2 border-sky-400" : "hover:bg-slate-800/60 hover:text-white text-slate-300"
         ]}
       >
-        <span>&gt;</span>
-        <span>ALL_DISPATCHES</span>
+        <span>All Posts</span>
       </a>
     </li>
     <li>
       <a 
         href={getRelativeLocaleUrl(locale, "tags/post-mortem")} 
         class:list={[
-          "block w-full rounded px-2.5 py-1.5 transition-all flex items-center gap-2", 
-          pathWithoutTrailingSlash === "/tags/post-mortem" ? "bg-rose-950/40 text-rose-300 font-semibold border-l-2 border-rose-500" : "hover:bg-rose-950/20 hover:text-rose-300 text-rose-400/80"
+          "block w-full rounded px-2.5 py-1.5 transition-colors flex items-center gap-2", 
+          pathWithoutTrailingSlash === "/tags/post-mortem" ? "bg-rose-950/40 text-rose-300 font-semibold border-l-2 border-rose-500" : "hover:bg-rose-950/20 hover:text-rose-200 text-rose-300/80"
         ]}
       >
-        <span>&gt;</span>
-        <span>POST_MORTEMS</span>
+        <span>Post-Mortems</span>
+      </a>
+    </li>
+    <li>
+      <a 
+        href={getRelativeLocaleUrl(locale, "tags")} 
+        class:list={[
+          "block w-full rounded px-2.5 py-1.5 transition-colors flex items-center gap-2", 
+          pathWithoutTrailingSlash === "/tags" ? "bg-sky-950/40 text-sky-400 font-semibold border-l-2 border-sky-400" : "hover:bg-slate-800/60 hover:text-white text-slate-300"
+        ]}
+      >
+        <span>Tags & Categories</span>
       </a>
     </li>
 
     <li class="pt-4">
-      <div class="flex items-center justify-between pb-2 mb-2 border-b border-[rgba(0,240,255,0.1)]">
-        <span class="font-bold uppercase tracking-wider text-slate-400 text-[10px] flex items-center gap-1.5">
-          // RECENT LOGS
+      <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800">
+        <span class="font-bold uppercase tracking-wider text-slate-400 font-mono text-[10px]">
+          Recent Articles
         </span>
       </div>
-      <ul class="space-y-1">
+      <ul class="space-y-0.5">
         {posts.slice(0, 8).map((post) => {
            const postPath = `/posts/${getPostSlug(post.id, post.filePath)}`;
            const isActive = pathWithoutTrailingSlash === postPath;
@@ -78,9 +86,9 @@ const pathWithoutTrailingSlash =
                <a 
                  href={getRelativeLocaleUrl(locale, postPath)} 
                  class:list={[
-                   "block w-full rounded px-2 py-1.5 transition-all line-clamp-1 font-sans text-xs", 
-                   isActive ? "bg-[rgba(0,240,255,0.12)] text-[#00f0ff] font-semibold border-l-2 border-[#00f0ff]" : "hover:bg-[rgba(0,240,255,0.05)] hover:text-[#00f0ff] text-slate-400",
-                   isPostMortem && !isActive ? "text-rose-400/80 hover:text-rose-300" : ""
+                   "block w-full rounded px-2 py-1 transition-colors line-clamp-1 text-xs", 
+                   isActive ? "bg-sky-950/40 text-sky-400 font-semibold border-l-2 border-sky-400" : "hover:bg-slate-800/60 hover:text-white text-slate-400",
+                   isPostMortem && !isActive ? "hover:text-rose-300" : ""
                  ]}
                  title={post.data.title}
                >

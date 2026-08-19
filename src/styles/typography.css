@@ -1,58 +1,61 @@
 @plugin "@tailwindcss/typography";
 
 @layer base {
-  /* ===== Override default Tailwind Typography styles ===== */
+  /* ===== Override default Tailwind Typography styles for MkDocs Slate Theme ===== */
   .app-prose {
     @apply prose max-w-none;
 
     h1 {
-      @apply text-foreground mb-4 font-mono font-extrabold tracking-tight;
+      @apply text-white font-bold tracking-tight mb-4 text-2xl sm:text-3xl;
     }
     
     h2 {
-      @apply text-slate-900 dark:text-slate-100 font-mono font-bold border-b border-[rgba(0,240,255,0.2)] pb-2 mb-4 mt-10 tracking-tight flex items-center gap-2;
+      @apply text-white font-semibold text-xl sm:text-2xl border-b border-slate-800 pb-2 mb-4 mt-10 tracking-tight flex items-center gap-2;
     }
 
     h3 {
-      @apply text-slate-800 dark:text-cyan-300 font-mono font-semibold mt-8 mb-3 tracking-tight;
+      @apply text-slate-100 font-semibold text-lg sm:text-xl mt-8 mb-3 tracking-tight;
     }
     
     h4,
     th {
-      @apply text-foreground mb-3 font-mono font-semibold;
+      @apply text-slate-200 font-medium mb-3;
     }
 
     p,
-    strong,
     ol,
     ul,
     figcaption,
     table {
-      @apply text-foreground leading-relaxed;
+      @apply text-slate-300 leading-relaxed;
     }
 
     strong {
-      @apply text-slate-900 dark:text-white font-semibold;
+      @apply text-white font-semibold;
     }
 
     a {
-      @apply text-accent hover:underline wrap-break-word decoration-dashed underline-offset-4 focus-visible:no-underline;
+      @apply text-sky-400 hover:text-sky-300 hover:underline wrap-break-word underline-offset-4 focus-visible:no-underline;
     }
 
     ul {
-      @apply overflow-x-clip;
+      @apply overflow-x-clip list-disc pl-5 my-4 space-y-1;
+    }
+
+    ol {
+      @apply list-decimal pl-5 my-4 space-y-1;
     }
 
     li {
-      @apply marker:text-accent;
+      @apply marker:text-sky-400;
     }
 
     hr {
-      @apply border-[rgba(0,240,255,0.15)] my-8;
+      @apply border-slate-800 my-8;
     }
 
     img {
-      @apply border border-[rgba(0,240,255,0.2)] rounded-xl mx-auto shadow-2xl;
+      @apply border border-slate-800 rounded-lg mx-auto shadow-lg;
     }
 
     img[role="button"] {
@@ -64,24 +67,34 @@
     }
 
     figcaption {
-      @apply font-mono text-xs opacity-75 mt-2 text-center;
+      @apply font-mono text-xs text-slate-400 mt-2 text-center;
     }
 
+    /* ===== Markdown Tables with Alternate Striping ===== */
     table {
-      @apply border border-[rgba(0,240,255,0.15)] rounded-lg overflow-hidden;
+      @apply w-full border-collapse border border-slate-800 rounded-lg overflow-hidden my-6 text-sm;
       
       th,
       td {
-        @apply border border-[rgba(0,240,255,0.12)] p-3 text-sm;
+        @apply border border-slate-800 p-3 text-left;
       }
 
       th {
-        @apply py-2 bg-[rgba(0,240,255,0.06)] font-mono text-xs uppercase tracking-wider text-[#00f0ff];
+        @apply bg-slate-800/80 text-slate-200 font-mono text-xs uppercase tracking-wider font-semibold;
+      }
+
+      tbody tr {
+        @apply transition-colors hover:bg-slate-800/30;
+      }
+
+      tbody tr:nth-child(even) {
+        @apply bg-slate-900/40;
       }
     }
 
+    /* ===== Inline Code ===== */
     code:not(pre code) {
-      @apply font-mono text-xs bg-[rgba(0,240,255,0.08)] text-[#00f0ff] border border-[rgba(0,240,255,0.2)] rounded px-1.5 py-0.5 wrap-break-word before:content-none after:content-none;
+      @apply font-mono text-xs bg-slate-800/80 text-sky-300 border border-slate-700/60 rounded px-1.5 py-0.5 wrap-break-word before:content-none after:content-none;
     }
 
     .astro-code code {
@@ -89,29 +102,29 @@
     }
 
     blockquote {
-      @apply border-s-2 border-s-[#00f0ff] bg-[rgba(0,240,255,0.03)] rounded-r-lg p-4 my-4 font-sans italic text-slate-300;
+      @apply border-s-4 border-s-sky-500 bg-slate-900/50 rounded-r-lg p-4 my-4 font-sans italic text-slate-300;
     }
 
     details:not(.callout) {
-      @apply text-foreground inline-block cursor-pointer select-none [&_p]:hidden [&_ul]:my-0! hud-card p-4;
+      @apply text-foreground inline-block cursor-pointer select-none [&_p]:hidden [&_ul]:my-0! doc-card p-4;
     }
 
     summary {
-      @apply font-mono text-sm focus-visible:outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-dashed text-[#00f0ff];
+      @apply font-mono text-sm focus-visible:outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-dashed text-sky-400;
     }
 
     pre {
-      @apply focus-visible:outline-accent focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-dashed my-6 rounded-xl overflow-hidden border border-[rgba(0,240,255,0.2)] shadow-2xl;
+      @apply focus-visible:outline-accent focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-dashed my-6 rounded-lg overflow-hidden border border-slate-800 shadow-xl;
     }
   }
 
   /* ===== Code Blocks & Syntax Highlighting ===== */
   .astro-code {
-    @apply flex border border-[rgba(0,240,255,0.2)] bg-[#0c1017] rounded-xl text-(--shiki-light) [&_span]:text-(--shiki-light) p-4 shadow-xl;
+    @apply flex border border-slate-800 bg-slate-950/90 rounded-lg text-(--shiki-light) [&_span]:text-(--shiki-light) p-4 shadow-xl;
   }
 
   html[data-theme="dark"] .astro-code {
-    @apply bg-[#06080e] border border-[rgba(0,240,255,0.2)] text-(--shiki-dark) [&_span]:text-(--shiki-dark);
+    @apply bg-slate-950/90 border border-slate-800 text-(--shiki-dark) [&_span]:text-(--shiki-dark);
   }
 
   /* Styles for Shiki transformers */
@@ -119,14 +132,17 @@
     .line.diff.add {
       @apply relative inline-block w-full bg-emerald-500/15 before:absolute before:-left-3 before:text-emerald-400 before:content-['+'];
     }
+
     .line.diff.remove {
       @apply relative inline-block w-full bg-rose-500/15 before:absolute before:-left-3 before:text-rose-400 before:content-['-'];
     }
+
     .line.highlighted {
-      @apply inline-block w-full bg-cyan-500/15;
+      @apply inline-block w-full bg-slate-800/60;
     }
+
     .highlighted-word {
-      @apply border border-cyan-400/40 rounded px-1 py-0.5 bg-cyan-500/10;
+      @apply rounded bg-slate-800/80 p-0.5;
     }
   }
 }

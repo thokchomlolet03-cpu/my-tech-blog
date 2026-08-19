@@ -41,7 +41,7 @@ const date = datetime.format("D MMM, YYYY");
 >
   <IconCalendar
     class:list={[
-      "inline-block size-4 min-w-4 text-[#00f0ff]/70",
+      "inline-block size-3.5 min-w-3.5 text-sky-400",
       { "scale-90": size === "sm" },
     ]}
   />
@@ -53,7 +53,7 @@ const date = datetime.format("D MMM, YYYY");
     )
   }
   <time
-    class:list={["text-xs tracking-wider", { "sm:text-sm": size === "lg" }]}
+    class:list={["text-xs", { "sm:text-sm": size === "lg" }]}
     datetime={datetime.toISOString()}
   >
     {date}

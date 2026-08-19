@@ -15,48 +15,59 @@ const isPostMortem = tags.includes("post-mortem");
 ---
 
 <li class="my-4 list-none">
-  <div class="hud-card-interactive p-5 relative overflow-hidden group">
-    <!-- Subtle top corner telemetry indicator -->
-    <div class="absolute top-0 right-0 px-3 py-1 bg-[rgba(0,240,255,0.06)] border-b border-l border-[rgba(0,240,255,0.2)] rounded-bl-lg font-mono text-[10px] uppercase tracking-widest text-[#00f0ff]/70 flex items-center gap-1.5">
-      <span class:list={["size-1.5 rounded-full", isPostMortem ? "bg-rose-500 shadow-[0_0_6px_#f43f5e]" : "bg-cyan-400 shadow-[0_0_6px_#00f0ff]"]}></span>
-      <span>{isPostMortem ? "INCIDENT REPORT" : featured ? "FEATURED LOG" : "TELEMETRY LOG"}</span>
+  <div class="doc-card-interactive p-6 relative group">
+    <!-- Top right label -->
+    <div class="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-slate-800/80 text-xs font-mono">
+      <div class="flex items-center gap-2">
+        <span class:list={["size-2 rounded-full", isPostMortem ? "bg-rose-400" : featured ? "bg-sky-400" : "bg-slate-400"]}></span>
+        <span class={isPostMortem ? "text-rose-400 font-semibold" : featured ? "text-sky-400 font-semibold" : "text-slate-400"}>
+          {isPostMortem ? "INCIDENT REPORT" : featured ? "FEATURED ARCHITECTURE" : "TECHNICAL SPECIFICATION"}
+        </span>
+      </div>
+      <span class="text-[11px] text-slate-500">
+        STATUS: VERIFIED
+      </span>
     </div>
 
+    <!-- Title -->
     <a
       href={getPostUrl(id, filePath, Astro.currentLocale)}
       class="block focus-visible:outline-accent"
     >
       <Heading
         transition:name={toTransitionName(title)}
-        class="font-mono text-lg sm:text-xl font-bold tracking-tight text-slate-100 group-hover:text-[#00f0ff] group-hover:hud-glow-text transition-colors duration-200 pr-24"
+        class="font-sans text-lg sm:text-xl font-bold tracking-tight text-white group-hover:text-sky-400 transition-colors duration-150"
       >
         {title}
       </Heading>
     </a>
 
-    <div class="my-2.5 flex flex-wrap items-center gap-2">
+    <!-- Datetime & Tags -->
+    <div class="my-3 flex flex-wrap items-center gap-2">
       <Datetime {...props} />
       {tags.slice(0, 3).map(tag => (
-        <span class={tag === "post-mortem" ? "hud-badge-alert text-[10px]" : "hud-badge text-[10px]"}>
+        <span class={tag === "post-mortem" ? "doc-badge-alert text-[11px]" : "doc-badge text-[11px]"}>
           #{tag}
         </span>
       ))}
     </div>
 
-    <p class="text-sm text-slate-300 dark:text-slate-300 leading-relaxed font-sans mt-2 line-clamp-3">
+    <!-- Excerpt / Description -->
+    <p class="text-sm text-slate-300 leading-relaxed font-sans mt-2 line-clamp-3">
       {description}
     </p>
 
-    <div class="mt-4 pt-3 border-t border-[rgba(0,240,255,0.1)] flex items-center justify-between">
+    <!-- Footer Action -->
+    <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
       <a
         href={getPostUrl(id, filePath, Astro.currentLocale)}
-        class="font-mono text-xs text-[#00f0ff] hover:underline flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+        class="font-mono text-sky-400 hover:text-sky-300 flex items-center gap-1.5 group-hover:translate-x-0.5 transition-transform"
       >
-        <span>READ_LOG()</span>
+        <span>Read Article</span>
         <span aria-hidden="true">&rarr;</span>
       </a>
-      <span class="font-mono text-[11px] text-slate-400">
-        STATUS: VERIFIED
+      <span class="font-mono text-[11px] text-slate-500">
+        THE TOKEN COSMOS
       </span>
     </div>
   </div>
