@@ -1,4 +1,4 @@
-/* Register design tokens for Tailwind v4 */
+/* Register design tokens for Tailwind v4 matching Material for MkDocs Slate + Deep Purple Theme */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -7,12 +7,12 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --color-sky-accent: #38bdf8;
-  --color-blue-accent: #60a5fa;
-  --color-slate-base: #0f172a;
-  --color-slate-elevated: #1e293b;
-  --font-sans: 'Inter', 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Roboto Mono', 'Fira Code', monospace;
+  --color-primary-purple: #7e56c2;
+  --color-accent-purple: #a47bea;
+  --color-slate-canvas: #1e2129;
+  --color-slate-surface: #262a33;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
   --font-app: var(--font-sans);
 }
 
@@ -20,21 +20,21 @@
 :root,
 [data-theme="light"] {
   --background: #f8fafc;
-  --foreground: #0f172a;
-  --accent: #0284c7;
+  --foreground: #1e2129;
+  --accent: #7e56c2;
   --accent-foreground: #ffffff;
   --muted: #f1f5f9;
   --muted-foreground: #64748b;
   --border: #e2e8f0;
 }
 
-/* Dark theme values — Material for MkDocs Slate Dark Mode */
+/* Dark theme values — Exact Material for MkDocs Slate + Deep Purple */
 [data-theme="dark"] {
-  --background: #0f172a; /* Deep Slate Navy Base */
-  --foreground: #cbd5e1; /* Readable Light Slate */
-  --accent: #38bdf8; /* Crisp Electric Sky Blue */
-  --accent-foreground: #0f172a;
-  --muted: #1e293b; /* Elevated Slate Container */
-  --muted-foreground: #94a3b8; /* Muted Slate */
-  --border: rgba(255, 255, 255, 0.08); /* Hairline Grid Border */
+  --background: #1e2129; /* Material Slate Background: hsla(230, 15%, 14%, 1) */
+  --foreground: #dce0e8; /* Material Slate Foreground: hsla(230, 15%, 90%, 0.82) */
+  --accent: #a47bea;     /* Material Deep Purple Accent: #a47bea */
+  --accent-foreground: #ffffff;
+  --muted: #262a33;      /* Material Slate Elevated Surface: hsla(230, 15%, 18%, 1) */
+  --muted-foreground: #9ba0ad; /* Material Muted: hsla(230, 15%, 90%, 0.56) */
+  --border: rgba(230, 235, 245, 0.12); /* Material Slate Border */
 }

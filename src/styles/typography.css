@@ -1,7 +1,7 @@
 @plugin "@tailwindcss/typography";
 
 @layer base {
-  /* ===== Override default Tailwind Typography styles for MkDocs Slate Theme ===== */
+  /* ===== Override default Tailwind Typography styles for MkDocs Slate + Deep Purple Theme ===== */
   .app-prose {
     @apply prose max-w-none;
 
@@ -10,16 +10,16 @@
     }
     
     h2 {
-      @apply text-white font-semibold text-xl sm:text-2xl border-b border-slate-800 pb-2 mb-4 mt-10 tracking-tight flex items-center gap-2;
+      @apply text-white font-semibold text-xl sm:text-2xl border-b border-[rgba(230,235,245,0.12)] pb-2 mb-4 mt-10 tracking-tight flex items-center gap-2;
     }
 
     h3 {
-      @apply text-slate-100 font-semibold text-lg sm:text-xl mt-8 mb-3 tracking-tight;
+      @apply text-[#f3f4f6] font-semibold text-lg sm:text-xl mt-8 mb-3 tracking-tight;
     }
     
     h4,
     th {
-      @apply text-slate-200 font-medium mb-3;
+      @apply text-[#e2e4ea] font-medium mb-3;
     }
 
     p,
@@ -27,7 +27,7 @@
     ul,
     figcaption,
     table {
-      @apply text-slate-300 leading-relaxed;
+      @apply text-[#dce0e8] leading-relaxed;
     }
 
     strong {
@@ -35,7 +35,7 @@
     }
 
     a {
-      @apply text-sky-400 hover:text-sky-300 hover:underline wrap-break-word underline-offset-4 focus-visible:no-underline;
+      @apply text-[#a47bea] hover:text-[#c499ff] hover:underline wrap-break-word underline-offset-4 focus-visible:no-underline;
     }
 
     ul {
@@ -47,15 +47,15 @@
     }
 
     li {
-      @apply marker:text-sky-400;
+      @apply marker:text-[#a47bea];
     }
 
     hr {
-      @apply border-slate-800 my-8;
+      @apply border-[rgba(230,235,245,0.12)] my-8;
     }
 
     img {
-      @apply border border-slate-800 rounded-lg mx-auto shadow-lg;
+      @apply border border-[rgba(230,235,245,0.12)] rounded-lg mx-auto shadow-lg;
     }
 
     img[role="button"] {
@@ -67,34 +67,38 @@
     }
 
     figcaption {
-      @apply font-mono text-xs text-slate-400 mt-2 text-center;
+      @apply font-mono text-xs text-[#9ba0ad] mt-2 text-center;
     }
 
     /* ===== Markdown Tables with Alternate Striping ===== */
     table {
-      @apply w-full border-collapse border border-slate-800 rounded-lg overflow-hidden my-6 text-sm;
+      @apply w-full border-collapse border border-[rgba(230,235,245,0.12)] rounded-lg overflow-hidden my-6 text-sm;
       
       th,
       td {
-        @apply border border-slate-800 p-3 text-left;
+        @apply border border-[rgba(230,235,245,0.10)] p-3 text-left;
       }
 
       th {
-        @apply bg-slate-800/80 text-slate-200 font-mono text-xs uppercase tracking-wider font-semibold;
+        @apply bg-[#282c35] text-white font-mono text-xs uppercase tracking-wider font-semibold;
       }
 
       tbody tr {
-        @apply transition-colors hover:bg-slate-800/30;
+        @apply transition-colors hover:bg-[#7e56c2]/10;
+      }
+
+      tbody tr:nth-child(odd) {
+        @apply bg-[#1e2129];
       }
 
       tbody tr:nth-child(even) {
-        @apply bg-slate-900/40;
+        @apply bg-[#242831];
       }
     }
 
     /* ===== Inline Code ===== */
     code:not(pre code) {
-      @apply font-mono text-xs bg-slate-800/80 text-sky-300 border border-slate-700/60 rounded px-1.5 py-0.5 wrap-break-word before:content-none after:content-none;
+      @apply font-mono text-xs bg-[#282c35] text-[#c499ff] border border-[rgba(230,235,245,0.15)] rounded px-1.5 py-0.5 wrap-break-word before:content-none after:content-none;
     }
 
     .astro-code code {
@@ -102,7 +106,7 @@
     }
 
     blockquote {
-      @apply border-s-4 border-s-sky-500 bg-slate-900/50 rounded-r-lg p-4 my-4 font-sans italic text-slate-300;
+      @apply border-s-4 border-s-[#7e56c2] bg-[#7e56c2]/10 rounded-r-lg p-4 my-4 font-sans italic text-[#dce0e8];
     }
 
     details:not(.callout) {
@@ -110,21 +114,21 @@
     }
 
     summary {
-      @apply font-mono text-sm focus-visible:outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-dashed text-sky-400;
+      @apply font-mono text-sm focus-visible:outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-dashed text-[#a47bea];
     }
 
     pre {
-      @apply focus-visible:outline-accent focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-dashed my-6 rounded-lg overflow-hidden border border-slate-800 shadow-xl;
+      @apply focus-visible:outline-accent focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-dashed my-6 rounded-lg overflow-hidden border border-[rgba(230,235,245,0.12)] shadow-xl;
     }
   }
 
   /* ===== Code Blocks & Syntax Highlighting ===== */
   .astro-code {
-    @apply flex border border-slate-800 bg-slate-950/90 rounded-lg text-(--shiki-light) [&_span]:text-(--shiki-light) p-4 shadow-xl;
+    @apply flex border border-[rgba(230,235,245,0.10)] bg-[#1c1f26] rounded-lg text-(--shiki-light) [&_span]:text-(--shiki-light) p-4 shadow-xl;
   }
 
   html[data-theme="dark"] .astro-code {
-    @apply bg-slate-950/90 border border-slate-800 text-(--shiki-dark) [&_span]:text-(--shiki-dark);
+    @apply bg-[#1c1f26] border border-[rgba(230,235,245,0.10)] text-(--shiki-dark) [&_span]:text-(--shiki-dark);
   }
 
   /* Styles for Shiki transformers */
@@ -138,11 +142,11 @@
     }
 
     .line.highlighted {
-      @apply inline-block w-full bg-slate-800/60;
+      @apply inline-block w-full bg-[#7e56c2]/20;
     }
 
     .highlighted-word {
-      @apply rounded bg-slate-800/80 p-0.5;
+      @apply rounded bg-[#7e56c2]/30 p-0.5;
     }
   }
 }

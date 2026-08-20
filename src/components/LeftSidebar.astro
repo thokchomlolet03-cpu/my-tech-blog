@@ -42,8 +42,8 @@ function isCurrentPath(href: string): boolean {
   <!-- Section Header -->
   <div class="px-3 pb-2 mb-1">
     <div class="flex items-center gap-2 py-1.5">
-      <span class="size-1.5 rounded-full bg-sky-400 flex-shrink-0"></span>
-      <span class="font-mono text-[10px] uppercase tracking-widest text-slate-500 font-medium">
+      <span class="size-1.5 rounded-full bg-[#a47bea] flex-shrink-0"></span>
+      <span class="font-mono text-[10px] uppercase tracking-widest text-[#9ba0ad] font-medium">
         Navigation
       </span>
     </div>
@@ -61,12 +61,12 @@ function isCurrentPath(href: string): boolean {
             class:list={[
               "flex items-center gap-2 w-full rounded px-2 py-1.5 text-xs font-normal leading-relaxed transition-all duration-150 truncate",
               active && !isAlert
-                ? "bg-sky-950/50 text-sky-400 font-semibold border-l-2 border-sky-400 pl-[6px]"
+                ? "bg-[#7e56c2]/20 text-[#a47bea] font-semibold border-l-2 border-[#a47bea] pl-[6px]"
                 : active && isAlert
                 ? "bg-rose-950/40 text-rose-300 font-semibold border-l-2 border-rose-500 pl-[6px]"
                 : isAlert
                 ? "text-rose-300/70 hover:text-rose-200 hover:bg-rose-950/20"
-                : "text-slate-400 font-normal hover:text-white hover:bg-slate-800/40"
+                : "text-[#9ba0ad] font-normal hover:text-white hover:bg-[rgba(230,235,245,0.06)]"
             ]}
             aria-current={active ? "page" : undefined}
           >
@@ -78,11 +78,11 @@ function isCurrentPath(href: string): boolean {
   </ul>
 
   <!-- Divider -->
-  <div class="mx-3 my-3 border-t border-slate-800/80"></div>
+  <div class="mx-3 my-3 border-t border-[rgba(230,235,245,0.10)]"></div>
 
   <!-- Recent Articles Section -->
   <div class="px-3 pb-1.5">
-    <span class="font-mono text-[10px] uppercase tracking-widest text-slate-500 font-medium">
+    <span class="font-mono text-[10px] uppercase tracking-widest text-[#9ba0ad] font-medium">
       Recent Articles
     </span>
   </div>
@@ -100,10 +100,10 @@ function isCurrentPath(href: string): boolean {
             class:list={[
               "block w-full rounded px-2 py-1 text-xs leading-snug transition-all duration-150 truncate",
               isActive
-                ? "bg-sky-950/50 text-sky-400 font-medium border-l-2 border-sky-400 pl-[6px]"
+                ? "bg-[#7e56c2]/20 text-[#a47bea] font-medium border-l-2 border-[#a47bea] pl-[6px]"
                 : isPostMortem
                 ? "text-rose-300/60 hover:text-rose-200 hover:bg-rose-950/20"
-                : "text-slate-400 font-normal hover:text-white hover:bg-slate-800/40"
+                : "text-[#9ba0ad] font-normal hover:text-white hover:bg-[rgba(230,235,245,0.06)]"
             ]}
           >
             {post.data.title}

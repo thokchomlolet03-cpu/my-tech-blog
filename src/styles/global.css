@@ -10,17 +10,19 @@
   * {
     @apply border-border outline-accent/75;
     scrollbar-width: thin;
-    scrollbar-color: rgba(56, 189, 248, 0.2) transparent;
+    scrollbar-color: rgba(164, 123, 234, 0.3) transparent;
   }
   
   body {
     min-height: 100vh;
     background-color: var(--background);
     color: var(--foreground);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   }
 
   html[data-theme="dark"] body {
-    background-color: #0f172a;
+    background-color: #1e2129;
+    color: #dce0e8;
   }
 
   a,
@@ -42,20 +44,20 @@
 }
 
 @utility active-nav {
-  @apply text-sky-400 font-semibold bg-slate-800/80 border border-slate-700;
+  @apply text-[#a47bea] font-semibold bg-[#262a33] border border-[rgba(230,235,245,0.15)];
 }
 
 /* ===== Material for MkDocs Slate Documentation Utilities ===== */
 @utility doc-card {
-  @apply bg-slate-900/60 border border-slate-800 rounded-lg transition-all duration-200;
+  @apply bg-[#242831]/90 border border-[rgba(230,235,245,0.10)] rounded-lg transition-all duration-200;
 }
 
 @utility doc-card-interactive {
-  @apply doc-card hover:border-sky-500/40 hover:bg-slate-900/80 hover:-translate-y-0.5;
+  @apply doc-card hover:border-[#a47bea]/60 hover:bg-[#282c35] hover:-translate-y-0.5 shadow-sm;
 }
 
 @utility doc-badge {
-  @apply font-mono text-xs px-2.5 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700 inline-flex items-center gap-1.5;
+  @apply font-mono text-xs px-2.5 py-1 rounded bg-[#282c35] text-[#dce0e8] border border-[rgba(230,235,245,0.12)] inline-flex items-center gap-1.5;
 }
 
 @utility doc-badge-alert {
@@ -66,8 +68,8 @@
   @apply font-mono text-xs px-2.5 py-1 rounded bg-emerald-950/40 text-emerald-300 border border-emerald-800/50 inline-flex items-center gap-1.5;
 }
 
-@utility doc-badge-sky {
-  @apply font-mono text-xs px-2.5 py-1 rounded bg-sky-950/40 text-sky-300 border border-sky-800/50 inline-flex items-center gap-1.5;
+@utility doc-badge-purple {
+  @apply font-mono text-xs px-2.5 py-1 rounded bg-[#7e56c2]/20 text-[#c499ff] border border-[#7e56c2]/40 inline-flex items-center gap-1.5;
 }
 
 /* Backward compatibility aliases */

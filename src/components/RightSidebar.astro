@@ -15,15 +15,15 @@ const toc = headings.filter((h) => h.depth > 1 && h.depth < 4);
     <!-- Section Header -->
     <div class="px-3 pb-2 mb-1">
       <div class="flex items-center gap-2 py-1.5">
-        <span class="size-1.5 rounded-full bg-sky-400 flex-shrink-0"></span>
-        <span class="font-mono text-[10px] uppercase tracking-widest text-slate-500 font-medium">
+        <span class="size-1.5 rounded-full bg-[#a47bea] flex-shrink-0"></span>
+        <span class="font-mono text-[10px] uppercase tracking-widest text-[#9ba0ad] font-medium">
           Contents
         </span>
       </div>
     </div>
 
     <!-- TOC Links -->
-    <div class="border-l border-slate-800 ml-4">
+    <div class="border-l border-[rgba(230,235,245,0.12)] ml-4">
       <ul class="space-y-0.5 pl-0" role="list">
         {toc.map((heading) => {
           const indent = (heading.depth - 2) * 0.75;
@@ -31,7 +31,7 @@ const toc = headings.filter((h) => h.depth > 1 && h.depth < 4);
             <li>
               <a
                 href={`#${heading.slug}`}
-                class="toc-link block py-1 pr-2 text-xs leading-snug text-slate-400 hover:text-sky-400 transition-colors duration-150 truncate"
+                class="toc-link block py-1 pr-2 text-xs leading-snug text-[#9ba0ad] hover:text-[#a47bea] transition-colors duration-150 truncate"
                 style={`padding-left: ${0.75 + indent}rem`}
                 data-heading-slug={heading.slug}
               >
@@ -64,9 +64,9 @@ const toc = headings.filter((h) => h.depth > 1 && h.depth < 4);
             const slug = entry.target.id;
             tocLinks.forEach(link => {
               const isActive = link.dataset.headingSlug === slug;
-              link.classList.toggle("text-sky-400", isActive);
+              link.classList.toggle("text-[#a47bea]", isActive);
               link.classList.toggle("font-medium", isActive);
-              link.classList.toggle("text-slate-400", !isActive);
+              link.classList.toggle("text-[#9ba0ad]", !isActive);
             });
             break;
           }
