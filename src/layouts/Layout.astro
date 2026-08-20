@@ -164,17 +164,25 @@ const rssHref = getRelativeLocaleUrl(
           const container = el.tagName === 'CODE' ? el.parentElement : el;
           if (!container || container.dataset.mermaidRendered) continue;
           
-          const rawCode = el.textContent || '';
+          let rawCode = el.textContent || '';
+          rawCode = rawCode
+            .replace(/&gt;/g, '>')
+            .replace(/&lt;/g, '<')
+            .replace(/&amp;/g, '&')
+            .trim();
+
           const graphId = `mermaid-svg-${Date.now()}-${i}`;
           try {
-            const { svg } = await mermaid.render(graphId, rawCode.trim());
+            const { svg } = await mermaid.render(graphId, rawCode);
             const wrapper = document.createElement('div');
             wrapper.className = 'mermaid-rendered-container my-6 w-full flex justify-center overflow-x-auto rounded-lg bg-[#1c1f26] border border-[rgba(230,235,245,0.10)] p-4 shadow-xl';
             wrapper.innerHTML = svg;
             container.dataset.mermaidRendered = 'true';
             container.parentNode?.replaceChild(wrapper, container);
           } catch (e) {
-            console.error('Mermaid render error:', e);
+            console.warn('Mermaid render error:', e);
+            const errorElement = document.getElementById(graphId) || document.getElementById('d' + graphId);
+            if (errorElement) errorElement.remove();
           }
         }
       }
