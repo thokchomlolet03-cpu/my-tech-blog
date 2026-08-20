@@ -138,6 +138,53 @@ const rssHref = getRelativeLocaleUrl(
       });
     </script>
 
+    <!-- Mermaid.js for rendering flowchart diagrams -->
+    <script is:inline type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'dark',
+        themeVariables: {
+          darkMode: true,
+          background: '#1e2129',
+          mainBkg: '#242831',
+          nodeBorder: '#7e56c2',
+          primaryColor: '#7e56c2',
+          primaryTextColor: '#ffffff',
+          primaryBorderColor: '#a47bea',
+          lineColor: '#a47bea',
+          secondaryColor: '#282c35',
+          tertiaryColor: '#1e2129'
+        }
+      });
+
+      async function renderAllMermaid() {
+        const blocks = document.querySelectorAll('pre.astro-code[data-language="mermaid"], pre > code.language-mermaid, pre.mermaid, code.language-mermaid');
+        for (let i = 0; i < blocks.length; i++) {
+          const el = blocks[i];
+          const container = el.tagName === 'CODE' ? el.parentElement : el;
+          if (!container || container.dataset.mermaidRendered) continue;
+          
+          const rawCode = el.textContent || '';
+          const graphId = `mermaid-svg-${Date.now()}-${i}`;
+          try {
+            const { svg } = await mermaid.render(graphId, rawCode.trim());
+            const wrapper = document.createElement('div');
+            wrapper.className = 'mermaid-rendered-container my-6 w-full flex justify-center overflow-x-auto rounded-lg bg-[#1c1f26] border border-[rgba(230,235,245,0.10)] p-4 shadow-xl';
+            wrapper.innerHTML = svg;
+            container.dataset.mermaidRendered = 'true';
+            container.parentNode?.replaceChild(wrapper, container);
+          } catch (e) {
+            console.error('Mermaid render error:', e);
+          }
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', renderAllMermaid);
+      document.addEventListener('astro:page-load', renderAllMermaid);
+    </script>
+
     <ClientRouter />
   </head>
   <body
