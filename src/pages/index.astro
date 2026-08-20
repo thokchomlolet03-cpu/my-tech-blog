@@ -31,21 +31,21 @@ const homePath = getRelativeLocaleUrl(locale, "");
     class="w-full"
   >
     <!-- MkDocs Slate Hero Section -->
-    <section id="hero" class="doc-card p-6 sm:p-8 mb-8 relative">
-      <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-800">
+    <section id="hero" class="doc-card p-5 sm:p-6 mb-6 relative">
+      <div class="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
-          <span class="size-2 rounded-full bg-sky-400"></span>
-          <span class="font-mono text-xs uppercase tracking-wider text-sky-400 font-medium">
+          <span class="size-1.5 rounded-full bg-sky-400"></span>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-sky-400 font-medium">
             System Architecture &amp; AI Engineering
           </span>
         </div>
-        <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-500 border border-slate-700">
           EDITION: 2026.08
         </span>
       </div>
 
-      <div class="flex items-center gap-3 my-2">
-        <h1 class="font-sans text-3xl sm:text-4xl font-bold tracking-tight text-white">
+      <div class="flex items-center gap-3 my-1.5">
+        <h1 class="font-sans text-2xl sm:text-3xl font-bold tracking-tight text-white">
           Friction Hunter
         </h1>
         <a
@@ -56,27 +56,27 @@ const homePath = getRelativeLocaleUrl(locale, "");
           title="RSS Feed"
         >
           <IconRss
-            width={16}
-            height={16}
+            width={14}
+            height={14}
             class="stroke-accent stroke-2 rtl:-rotate-90"
           />
           <span class="sr-only">RSS Feed</span>
         </a>
       </div>
 
-      <p class="text-sm sm:text-base text-slate-300 leading-relaxed font-sans mt-3">
+      <p class="text-sm text-slate-300 leading-relaxed font-sans mt-2">
         Welcome to <strong class="text-white font-semibold">Friction Hunter</strong> — an engineering publication by <strong class="text-sky-400 font-medium">Thokchom Lolet Singh</strong> investigating client-side WebGPU architectures, transformer sampling thermodynamics, edge-AI state machines, and incident post-mortems.
       </p>
 
       {
         socials.length > 0 && (
-          <div class="mt-6 pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4 font-sans text-xs text-slate-400">
+          <div class="mt-4 pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3 font-sans text-xs text-slate-400">
             <div class="flex items-center gap-2">
-              <span class="text-sky-400 font-mono">&gt;</span>
+              <span class="text-sky-400 font-mono text-xs">&gt;</span>
               <span>Connect:</span>
               <Socials />
             </div>
-            <span class="text-emerald-400 flex items-center gap-1.5 font-mono">
+            <span class="text-emerald-400 flex items-center gap-1.5 font-mono text-[11px]">
               <span class="size-1.5 rounded-full bg-emerald-400"></span>
               ALL_SYSTEMS_OPERATIONAL
             </span>
@@ -89,16 +89,16 @@ const homePath = getRelativeLocaleUrl(locale, "");
       featuredPosts.length > 0 && (
         <section
           id="featured"
-          class="mb-10"
+          class="mb-8"
         >
-          <div class="flex items-center justify-between pb-2 mb-4 border-b border-slate-800">
-            <h2 class="font-sans text-lg font-bold tracking-tight text-white flex items-center gap-2">
-              <span class="text-sky-400 font-mono">//</span>
+          <div class="flex items-center justify-between pb-2 mb-3 border-b border-slate-800/60">
+            <h2 class="font-sans text-sm font-bold tracking-tight text-white flex items-center gap-2">
+              <span class="text-sky-400 font-mono text-xs">//</span>
               <span>{t.home.featured}</span>
             </h2>
-            <span class="font-mono text-xs text-slate-500">{featuredPosts.length} Articles</span>
+            <span class="font-mono text-[10px] text-slate-600">{featuredPosts.length} Articles</span>
           </div>
-          <ul class="space-y-4">
+          <ul class="divide-y-0">
             {featuredPosts.map(data => (
               <Card variant="h3" {...data} />
             ))}
@@ -109,15 +109,15 @@ const homePath = getRelativeLocaleUrl(locale, "");
 
     {
       recentPosts.length > 0 && (
-        <section id="recent-posts" class="mb-10">
-          <div class="flex items-center justify-between pb-2 mb-4 border-b border-slate-800">
-            <h2 class="font-sans text-lg font-bold tracking-tight text-white flex items-center gap-2">
-              <span class="text-sky-400 font-mono">//</span>
+        <section id="recent-posts" class="mb-8">
+          <div class="flex items-center justify-between pb-2 mb-3 border-b border-slate-800/60">
+            <h2 class="font-sans text-sm font-bold tracking-tight text-white flex items-center gap-2">
+              <span class="text-sky-400 font-mono text-xs">//</span>
               <span>{t.home.recentPosts}</span>
             </h2>
-            <span class="font-mono text-xs text-slate-500">Latest</span>
+            <span class="font-mono text-[10px] text-slate-600">Latest</span>
           </div>
-          <ul class="space-y-4">
+          <ul class="divide-y-0">
             {recentPosts.slice(0, postsConfig.perIndex).map(data => (
               <Card variant="h3" {...data} />
             ))}

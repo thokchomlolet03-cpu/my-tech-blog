@@ -121,14 +121,14 @@ const rssHref = getRelativeLocaleUrl(
     class="bg-background font-app text-foreground selection:bg-accent/75 selection:text-accent-foreground flex min-h-svh flex-col"
   >
     <Header />
-    <div class="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[250px_minmax(0,1fr)_250px] gap-8 mt-20 pt-4">
-      <aside class="hidden lg:block sticky top-24 h-[calc(100vh-6rem)] overflow-y-auto">
+    <div class="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[260px_1fr_240px] gap-8 mt-16 pt-6">
+      <aside class="hidden lg:block w-[260px] flex-shrink-0 sticky top-[4.5rem] h-[calc(100vh-4.5rem)] overflow-y-auto">
         <LeftSidebar />
       </aside>
-      <div class="w-full min-w-0 max-w-3xl mx-auto flex flex-col items-start justify-start pb-12">
+      <div class="w-full min-w-0 max-w-3xl mx-auto flex flex-col items-start justify-start pb-16">
         <slot />
       </div>
-      <aside class="hidden lg:block sticky top-24 h-[calc(100vh-6rem)] overflow-y-auto">
+      <aside class="hidden xl:block w-[240px] flex-shrink-0 sticky top-[4.5rem] h-[calc(100vh-4.5rem)] overflow-y-auto">
         <slot name="right-sidebar" />
       </aside>
     </div>

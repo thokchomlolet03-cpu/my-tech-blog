@@ -6,33 +6,83 @@ type Props = {
 };
 
 const { headings = [] } = Astro.props;
+// Filter to H2 and H3 only (depth 2-3)
 const toc = headings.filter((h) => h.depth > 1 && h.depth < 4);
 ---
 
 {toc.length > 0 && (
-  <nav class="doc-card p-4 text-xs font-sans">
-    <div class="flex items-center justify-between pb-2.5 mb-3 border-b border-slate-800">
-      <span class="font-bold uppercase tracking-wider text-slate-200 font-mono text-[11px] flex items-center gap-2">
-        <span class="size-1.5 rounded-full bg-sky-400"></span>
-        Table of Contents
-      </span>
-      <span class="text-[10px] font-mono text-slate-500">TOC</span>
+  <nav class="py-2 text-xs font-sans" aria-label="Table of contents">
+    <!-- Section Header -->
+    <div class="px-3 pb-2 mb-1">
+      <div class="flex items-center gap-2 py-1.5">
+        <span class="size-1.5 rounded-full bg-sky-400 flex-shrink-0"></span>
+        <span class="font-mono text-[10px] uppercase tracking-widest text-slate-500 font-medium">
+          Contents
+        </span>
+      </div>
     </div>
-    <ul class="space-y-1.5 border-l border-slate-800 pl-3">
-      {toc.map((heading) => {
-        const paddingLeft = (heading.depth - 2) * 0.75;
-        return (
-          <li>
-            <a
-              href={`#${heading.slug}`}
-              class="block py-0.5 text-slate-400 hover:text-sky-400 transition-colors text-xs line-clamp-1"
-              style={`padding-left: ${paddingLeft}rem`}
-            >
-              {heading.text}
-            </a>
-          </li>
-        )
-      })}
-    </ul>
+
+    <!-- TOC Links -->
+    <div class="border-l border-slate-800 ml-4">
+      <ul class="space-y-0.5 pl-0" role="list">
+        {toc.map((heading) => {
+          const indent = (heading.depth - 2) * 0.75;
+          return (
+            <li>
+              <a
+                href={`#${heading.slug}`}
+                class="toc-link block py-1 pr-2 text-xs leading-snug text-slate-400 hover:text-sky-400 transition-colors duration-150 truncate"
+                style={`padding-left: ${0.75 + indent}rem`}
+                data-heading-slug={heading.slug}
+              >
+                {heading.text}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   </nav>
 )}
+
+<script>
+  function setupTocScrollSpy() {
+    const tocLinks = document.querySelectorAll<HTMLAnchorElement>(".toc-link");
+    if (!tocLinks.length) return;
+
+    const headingEls = Array.from(tocLinks)
+      .map(link => {
+        const slug = link.dataset.headingSlug;
+        return slug ? document.getElementById(slug) : null;
+      })
+      .filter(Boolean) as HTMLElement[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const slug = entry.target.id;
+            tocLinks.forEach(link => {
+              const isActive = link.dataset.headingSlug === slug;
+              link.classList.toggle("text-sky-400", isActive);
+              link.classList.toggle("font-medium", isActive);
+              link.classList.toggle("text-slate-400", !isActive);
+            });
+            break;
+          }
+        }
+      },
+      {
+        rootMargin: "-72px 0px -60% 0px",
+        threshold: 0,
+      }
+    );
+
+    headingEls.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }
+
+  setupTocScrollSpy();
+  document.addEventListener("astro:after-swap", setupTocScrollSpy);
+</script>
