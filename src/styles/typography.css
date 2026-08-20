@@ -4,22 +4,28 @@
   /* ===== Override default Tailwind Typography styles for MkDocs Slate + Deep Purple Theme ===== */
   .app-prose {
     @apply prose max-w-none;
+    color: var(--foreground);
 
     h1 {
-      @apply text-white font-bold tracking-tight mb-4 text-2xl sm:text-3xl;
+      color: var(--heading);
+      @apply font-bold tracking-tight mb-4 text-2xl sm:text-3xl;
     }
     
     h2 {
-      @apply text-white font-semibold text-xl sm:text-2xl border-b border-[rgba(230,235,245,0.12)] pb-2 mb-4 mt-10 tracking-tight flex items-center gap-2;
+      color: var(--heading);
+      border-color: var(--border);
+      @apply font-semibold text-xl sm:text-2xl border-b pb-2 mb-4 mt-10 tracking-tight flex items-center gap-2;
     }
 
     h3 {
-      @apply text-[#f3f4f6] font-semibold text-lg sm:text-xl mt-8 mb-3 tracking-tight;
+      color: var(--heading);
+      @apply font-semibold text-lg sm:text-xl mt-8 mb-3 tracking-tight;
     }
     
     h4,
     th {
-      @apply text-[#e2e4ea] font-medium mb-3;
+      color: var(--heading);
+      @apply font-medium mb-3;
     }
 
     p,
@@ -27,15 +33,17 @@
     ul,
     figcaption,
     table {
-      @apply text-[#dce0e8] leading-relaxed;
+      color: var(--foreground);
+      @apply leading-relaxed;
     }
 
     strong {
-      @apply text-white font-semibold;
+      color: var(--heading);
+      @apply font-semibold;
     }
 
     a {
-      @apply text-[#a47bea] hover:text-[#c499ff] hover:underline wrap-break-word underline-offset-4 focus-visible:no-underline;
+      @apply text-[#a47bea] hover:text-[#c499ff] hover:underline wrap-break-word underline-offset-4 focus-visible:no-underline font-medium;
     }
 
     ul {
@@ -51,11 +59,13 @@
     }
 
     hr {
-      @apply border-[rgba(230,235,245,0.12)] my-8;
+      border-color: var(--border);
+      @apply my-8;
     }
 
     img {
-      @apply border border-[rgba(230,235,245,0.12)] rounded-lg mx-auto shadow-lg;
+      border-color: var(--border);
+      @apply border rounded-lg mx-auto shadow-lg;
     }
 
     img[role="button"] {
@@ -67,38 +77,46 @@
     }
 
     figcaption {
-      @apply font-mono text-xs text-[#9ba0ad] mt-2 text-center;
+      color: var(--muted-foreground);
+      @apply font-mono text-xs mt-2 text-center;
     }
 
     /* ===== Markdown Tables with Alternate Striping ===== */
     table {
-      @apply w-full border-collapse border border-[rgba(230,235,245,0.12)] rounded-lg overflow-hidden my-6 text-sm;
+      border-color: var(--border);
+      @apply w-full border-collapse border rounded-lg overflow-hidden my-6 text-sm;
       
       th,
       td {
-        @apply border border-[rgba(230,235,245,0.10)] p-3 text-left;
+        border-color: var(--border);
+        @apply border p-3 text-left;
       }
 
       th {
-        @apply bg-[#282c35] text-white font-mono text-xs uppercase tracking-wider font-semibold;
+        background-color: var(--table-header);
+        color: var(--heading);
+        @apply font-mono text-xs uppercase tracking-wider font-semibold;
       }
 
       tbody tr {
-        @apply transition-colors hover:bg-[#7e56c2]/10;
+        @apply transition-colors;
       }
 
       tbody tr:nth-child(odd) {
-        @apply bg-[#1e2129];
+        background-color: var(--table-odd);
       }
 
       tbody tr:nth-child(even) {
-        @apply bg-[#242831];
+        background-color: var(--table-even);
       }
     }
 
     /* ===== Inline Code ===== */
     code:not(pre code) {
-      @apply font-mono text-xs bg-[#282c35] text-[#c499ff] border border-[rgba(230,235,245,0.15)] rounded px-1.5 py-0.5 wrap-break-word before:content-none after:content-none;
+      background-color: var(--muted);
+      color: var(--accent);
+      border-color: var(--border);
+      @apply font-mono text-xs border rounded px-1.5 py-0.5 wrap-break-word before:content-none after:content-none font-medium;
     }
 
     .astro-code code {
@@ -106,7 +124,10 @@
     }
 
     blockquote {
-      @apply border-s-4 border-s-[#7e56c2] bg-[#7e56c2]/10 rounded-r-lg p-4 my-4 font-sans italic text-[#dce0e8];
+      border-inline-start-color: #7e56c2;
+      background-color: var(--blockquote-bg);
+      color: var(--foreground);
+      @apply border-s-4 rounded-r-lg p-4 my-4 font-sans italic;
     }
 
     details:not(.callout) {
@@ -118,17 +139,22 @@
     }
 
     pre {
-      @apply focus-visible:outline-accent focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-dashed my-6 rounded-lg overflow-hidden border border-[rgba(230,235,245,0.12)] shadow-xl;
+      border-color: var(--border);
+      @apply focus-visible:outline-accent focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-dashed my-6 rounded-lg overflow-hidden border shadow-xl;
     }
   }
 
   /* ===== Code Blocks & Syntax Highlighting ===== */
   .astro-code {
-    @apply flex border border-[rgba(230,235,245,0.10)] bg-[#1c1f26] rounded-lg text-(--shiki-light) [&_span]:text-(--shiki-light) p-4 shadow-xl;
+    border-color: var(--border);
+    background-color: var(--code-bg);
+    @apply flex border rounded-lg text-(--shiki-light) [&_span]:text-(--shiki-light) p-4 shadow-xl;
   }
 
   html[data-theme="dark"] .astro-code {
-    @apply bg-[#1c1f26] border border-[rgba(230,235,245,0.10)] text-(--shiki-dark) [&_span]:text-(--shiki-dark);
+    border-color: var(--border);
+    background-color: var(--code-bg);
+    @apply border text-(--shiki-dark) [&_span]:text-(--shiki-dark);
   }
 
   /* Styles for Shiki transformers */
