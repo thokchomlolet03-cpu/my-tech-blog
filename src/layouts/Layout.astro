@@ -115,6 +115,29 @@ const rssHref = getRelativeLocaleUrl(
       })();
     </script>
 
+    <!-- MathJax for rendering math and chemical formulas ($...$ and $$...$$) -->
+    <script is:inline>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["$", "$"], ["\\(", "\\)"]],
+          displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+          processEscapes: true,
+          processEnvironments: true
+        },
+        options: {
+          skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      };
+    </script>
+    <script is:inline id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script is:inline>
+      document.addEventListener("astro:page-load", () => {
+        if (window.MathJax && window.MathJax.typesetPromise) {
+          window.MathJax.typesetPromise();
+        }
+      });
+    </script>
+
     <ClientRouter />
   </head>
   <body
