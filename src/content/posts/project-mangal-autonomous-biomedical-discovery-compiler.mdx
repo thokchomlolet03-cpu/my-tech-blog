@@ -86,6 +86,7 @@ This is forward design: starting with known molecules and hoping one hits an unk
 ---
 
 import ProjectMangalFlowchart from "@/components/ProjectMangalFlowchart.jsx";
+import EpistemicExplorer from "@/components/EpistemicExplorer.jsx";
 
 ## 3. The Two-Hemisphere Unified Architecture
 
@@ -673,7 +674,20 @@ To maintain scientific integrity, we explicitly document the remaining technical
 
 ---
 
-## 20. The Bigger Picture: Autonomous Discovery as a Civilizational Imperative
+## 20. Interactive Exploration Lab: The 4-Perspective Scientific Explorer
+
+Below is the **Scientific Epistemic Explorer**, allowing researchers and peer reviewers to interactively analyze the architecture across four analytical lenses:
+
+1. **🌐 2D Epistemic Topology:** Explore the causal knowledge graph, inspect nodes, and toggle between orthodox known science and negative space gaps.
+2. **🧬 3D Candidate Structure:** Interactively rotate the generated de novo Glucosepane Hydrolase candidate, inspect per-residue AlphaFold pLDDT confidence, explore the locked catalytic triad pocket (His54-Asp112-Ser198), and evaluate the docked Glucosepane ligand (C<sub>18</sub>H<sub>34</sub>N<sub>6</sub>O<sub>6</sub>).
+3. **🔬 4D Cognitive Hyper-Matrix:** Interactively tune the 4 axes (Mindset, Element, Operation, Scale) and generate real-time synthesized inquiry vectors with Anomaly and Leverage scoring.
+4. **🛡️ 6-Gate Safety & QC Dashboard:** Inspect live telemetry for all 6 quality gates (pLDDT, scRMSD, Active Site lock, GRAVY solubility, AutoDock Vina binding free energy &Delta;G &le; -8.0 kcal/mol, and multi-target off-target selectivity &ge; 100&times; vs native Collagen I/III, Elastin, and Human Serum Albumin [HSA]).
+
+<EpistemicExplorer client:visible />
+
+---
+
+## 21. The Bigger Picture: Autonomous Discovery as a Civilizational Imperative
 
 Humanity has spent the last century treating aging as an inevitability rather than an engineering problem. We have built trillions of dollars of healthcare infrastructure designed to manage the late-stage symptoms of chronic disease while leaving the underlying molecular damage entirely unaddressed.
 
@@ -687,10 +701,10 @@ Every epistemic gap flagged in the graph is an actionable research program. Ever
 
 ```yaml
 System: Project Mangal & Universal Inverse Design Engine
-Version: v0.1.0 (Mangal) / v0.6.0 (UID)
+Version: v0.1.0 (Mangal) / v0.7.0 (UID)
 Architecture: Two-Hemisphere Cognitive & Generative Compiler
 Language: Python 3.11+
-Test Suite: 139/139 Passing (0.95s)
+Test Suite: 150/150 Passing (1.21s)
 Repository: github.com/thokchomlolet03-cpu/universal-inverse-design
 
 Hemisphere 1 (Mangal - Brain):
@@ -705,8 +719,8 @@ Hemisphere 2 (UID - Hands):
   - Negative Space: O(1) Edge-Indexed Topological Gap Detector
   - 3D Specs: RDKit ETKDGv3 + MMFF94 Force-Field Conformer Synthesis
   - Generative: ProteinMPNN (Masked Catalytic Triad) + ESM-3 Adapter
-  - QC Filter: 4-Gate Screen (pLDDT >= 80, scRMSD <= 2.0A, GRAVY <= 0.2)
-  - Loop Closure: Epistemic Graph Injection & State Transitions
+  - QC Filter: 6-Gate Screen (pLDDT >= 80, scRMSD <= 2.0A, GRAVY <= 0.2, Vina ΔG <= -8.0, Selectivity >= 100x)
+  - Loop Closure: Epistemic Graph Injection & State Transitions (7 Evidence States)
 
 Active Targets:
   - GlycoSENS: Glucosepane crosslink cleavage (24 candidates)
@@ -715,7 +729,7 @@ Active Targets:
   - LysoSENS: Lipofuscin & 7-ketocholesterol catabolism
 
 Operating Cost: ~$0.10 / target (Free/open scientific APIs)
-Validation Speed: 139 tests in 0.95 seconds
+Validation Speed: 150 tests in 1.21 seconds
 ```
 
 ---
