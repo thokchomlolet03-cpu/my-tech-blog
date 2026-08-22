@@ -595,6 +595,23 @@ export default function EpistemicExplorer() {
           color = p1.plddt >= 90 ? '#0053d6' : p1.plddt >= 70 ? '#65cbf3' : p1.plddt >= 50 ? '#ffdb13' : '#ff7d45';
         } else if (macroMode === 'triad') {
           color = p1.secStruct === 'triad' ? '#f43f5e' : 'rgba(51, 65, 85, 0.2)';
+        } else if (macroMode === 'surface') {
+          // Kyte-Doolittle Hydropathy Color Ramp (Blue = Hydrophilic / Soluble, Red/Orange = Hydrophobic)
+          color = p1.secStruct === 'strand' ? '#f59e0b' : p1.secStruct === 'helix' ? '#38bdf8' : '#818cf8';
+        }
+
+        // Volumetric Solvent-Accessible Surface (SAS) Cloud Pass
+        if (macroMode === 'surface') {
+          const sasRadius = 24 * (p1.scale / baseScale);
+          const sasGrad = ctx.createRadialGradient(p1.projX, p1.projY, 0, p1.projX, p1.projY, sasRadius);
+          sasGrad.addColorStop(0, color);
+          sasGrad.addColorStop(0.6, `${color}40`);
+          sasGrad.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.arc(p1.projX, p1.projY, sasRadius, 0, Math.PI * 2);
+          ctx.fillStyle = sasGrad;
+          ctx.globalAlpha = depthAlpha * 0.45;
+          ctx.fill();
         }
 
         // Glow Pass
@@ -1019,7 +1036,8 @@ export default function EpistemicExplorer() {
                 {[
                   { id: 'docking', label: '🧪 Ligand Docking (ΔG = -9.2 kcal/mol)' },
                   { id: 'triad', label: '🔴 Catalytic Triad (His54-Asp112-Ser198)' },
-                  { id: 'plddt', label: '🔵 AlphaFold 3 pLDDT Spectrum' }
+                  { id: 'plddt', label: '🔵 AlphaFold 3 pLDDT Spectrum' },
+                  { id: 'surface', label: '💧 GRAVY Hydropathy Surface (SAS)' }
                 ].map(mode => (
                   <button
                     key={mode.id}
