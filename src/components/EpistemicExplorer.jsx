@@ -1045,7 +1045,7 @@ export default function EpistemicExplorer() {
                     style={{
                       background: macroMode === mode.id ? 'rgba(56, 189, 248, 0.25)' : 'rgba(15, 23, 42, 0.85)',
                       color: macroMode === mode.id ? '#38bdf8' : '#94a3b8',
-                      border: renderMode === mode.id ? '1px solid #38bdf8' : '1px solid rgba(56, 189, 248, 0.15)',
+                      border: macroMode === mode.id ? '1px solid #38bdf8' : '1px solid rgba(56, 189, 248, 0.15)',
                       borderRadius: '8px',
                       padding: '8px 14px',
                       fontSize: '0.78rem',
