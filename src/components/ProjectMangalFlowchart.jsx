@@ -103,7 +103,7 @@ const STAGES = [
     output: 'Hydrated Epistemic Knowledge Graph (.graphml)',
     math: 'G = (V, E) with V ∈ {PROTEIN, CHEMICAL, PATHWAY}, E ∈ {CATALYZES, DEGRADES}',
     cost: 'Cost: ~$0.10 / target (Free APIs)',
-    color: '#38bdf8',
+    color: '#a47bea',
     badge: '5 Data Sources'
   },
   {
@@ -118,7 +118,7 @@ const STAGES = [
     output: 'Ranked Epistemic Gaps (Negative Space Set)',
     math: 'Gap(r) = True ⟺ ¬∃ v ∈ V, e ∈ E : Satisfies(v, e, r)',
     cost: 'Complexity: O(1) Edge-Indexed',
-    color: '#0ea5e9',
+    color: '#9383e2',
     badge: 'O(1) Gap Traversal'
   },
   {
@@ -133,7 +133,7 @@ const STAGES = [
     output: '3D Cartesian Pocket Coordinates (.sdf + JSON spec)',
     math: 'E_MMFF94(R) → min, ∇E = 0 with explicit Hydrogens',
     cost: 'Engine: RDKit ETKDGv3 (Local CPU)',
-    color: '#06b6d4',
+    color: '#a47bea',
     badge: 'RDKit 3D Conformer'
   },
   {
@@ -148,7 +148,7 @@ const STAGES = [
     output: '24 De Novo Candidate Protein Sequences (.fasta)',
     math: 'P(Sequence | Structure, Mask(Triad)) via Autoregressive Transformer',
     cost: 'Framework: ESM-3 & ProteinMPNN',
-    color: '#10b981',
+    color: '#7e56c2',
     badge: 'Masked Inverse Folding'
   },
   {
@@ -163,7 +163,7 @@ const STAGES = [
     output: 'High-Confidence Validated Hits Ready for Wet-Lab Synthesis',
     math: 'Pass ⟺ pLDDT ≥ 80 ∧ scRMSD ≤ 2.0Å ∧ Triad=Match ∧ GRAVY ≤ 0.2',
     cost: 'Filters: 4 Sequential Gates',
-    color: '#059669',
+    color: '#9383e2',
     badge: '4-Gate Biophysical QC'
   },
   {
@@ -178,7 +178,7 @@ const STAGES = [
     output: 'Updated GraphML + Interactive Cytoscape.js Dark-Mode Visualizer',
     math: 'V ← V ∪ {Candidate}, E ← E ∪ {(Candidate, DEGRADES, Target)}, Gap.Priority ← LOW',
     cost: 'Status: Closed-Loop Discovery',
-    color: '#34d399',
+    color: '#a47bea',
     badge: 'Closed-Loop Discovery'
   }
 ];
@@ -199,16 +199,16 @@ export default function ProjectMangalFlowchart() {
   const currentStage = STAGES[activeStep];
 
   return (
-    <div className="w-full my-8 p-4 sm:p-6 rounded-2xl bg-[#1c1f26] border border-[rgba(230,235,245,0.12)] shadow-2xl font-sans text-[#dce0e8]">
+    <div className="w-full my-8 p-4 sm:p-6 rounded-2xl bg-[#1e2129] border border-[rgba(230,235,245,0.12)] shadow-xl font-sans text-[#dce0e8]">
       {/* Visualizer Header */}
       <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-6 border-b border-[rgba(230,235,245,0.10)]">
         <div>
           <div className="flex items-center gap-2">
-            <span className="relative flex h-2.5 w-2.5">
+            <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a47bea] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#a47bea]"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#a47bea]"></span>
             </span>
-            <span className="font-mono text-xs uppercase tracking-widest text-[#a47bea] font-semibold">
+            <span className="font-mono text-xs uppercase tracking-wider text-[#a47bea] font-semibold">
               Autonomous Discovery Compiler
             </span>
           </div>
@@ -224,7 +224,7 @@ export default function ProjectMangalFlowchart() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsPlaying(!isPlaying)}
-            className="px-3 py-1.5 rounded-lg bg-[#282c35] hover:bg-[#343a46] border border-[rgba(230,235,245,0.12)] text-xs font-mono text-[#38bdf8] transition-all flex items-center gap-1.5 shadow-sm"
+            className="px-3 py-1.5 rounded-lg bg-[#242831] hover:bg-[#282c35] border border-[rgba(230,235,245,0.12)] text-xs font-mono text-[#dce0e8] transition-all flex items-center gap-1.5"
             title={isPlaying ? "Pause Pulse" : "Resume Pulse"}
           >
             <span>{isPlaying ? '⏸ Pause Pulse' : '▶ Resume Pulse'}</span>
@@ -234,7 +234,7 @@ export default function ProjectMangalFlowchart() {
               setActiveStep((prev) => (prev + 1) % STAGES.length);
               setIsPlaying(false);
             }}
-            className="px-3 py-1.5 rounded-lg bg-[#7e56c2]/20 hover:bg-[#7e56c2]/30 border border-[#7e56c2]/40 text-xs font-mono text-[#c499ff] transition-all shadow-sm"
+            className="px-3 py-1.5 rounded-lg bg-[#282c35] hover:bg-[#343a46] border border-[rgba(230,235,245,0.15)] text-xs font-mono text-[#ffffff] transition-all"
           >
             Step ⏭
           </button>
@@ -244,15 +244,15 @@ export default function ProjectMangalFlowchart() {
       {/* Main Two-Hemisphere Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 relative">
         {/* Hemisphere 1: Project Mangal (Cognitive Cortex) */}
-        <div className="rounded-xl p-4 bg-[#242831]/80 border border-[#7e56c2]/40 relative overflow-hidden shadow-lg">
-          <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#7e56c2]/20">
+        <div className="rounded-xl p-4 bg-[#242831] border border-[rgba(230,235,245,0.12)] relative overflow-hidden">
+          <div className="flex items-center justify-between pb-3 mb-3 border-b border-[rgba(230,235,245,0.10)]">
             <div className="flex items-center gap-2">
-              <span className="text-lg">🧠</span>
+              <span className="text-base">🧠</span>
               <span className="font-bold text-sm text-white tracking-wide">
                 PROJECT MANGAL (Cognitive Cortex)
               </span>
             </div>
-            <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-[#7e56c2]/25 text-[#c499ff] border border-[#7e56c2]/40 font-semibold">
+            <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-[#1e2129] text-[#a47bea] border border-[rgba(230,235,245,0.12)] font-semibold">
               Hypothesis Formulation
             </span>
           </div>
@@ -269,22 +269,22 @@ export default function ProjectMangalFlowchart() {
                   }}
                   className={`p-3 rounded-lg border transition-all cursor-pointer relative ${
                     isCurrent
-                      ? 'bg-[#7e56c2]/30 border-[#a47bea] shadow-[0_0_18px_rgba(164,123,234,0.45)] translate-x-1'
-                      : 'bg-[#1e2129]/85 border-[rgba(230,235,245,0.08)] hover:border-[#7e56c2]/50 hover:bg-[#282c35]'
+                      ? 'bg-[#282c35] border-[#a47bea]'
+                      : 'bg-[#1e2129] border-[rgba(230,235,245,0.08)] hover:border-[rgba(230,235,245,0.2)] hover:bg-[#282c35]'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2.5">
                       <span
                         className={`size-6 rounded-md flex items-center justify-center font-mono text-[11px] font-bold ${
-                          isCurrent ? 'bg-[#a47bea] text-[#1e2129]' : 'bg-[#282c35] text-[#c499ff]'
+                          isCurrent ? 'bg-[#a47bea] text-[#1e2129]' : 'bg-[#242831] text-[#dce0e8]'
                         }`}
                       >
                         {stage.code}
                       </span>
                       <span className="font-semibold text-xs sm:text-sm text-white">{stage.title}</span>
                     </div>
-                    <span className="font-mono text-[10px] text-[#c499ff] hidden sm:inline">{stage.badge}</span>
+                    <span className="font-mono text-[10px] text-[#9ba0ad] hidden sm:inline">{stage.badge}</span>
                   </div>
                   <p className="text-[11px] text-[#9ba0ad] mt-1 line-clamp-1">{stage.subtitle}</p>
                 </div>
@@ -294,15 +294,15 @@ export default function ProjectMangalFlowchart() {
         </div>
 
         {/* Hemisphere 2: UID Engine (Physical Laboratory) */}
-        <div className="rounded-xl p-4 bg-[#242831]/80 border border-[#059669]/40 relative overflow-hidden shadow-lg">
-          <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#059669]/20">
+        <div className="rounded-xl p-4 bg-[#242831] border border-[rgba(230,235,245,0.12)] relative overflow-hidden">
+          <div className="flex items-center justify-between pb-3 mb-3 border-b border-[rgba(230,235,245,0.10)]">
             <div className="flex items-center gap-2">
-              <span className="text-lg">🔬</span>
+              <span className="text-base">🔬</span>
               <span className="font-bold text-sm text-white tracking-wide">
                 UID ENGINE (Physical Laboratory)
               </span>
             </div>
-            <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-[#059669]/25 text-[#6ee7b7] border border-[#059669]/40 font-semibold">
+            <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-[#1e2129] text-[#a47bea] border border-[rgba(230,235,245,0.12)] font-semibold">
               Generative In Silico Synthesis
             </span>
           </div>
@@ -320,22 +320,22 @@ export default function ProjectMangalFlowchart() {
                   }}
                   className={`p-3 rounded-lg border transition-all cursor-pointer relative ${
                     isCurrent
-                      ? 'bg-[#059669]/25 border-[#34d399] shadow-[0_0_18px_rgba(52,211,153,0.45)] translate-x-1'
-                      : 'bg-[#1e2129]/85 border-[rgba(230,235,245,0.08)] hover:border-[#059669]/50 hover:bg-[#282c35]'
+                      ? 'bg-[#282c35] border-[#a47bea]'
+                      : 'bg-[#1e2129] border-[rgba(230,235,245,0.08)] hover:border-[rgba(230,235,245,0.2)] hover:bg-[#282c35]'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2.5">
                       <span
                         className={`size-6 rounded-md flex items-center justify-center font-mono text-[11px] font-bold ${
-                          isCurrent ? 'bg-[#34d399] text-[#1e2129]' : 'bg-[#282c35] text-[#6ee7b7]'
+                          isCurrent ? 'bg-[#a47bea] text-[#1e2129]' : 'bg-[#242831] text-[#dce0e8]'
                         }`}
                       >
                         {stage.code}
                       </span>
                       <span className="font-semibold text-xs sm:text-sm text-white">{stage.title}</span>
                     </div>
-                    <span className="font-mono text-[10px] text-[#34d399] hidden sm:inline">{stage.badge}</span>
+                    <span className="font-mono text-[10px] text-[#9ba0ad] hidden sm:inline">{stage.badge}</span>
                   </div>
                   <p className="text-[11px] text-[#9ba0ad] mt-1 line-clamp-1">{stage.subtitle}</p>
                 </div>
@@ -346,18 +346,18 @@ export default function ProjectMangalFlowchart() {
       </div>
 
       {/* Zero-Human-Touch Cybernetic Handoff Banner */}
-      <div className="my-4 p-3.5 rounded-xl bg-[#1e1b4b]/80 border border-dashed border-[#818cf8]/50 flex flex-wrap items-center justify-between gap-3 text-xs shadow-inner">
-        <div className="flex items-center gap-2 text-[#c7d2fe]">
-          <span className="font-bold">⚡ Zero-Human-Touch Handoff:</span>
-          <span>Project Mangal autonomously serializes YAML causal chains to <code className="px-1.5 py-0.5 rounded bg-[#312e81] text-[#a5b4fc] font-mono text-[11px]">src/uid_engine/chains/</code></span>
+      <div className="my-4 p-3.5 rounded-xl bg-[#242831] border border-[rgba(230,235,245,0.12)] flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-2 text-[#dce0e8]">
+          <span className="font-bold text-white">⚡ Zero-Human-Touch Handoff:</span>
+          <span>Project Mangal autonomously serializes YAML causal chains to <code className="px-1.5 py-0.5 rounded bg-[#1e2129] text-[#a47bea] border border-[rgba(230,235,245,0.10)] font-mono text-[11px]">src/uid_engine/chains/</code></span>
         </div>
-        <span className="font-mono text-[11px] bg-[#4338ca] text-white px-2.5 py-1 rounded-md font-semibold">
+        <span className="font-mono text-[11px] bg-[#1e2129] border border-[rgba(230,235,245,0.12)] text-[#dce0e8] px-2.5 py-1 rounded-md font-semibold">
           Handoff Latency: 0.002s
         </span>
       </div>
 
       {/* Real-Time Module Inspector Card */}
-      <div className="mt-4 p-4 sm:p-5 rounded-xl bg-[#242831] border border-[rgba(230,235,245,0.15)] shadow-inner">
+      <div className="mt-4 p-4 sm:p-5 rounded-xl bg-[#242831] border border-[rgba(230,235,245,0.12)]">
         <div className="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-[rgba(230,235,245,0.10)]">
           <div className="flex items-center gap-2.5">
             <span className="size-6 rounded-md bg-[#a47bea] text-[#1e2129] flex items-center justify-center font-mono text-xs font-bold">
@@ -368,8 +368,8 @@ export default function ProjectMangalFlowchart() {
             </h4>
           </div>
           <div className="flex items-center gap-2 font-mono text-xs">
-            <span className="text-emerald-400 font-semibold">{currentStage.cost}</span>
-            <span className="text-[#a47bea] bg-[#7e56c2]/20 px-2.5 py-0.5 rounded border border-[#7e56c2]/30">
+            <span className="text-[#dce0e8] font-semibold">{currentStage.cost}</span>
+            <span className="text-[#dce0e8] bg-[#1e2129] px-2.5 py-0.5 rounded border border-[rgba(230,235,245,0.12)]">
               {currentStage.hemisphere === 'mangal' ? '🧠 Mangal Cognitive Step' : '🔬 UID Physical Step'}
             </span>
           </div>
@@ -382,17 +382,17 @@ export default function ProjectMangalFlowchart() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 font-mono text-xs">
           <div className="p-3 rounded-lg bg-[#1e2129] border border-[rgba(230,235,245,0.08)]">
             <span className="text-[10px] uppercase text-[#9ba0ad] block mb-1">📥 Input:</span>
-            <span className="text-sky-300 text-[11px] leading-snug">{currentStage.input}</span>
+            <span className="text-[#dce0e8] text-[11px] leading-snug">{currentStage.input}</span>
           </div>
 
           <div className="p-3 rounded-lg bg-[#1e2129] border border-[rgba(230,235,245,0.08)]">
             <span className="text-[10px] uppercase text-[#9ba0ad] block mb-1">📤 Output:</span>
-            <span className="text-emerald-300 text-[11px] leading-snug">{currentStage.output}</span>
+            <span className="text-[#dce0e8] text-[11px] leading-snug">{currentStage.output}</span>
           </div>
 
           <div className="p-3 rounded-lg bg-[#1e2129] border border-[rgba(230,235,245,0.08)]">
             <span className="text-[10px] uppercase text-[#9ba0ad] block mb-1">📐 Mathematical Rule:</span>
-            <span className="text-purple-300 text-[11px] leading-snug break-words">{currentStage.math}</span>
+            <span className="text-[#a47bea] text-[11px] leading-snug break-words">{currentStage.math}</span>
           </div>
         </div>
       </div>
