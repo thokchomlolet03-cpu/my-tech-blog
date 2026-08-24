@@ -111,20 +111,24 @@ const ogImage = ogImageUrl
     class:list={["w-full", { "mt-4": !config.features.showBackButton }]}
     data-pagefind-body
   >
-    <div class="doc-card p-6 sm:p-8 mb-8">
-      <div class="flex items-center gap-2 pb-3 mb-3 border-b border-[rgba(230,235,245,0.12)] font-mono text-xs text-[#a47bea]">
+    <div class="doc-card mb-8 p-6 sm:p-8">
+      <div
+        class="mb-3 flex items-center gap-2 border-b border-[rgba(230,235,245,0.12)] pb-3 font-mono text-xs text-[#a47bea]"
+      >
         <span class="size-1.5 rounded-full bg-[#a47bea]"></span>
         <span>TECHNICAL ARTICLE</span>
       </div>
 
       <h1
         style={{ viewTransitionName: toTransitionName(title) }}
-        class="font-sans text-2xl sm:text-3xl font-bold text-white tracking-tight leading-tight"
+        class="font-sans text-2xl leading-tight font-bold tracking-tight text-white sm:text-3xl"
       >
         {title}
       </h1>
 
-      <div class="mt-4 pt-3 border-t border-[rgba(230,235,245,0.12)] flex flex-wrap items-center gap-3">
+      <div
+        class="mt-4 flex flex-wrap items-center gap-3 border-t border-[rgba(230,235,245,0.12)] pt-3"
+      >
         <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
         <span
           aria-hidden="true"

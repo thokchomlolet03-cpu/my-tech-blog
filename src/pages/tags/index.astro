@@ -16,7 +16,6 @@ const t = useTranslations(locale);
 ---
 
 <Layout title={`${t.pages.tagsTitle} | ${config.site.title}`}>
-
   <Breadcrumb />
 
   <Main pageTitle={t.pages.tagsTitle} pageDesc={t.pages.tagsDesc}>
@@ -24,5 +23,4 @@ const t = useTranslations(locale);
       {tags.map(({ tag, tagName }) => <Tag {tag} {tagName} />)}
     </ul>
   </Main>
-
 </Layout>

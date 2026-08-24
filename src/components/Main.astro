@@ -21,13 +21,23 @@ const backUrl = config.features.showBackButton
   id="main-content"
   class:list={["w-full pb-6", className]}
 >
-  <div class="doc-card p-6 mb-6">
-    <div class="flex items-center gap-2 pb-2 mb-2 border-b border-[rgba(230,235,245,0.12)] font-mono text-[11px] text-[#a47bea]">
+  <div class="doc-card mb-6 p-6">
+    <div
+      class="mb-2 flex items-center gap-2 border-b border-[rgba(230,235,245,0.12)] pb-2 font-mono text-[11px] text-[#a47bea]"
+    >
       <span class="size-1.5 rounded-full bg-[#a47bea]"></span>
       <span>Documentation Archive</span>
     </div>
-    <h1 class="font-sans text-2xl sm:text-3xl font-bold text-white tracking-tight">{pageTitle}</h1>
-    {pageDesc && <p class="mt-2 text-sm text-[#dce0e8] font-sans">{pageDesc}</p>}
+    <h1
+      class="font-sans text-2xl font-bold tracking-tight text-white sm:text-3xl"
+    >
+      {pageTitle}
+    </h1>
+    {
+      pageDesc && (
+        <p class="mt-2 font-sans text-sm text-[#dce0e8]">{pageDesc}</p>
+      )
+    }
   </div>
   <slot />
 </main>

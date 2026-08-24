@@ -7,43 +7,45 @@ type Props = {
 
 const { headings = [] } = Astro.props;
 // Filter to H2 and H3 only (depth 2-3)
-const toc = headings.filter((h) => h.depth > 1 && h.depth < 4);
+const toc = headings.filter(h => h.depth > 1 && h.depth < 4);
 ---
 
-{toc.length > 0 && (
-  <nav class="py-2 text-xs font-sans" aria-label="Table of contents">
-    <!-- Section Header -->
-    <div class="px-3 pb-2 mb-1">
-      <div class="flex items-center gap-2 py-1.5">
-        <span class="size-1.5 rounded-full bg-[#a47bea] flex-shrink-0"></span>
-        <span class="font-mono text-[10px] uppercase tracking-widest text-[#9ba0ad] font-medium">
-          Contents
-        </span>
+{
+  toc.length > 0 && (
+    <nav class="py-2 font-sans text-xs" aria-label="Table of contents">
+      {/* Section Header */}
+      <div class="mb-1 px-3 pb-2">
+        <div class="flex items-center gap-2 py-1.5">
+          <span class="size-1.5 flex-shrink-0 rounded-full bg-[#a47bea]" />
+          <span class="font-mono text-[10px] font-medium tracking-widest text-[#9ba0ad] uppercase">
+            Contents
+          </span>
+        </div>
       </div>
-    </div>
 
-    <!-- TOC Links -->
-    <div class="border-l border-[rgba(230,235,245,0.12)] ml-4">
-      <ul class="space-y-0.5 pl-0" role="list">
-        {toc.map((heading) => {
-          const indent = (heading.depth - 2) * 0.75;
-          return (
-            <li>
-              <a
-                href={`#${heading.slug}`}
-                class="toc-link block py-1 pr-2 text-xs leading-snug text-[#9ba0ad] hover:text-[#a47bea] transition-colors duration-150 truncate"
-                style={`padding-left: ${0.75 + indent}rem`}
-                data-heading-slug={heading.slug}
-              >
-                {heading.text}
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  </nav>
-)}
+      {/* TOC Links */}
+      <div class="ml-4 border-l border-[rgba(230,235,245,0.12)]">
+        <ul class="space-y-0.5 pl-0" role="list">
+          {toc.map(heading => {
+            const indent = (heading.depth - 2) * 0.75;
+            return (
+              <li>
+                <a
+                  href={`#${heading.slug}`}
+                  class="toc-link block truncate py-1 pr-2 text-xs leading-snug text-[#9ba0ad] transition-colors duration-150 hover:text-[#a47bea]"
+                  style={`padding-left: ${0.75 + indent}rem`}
+                  data-heading-slug={heading.slug}
+                >
+                  {heading.text}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </nav>
+  )
+}
 
 <script>
   function setupTocScrollSpy() {
@@ -58,7 +60,7 @@ const toc = headings.filter((h) => h.depth > 1 && h.depth < 4);
       .filter(Boolean) as HTMLElement[];
 
     const observer = new IntersectionObserver(
-      (entries) => {
+      entries => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
             const slug = entry.target.id;

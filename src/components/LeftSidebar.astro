@@ -26,24 +26,34 @@ type NavItem = {
 const primaryNav: NavItem[] = [
   { href: getRelativeLocaleUrl(locale, ""), label: "Overview" },
   { href: getRelativeLocaleUrl(locale, "posts"), label: "All Posts" },
-  { href: getRelativeLocaleUrl(locale, "tags/post-mortem"), label: "Post-Mortems", tag: "post-mortem" },
+  {
+    href: getRelativeLocaleUrl(locale, "tags/post-mortem"),
+    label: "Post-Mortems",
+    tag: "post-mortem",
+  },
   { href: getRelativeLocaleUrl(locale, "tags"), label: "Tags & Categories" },
   { href: getRelativeLocaleUrl(locale, "about"), label: "About" },
 ];
 
 function isCurrentPath(href: string): boolean {
   // Strip the locale prefix and trailing slash for comparison
-  const strippedHref = href.replace(/^\/[a-z]{2}(-[A-Z]{2})?\//, "/").replace(/\/$/, "") || "/";
-  return pathWithoutTrailingSlash === strippedHref || pathWithoutTrailingSlash === "" && strippedHref === "/";
+  const strippedHref =
+    href.replace(/^\/[a-z]{2}(-[A-Z]{2})?\//, "/").replace(/\/$/, "") || "/";
+  return (
+    pathWithoutTrailingSlash === strippedHref ||
+    (pathWithoutTrailingSlash === "" && strippedHref === "/")
+  );
 }
 ---
 
-<nav class="py-2 text-xs font-sans" aria-label="Left sidebar navigation">
+<nav class="py-2 font-sans text-xs" aria-label="Left sidebar navigation">
   <!-- Section Header -->
-  <div class="px-3 pb-2 mb-1">
+  <div class="mb-1 px-3 pb-2">
     <div class="flex items-center gap-2 py-1.5">
-      <span class="size-1.5 rounded-full bg-[#a47bea] flex-shrink-0"></span>
-      <span class="font-mono text-[10px] uppercase tracking-widest text-[#9ba0ad] font-medium">
+      <span class="size-1.5 flex-shrink-0 rounded-full bg-[#a47bea]"></span>
+      <span
+        class="font-mono text-[10px] font-medium tracking-widest text-[#9ba0ad] uppercase"
+      >
         Navigation
       </span>
     </div>
@@ -51,30 +61,32 @@ function isCurrentPath(href: string): boolean {
 
   <!-- Primary Nav Links -->
   <ul class="space-y-0.5 px-2" role="list">
-    {primaryNav.map(({ href, label, tag }) => {
-      const active = isCurrentPath(href);
-      const isAlert = tag === "post-mortem";
-      return (
-        <li>
-          <a
-            href={href}
-            class:list={[
-              "flex items-center gap-2 w-full rounded px-2 py-1.5 text-xs font-normal leading-relaxed transition-all duration-150 truncate",
-              active && !isAlert
-                ? "bg-[#7e56c2]/20 text-[#a47bea] font-semibold border-l-2 border-[#a47bea] pl-[6px]"
-                : active && isAlert
-                ? "bg-rose-950/40 text-rose-300 font-semibold border-l-2 border-rose-500 pl-[6px]"
-                : isAlert
-                ? "text-rose-300/70 hover:text-rose-200 hover:bg-rose-950/20"
-                : "text-[#9ba0ad] font-normal hover:text-white hover:bg-[rgba(230,235,245,0.06)]"
-            ]}
-            aria-current={active ? "page" : undefined}
-          >
-            {label}
-          </a>
-        </li>
-      );
-    })}
+    {
+      primaryNav.map(({ href, label, tag }) => {
+        const active = isCurrentPath(href);
+        const isAlert = tag === "post-mortem";
+        return (
+          <li>
+            <a
+              href={href}
+              class:list={[
+                "flex w-full items-center gap-2 truncate rounded px-2 py-1.5 text-xs leading-relaxed font-normal transition-all duration-150",
+                active && !isAlert
+                  ? "border-l-2 border-[#a47bea] bg-[#7e56c2]/20 pl-[6px] font-semibold text-[#a47bea]"
+                  : active && isAlert
+                    ? "border-l-2 border-rose-500 bg-rose-950/40 pl-[6px] font-semibold text-rose-300"
+                    : isAlert
+                      ? "text-rose-300/70 hover:bg-rose-950/20 hover:text-rose-200"
+                      : "font-normal text-[#9ba0ad] hover:bg-[rgba(230,235,245,0.06)] hover:text-white",
+              ]}
+              aria-current={active ? "page" : undefined}
+            >
+              {label}
+            </a>
+          </li>
+        );
+      })
+    }
   </ul>
 
   <!-- Divider -->
@@ -82,34 +94,38 @@ function isCurrentPath(href: string): boolean {
 
   <!-- Recent Articles Section -->
   <div class="px-3 pb-1.5">
-    <span class="font-mono text-[10px] uppercase tracking-widest text-[#9ba0ad] font-medium">
+    <span
+      class="font-mono text-[10px] font-medium tracking-widest text-[#9ba0ad] uppercase"
+    >
       Recent Articles
     </span>
   </div>
 
   <ul class="space-y-0.5 px-2" role="list">
-    {sortedPosts.slice(0, 10).map((post) => {
-      const postPath = `/posts/${getPostSlug(post.id, post.filePath)}`;
-      const isActive = pathWithoutTrailingSlash === postPath;
-      const isPostMortem = post.data.tags?.includes("post-mortem");
-      return (
-        <li>
-          <a
-            href={getRelativeLocaleUrl(locale, postPath)}
-            title={post.data.title}
-            class:list={[
-              "block w-full rounded px-2 py-1 text-xs leading-snug transition-all duration-150 truncate",
-              isActive
-                ? "bg-[#7e56c2]/20 text-[#a47bea] font-medium border-l-2 border-[#a47bea] pl-[6px]"
-                : isPostMortem
-                ? "text-rose-300/60 hover:text-rose-200 hover:bg-rose-950/20"
-                : "text-[#9ba0ad] font-normal hover:text-white hover:bg-[rgba(230,235,245,0.06)]"
-            ]}
-          >
-            {post.data.title}
-          </a>
-        </li>
-      );
-    })}
+    {
+      sortedPosts.slice(0, 10).map(post => {
+        const postPath = `/posts/${getPostSlug(post.id, post.filePath)}`;
+        const isActive = pathWithoutTrailingSlash === postPath;
+        const isPostMortem = post.data.tags?.includes("post-mortem");
+        return (
+          <li>
+            <a
+              href={getRelativeLocaleUrl(locale, postPath)}
+              title={post.data.title}
+              class:list={[
+                "block w-full truncate rounded px-2 py-1 text-xs leading-snug transition-all duration-150",
+                isActive
+                  ? "border-l-2 border-[#a47bea] bg-[#7e56c2]/20 pl-[6px] font-medium text-[#a47bea]"
+                  : isPostMortem
+                    ? "text-rose-300/60 hover:bg-rose-950/20 hover:text-rose-200"
+                    : "font-normal text-[#9ba0ad] hover:bg-[rgba(230,235,245,0.06)] hover:text-white",
+              ]}
+            >
+              {post.data.title}
+            </a>
+          </li>
+        );
+      })
+    }
   </ul>
 </nav>

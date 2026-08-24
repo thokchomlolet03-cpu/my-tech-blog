@@ -41,6 +41,7 @@ However, moving execution from managed cloud endpoints (like OpenAI or Anthropic
 ```
 
 The system supports two core interaction modes:
+
 1. **Manual Flight Step Steering:** Users click an orbiting candidate star, appending that token to the conversation history and triggering the next token prediction step.
 2. **Auto-Play Simulation:** An automated 900ms timer loop that continuously samples the top non-filtered candidate and advances the generation trajectory.
 
@@ -55,6 +56,7 @@ Engine Error: Last message should be from either `user` or `tool`
 ```
 
 Whenever this exception fired:
+
 - The WebWorker halted generation immediately.
 - The React state machine froze in a perpetual loading state (`isFetchingLogits: true`).
 - The 3D starfield stopped receiving logit updates.
@@ -78,13 +80,13 @@ let userContent = prompt;
 if (ragEnabled && ragContext.trim()) {
   userContent = `Context: ${ragContext}\n\nQuestion: ${prompt}`;
 }
-messages.push({ role: 'user', content: userContent });
+messages.push({ role: "user", content: userContent });
 
 const activeSteps = historyStepsOverride || [];
 if (activeSteps.length > 0) {
   messages.push({
-    role: 'assistant',
-    content: activeSteps.map(s => s.selectedToken.token_str).join(''),
+    role: "assistant",
+    content: activeSteps.map(s => s.selectedToken.token_str).join(""),
   });
 }
 
@@ -99,11 +101,12 @@ Inside the worker thread, `getFullLogits` prepends the system persona and calls 
 ```typescript
 // frontend/src/engine/WebGPUInferenceWorker.ts (getFullLogits)
 const currentMessages: Array<{ role: string; content: string }> = [];
-const sysPrompt = (systemPrompt && systemPrompt.trim().length > 0)
-  ? systemPrompt.trim()
-  : 'You are a precise AI assistant. Complete user requests directly and concisely.';
+const sysPrompt =
+  systemPrompt && systemPrompt.trim().length > 0
+    ? systemPrompt.trim()
+    : "You are a precise AI assistant. Complete user requests directly and concisely.";
 
-currentMessages.push({ role: 'system', content: sysPrompt });
+currentMessages.push({ role: "system", content: sysPrompt });
 currentMessages.push(...messages);
 
 const response = await engine.chat.completions.create({
@@ -123,6 +126,7 @@ const response = await engine.chat.completions.create({
 The audit uncovered three distinct failure modes interacting in a cascade:
 
 ### 1. Structural Violation of the OpenAI/WebLLM Message Schema
+
 WebLLM adheres strictly to the canonical ChatML and OpenAI message order contract. In conversational completion pipelines, an inference request represents a turn where the **assistant is expected to respond**. Therefore, the terminal element of `messages` must be a `user` prompt or a `tool` output.
 
 When `activeSteps.length > 0`, `App.tsx` pushed an `assistant` message containing all accumulated tokens as the final element:
@@ -132,28 +136,38 @@ $$\text{Messages Payload} = [\text{system}, \text{user}, \text{assistant}]$$
 When WebLLM's internal schema validator inspected `currentMessages`, it encountered `role: 'assistant'` at index $N-1$, immediately throwing `MessageOrderError: Last message should be from either 'user' or 'tool'`.
 
 ### 2. Auto-Play Re-Trigger Amplification Loop
+
 In `App.tsx`, the auto-play timer checked if `isPlaying` was true and `processedCandidates` had items:
 
 ```typescript
 // frontend/src/App.tsx (Auto-play loop)
 useEffect(() => {
   let timer: NodeJS.Timeout;
-  const isPending = isFetchingLogits || inferenceEngine.state.status === 'generating';
+  const isPending =
+    isFetchingLogits || inferenceEngine.state.status === "generating";
   if (isPlaying && !isPending && processedCandidates.length > 0) {
     timer = setTimeout(() => {
-      const chosen = processedCandidates.find(c => !c.isFiltered) || processedCandidates[0];
+      const chosen =
+        processedCandidates.find(c => !c.isFiltered) || processedCandidates[0];
       if (chosen) {
         handleSelectToken(chosen);
       }
     }, 900);
   }
   return () => clearTimeout(timer);
-}, [isPlaying, isFetchingLogits, inferenceEngine.state.status, processedCandidates, handleSelectToken]);
+}, [
+  isPlaying,
+  isFetchingLogits,
+  inferenceEngine.state.status,
+  processedCandidates,
+  handleSelectToken,
+]);
 ```
 
 Because `handleSelectToken` calls `handleLaunchPrompt(updated)`, each tick appended another token to `steps[]`, ensuring that every 900ms tick re-sent the invalid `[system, user, assistant]` sequence.
 
 ### 3. Asynchronous Flag Leakage on Success Paths
+
 In `App.tsx`, `setIsFetchingLogits(true)` was set at the entry of `handleLaunchPrompt()`. While remote HTTP routes were wrapped in `try / finally`, the local WebGPU branch dispatched a worker message and returned immediately without resetting `isFetchingLogits`. The flag was only reset if an explicit error occurred, causing inconsistent UI states when switching between local GPU execution and cloud fallbacks.
 
 ---
@@ -173,22 +187,25 @@ export function buildInferenceMessages(
   historyTokens: string,
   ragContext?: string,
   ragEnabled?: boolean
-): Array<{ role: 'user' | 'assistant' | 'system'; content: string }> {
-  const messages: Array<{ role: 'user' | 'assistant' | 'system'; content: string }> = [];
+): Array<{ role: "user" | "assistant" | "system"; content: string }> {
+  const messages: Array<{
+    role: "user" | "assistant" | "system";
+    content: string;
+  }> = [];
 
   let initialUserPrompt = prompt;
   if (ragEnabled && ragContext?.trim()) {
     initialUserPrompt = `Context: ${ragContext.trim()}\n\nQuestion: ${prompt}`;
   }
 
-  messages.push({ role: 'user', content: initialUserPrompt });
+  messages.push({ role: "user", content: initialUserPrompt });
 
   if (historyTokens.length > 0) {
-    messages.push({ role: 'assistant', content: historyTokens });
+    messages.push({ role: "assistant", content: historyTokens });
     // Injects explicit continuation turn to satisfy ChatML schema
-    messages.push({ 
-      role: 'user', 
-      content: 'Continue your response from the exact point left off.' 
+    messages.push({
+      role: "user",
+      content: "Continue your response from the exact point left off.",
     });
   }
 
@@ -205,22 +222,25 @@ Even if an upstream component emits an improperly ordered message array, the Web
 function sanitizeMessagesForInference(
   messages: Array<{ role: string; content: string }>,
   systemPrompt?: string
-): Array<{ role: 'system' | 'user' | 'assistant'; content: string }> {
-  const sanitized: Array<{ role: 'system' | 'user' | 'assistant'; content: string }> = [];
-  
+): Array<{ role: "system" | "user" | "assistant"; content: string }> {
+  const sanitized: Array<{
+    role: "system" | "user" | "assistant";
+    content: string;
+  }> = [];
+
   // 1. Inject System Persona
-  const sys = systemPrompt?.trim() || 'You are a precise AI assistant.';
-  sanitized.push({ role: 'system', content: sys });
+  const sys = systemPrompt?.trim() || "You are a precise AI assistant.";
+  sanitized.push({ role: "system", content: sys });
 
   // 2. Push input messages
   sanitized.push(...(messages as any));
 
   // 3. Defensive Check: Ensure terminal message is 'user' or 'tool'
   const lastMsg = sanitized[sanitized.length - 1];
-  if (lastMsg && lastMsg.role === 'assistant') {
+  if (lastMsg && lastMsg.role === "assistant") {
     sanitized.push({
-      role: 'user',
-      content: 'Please continue.',
+      role: "user",
+      content: "Please continue.",
     });
   }
 
@@ -236,7 +256,7 @@ To prevent dead GPU contexts from lingering after a hardware context loss or unh
 // frontend/src/engine/WebGPUInferenceWorker.ts
 device.lost.then((info: any) => {
   console.error(`[WebGPUWorker] Fatal: GPU Context Lost: ${info?.message}`);
-  
+
   // Cleanly unbind engine instance to prevent re-entry on dead device
   if (engine) {
     engine = null;
@@ -244,10 +264,11 @@ device.lost.then((info: any) => {
   }
 
   post({
-    type: 'ENGINE_ERROR',
+    type: "ENGINE_ERROR",
     payload: {
-      code: 'WEBGPU_DEVICE_LOST',
-      message: 'GPU memory context was reclaimed by the OS. Please reload the tab.',
+      code: "WEBGPU_DEVICE_LOST",
+      message:
+        "GPU memory context was reclaimed by the OS. Please reload the tab.",
     },
   });
 });

@@ -21,25 +21,43 @@ const topics = Object.entries(labels).map(([category, label]) => ({
 
 <Layout title="Topics">
   <main id="main-content" class="w-full">
-    <section class="doc-card p-6 sm:p-8 mb-8">
-      <p class="font-mono text-xs uppercase tracking-widest text-[#a47bea]">Publication map</p>
-      <h1 class="font-sans text-3xl font-bold text-white tracking-tight">Browse by topic</h1>
-      <p class="text-[#dce0e8] leading-relaxed">
-        Friction Hunter is the publication. The separately operated Friction Hunter
-        engine appears here only in product and architecture reporting.
+    <section class="doc-card mb-8 p-6 sm:p-8">
+      <p class="font-mono text-xs tracking-widest text-[#a47bea] uppercase">
+        Publication map
+      </p>
+      <h1 class="font-sans text-3xl font-bold tracking-tight text-white">
+        Browse by topic
+      </h1>
+      <p class="leading-relaxed text-[#dce0e8]">
+        Friction Hunter is the publication. The separately operated Friction
+        Hunter engine appears here only in product and architecture reporting.
       </p>
     </section>
 
-    {topics.map(topic => topic.posts.length > 0 && (
-      <section class="mb-10" aria-labelledby={`topic-${topic.category}`}>
-        <div class="flex items-center justify-between pb-2 mb-3 border-b border-[rgba(230,235,245,0.10)]">
-          <h2 id={`topic-${topic.category}`} class="font-sans text-xl font-bold text-white">{topic.label}</h2>
-          <span class="font-mono text-xs text-[#9ba0ad]">{topic.posts.length} articles</span>
-        </div>
-        <ul>
-          {topic.posts.map(post => <Card variant="h3" {...post} />)}
-        </ul>
-      </section>
-    ))}
+    {
+      topics.map(
+        topic =>
+          topic.posts.length > 0 && (
+            <section class="mb-10" aria-labelledby={`topic-${topic.category}`}>
+              <div class="mb-3 flex items-center justify-between border-b border-[rgba(230,235,245,0.10)] pb-2">
+                <h2
+                  id={`topic-${topic.category}`}
+                  class="font-sans text-xl font-bold text-white"
+                >
+                  {topic.label}
+                </h2>
+                <span class="font-mono text-xs text-[#9ba0ad]">
+                  {topic.posts.length} articles
+                </span>
+              </div>
+              <ul>
+                {topic.posts.map(post => (
+                  <Card variant="h3" {...post} />
+                ))}
+              </ul>
+            </section>
+          )
+      )
+    }
   </main>
 </Layout>

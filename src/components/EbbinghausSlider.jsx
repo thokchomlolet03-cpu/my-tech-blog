@@ -1,2 +1,2 @@
-import EbbinghausChart from './EbbinghausChart.jsx';
+import EbbinghausChart from "./EbbinghausChart.jsx";
 export default EbbinghausChart;
