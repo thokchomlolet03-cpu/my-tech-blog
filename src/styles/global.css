@@ -12,12 +12,20 @@
     scrollbar-width: thin;
     scrollbar-color: rgba(164, 123, 234, 0.3) transparent;
   }
-  
+
   body {
     min-height: 100vh;
     background-color: var(--background);
     color: var(--foreground);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif;
   }
 
   html[data-theme="dark"] body {
@@ -44,32 +52,32 @@
 }
 
 @utility active-nav {
-  @apply text-[#a47bea] font-semibold bg-[#262a33] border border-[rgba(230,235,245,0.15)];
+  @apply border border-[rgba(230,235,245,0.15)] bg-[#262a33] font-semibold text-[#a47bea];
 }
 
 /* ===== Material for MkDocs Slate Documentation Utilities ===== */
 @utility doc-card {
-  @apply bg-[#242831]/90 border border-[rgba(230,235,245,0.10)] rounded-lg transition-all duration-200;
+  @apply rounded-lg border border-[rgba(230,235,245,0.10)] bg-[#242831]/90 transition-all duration-200;
 }
 
 @utility doc-card-interactive {
-  @apply doc-card hover:border-[#a47bea]/60 hover:bg-[#282c35] hover:-translate-y-0.5 shadow-sm;
+  @apply doc-card shadow-sm hover:-translate-y-0.5 hover:border-[#a47bea]/60 hover:bg-[#282c35];
 }
 
 @utility doc-badge {
-  @apply font-mono text-xs px-2.5 py-1 rounded bg-[#282c35] text-[#dce0e8] border border-[rgba(230,235,245,0.12)] inline-flex items-center gap-1.5;
+  @apply inline-flex items-center gap-1.5 rounded border border-[rgba(230,235,245,0.12)] bg-[#282c35] px-2.5 py-1 font-mono text-xs text-[#dce0e8];
 }
 
 @utility doc-badge-alert {
-  @apply font-mono text-xs px-2.5 py-1 rounded bg-rose-950/40 text-rose-300 border border-rose-800/50 inline-flex items-center gap-1.5;
+  @apply inline-flex items-center gap-1.5 rounded border border-rose-800/50 bg-rose-950/40 px-2.5 py-1 font-mono text-xs text-rose-300;
 }
 
 @utility doc-badge-emerald {
-  @apply font-mono text-xs px-2.5 py-1 rounded bg-emerald-950/40 text-emerald-300 border border-emerald-800/50 inline-flex items-center gap-1.5;
+  @apply inline-flex items-center gap-1.5 rounded border border-emerald-800/50 bg-emerald-950/40 px-2.5 py-1 font-mono text-xs text-emerald-300;
 }
 
 @utility doc-badge-purple {
-  @apply font-mono text-xs px-2.5 py-1 rounded bg-[#7e56c2]/20 text-[#c499ff] border border-[#7e56c2]/40 inline-flex items-center gap-1.5;
+  @apply inline-flex items-center gap-1.5 rounded border border-[#7e56c2]/40 bg-[#7e56c2]/20 px-2.5 py-1 font-mono text-xs text-[#c499ff];
 }
 
 /* Backward compatibility aliases */

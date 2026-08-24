@@ -8,24 +8,24 @@
 
     h1 {
       color: var(--heading);
-      @apply font-bold tracking-tight mb-4 text-2xl sm:text-3xl;
+      @apply mb-4 text-2xl font-bold tracking-tight sm:text-3xl;
     }
-    
+
     h2 {
       color: var(--heading);
       border-color: var(--border);
-      @apply font-semibold text-xl sm:text-2xl border-b pb-2 mb-4 mt-10 tracking-tight flex items-center gap-2;
+      @apply mt-10 mb-4 flex items-center gap-2 border-b pb-2 text-xl font-semibold tracking-tight sm:text-2xl;
     }
 
     h3 {
       color: var(--heading);
-      @apply font-semibold text-lg sm:text-xl mt-8 mb-3 tracking-tight;
+      @apply mt-8 mb-3 text-lg font-semibold tracking-tight sm:text-xl;
     }
-    
+
     h4,
     th {
       color: var(--heading);
-      @apply font-medium mb-3;
+      @apply mb-3 font-medium;
     }
 
     p,
@@ -43,15 +43,15 @@
     }
 
     a {
-      @apply text-[#a47bea] hover:text-[#c499ff] hover:underline wrap-break-word underline-offset-4 focus-visible:no-underline font-medium;
+      @apply font-medium wrap-break-word text-[#a47bea] underline-offset-4 hover:text-[#c499ff] hover:underline focus-visible:no-underline;
     }
 
     ul {
-      @apply overflow-x-clip list-disc pl-5 my-4 space-y-1;
+      @apply my-4 list-disc space-y-1 overflow-x-clip pl-5;
     }
 
     ol {
-      @apply list-decimal pl-5 my-4 space-y-1;
+      @apply my-4 list-decimal space-y-1 pl-5;
     }
 
     li {
@@ -65,7 +65,7 @@
 
     img {
       border-color: var(--border);
-      @apply border rounded-lg mx-auto shadow-lg;
+      @apply mx-auto rounded-lg border shadow-lg;
     }
 
     img[role="button"] {
@@ -78,14 +78,14 @@
 
     figcaption {
       color: var(--muted-foreground);
-      @apply font-mono text-xs mt-2 text-center;
+      @apply mt-2 text-center font-mono text-xs;
     }
 
     /* ===== Markdown Tables with Alternate Striping ===== */
     table {
       border-color: var(--border);
-      @apply w-full border-collapse border rounded-lg overflow-hidden my-6 text-sm;
-      
+      @apply my-6 w-full border-collapse overflow-hidden rounded-lg border text-sm;
+
       th,
       td {
         border-color: var(--border);
@@ -95,7 +95,7 @@
       th {
         background-color: var(--table-header);
         color: var(--heading);
-        @apply font-mono text-xs uppercase tracking-wider font-semibold;
+        @apply font-mono text-xs font-semibold tracking-wider uppercase;
       }
 
       tbody tr {
@@ -116,7 +116,7 @@
       background-color: var(--muted);
       color: var(--accent);
       border-color: var(--border);
-      @apply font-mono text-xs border rounded px-1.5 py-0.5 wrap-break-word before:content-none after:content-none font-medium;
+      @apply rounded border px-1.5 py-0.5 font-mono text-xs font-medium wrap-break-word before:content-none after:content-none;
     }
 
     .astro-code code {
@@ -127,20 +127,20 @@
       border-inline-start-color: #7e56c2;
       background-color: var(--blockquote-bg);
       color: var(--foreground);
-      @apply border-s-4 rounded-r-lg p-4 my-4 font-sans italic;
+      @apply my-4 rounded-r-lg border-s-4 p-4 font-sans italic;
     }
 
     details:not(.callout) {
-      @apply text-foreground inline-block cursor-pointer select-none [&_p]:hidden [&_ul]:my-0! doc-card p-4;
+      @apply text-foreground doc-card inline-block cursor-pointer p-4 select-none [&_p]:hidden [&_ul]:my-0!;
     }
 
     summary {
-      @apply font-mono text-sm focus-visible:outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-dashed text-[#a47bea];
+      @apply focus-visible:outline-accent font-mono text-sm text-[#a47bea] focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-dashed;
     }
 
     pre {
       border-color: var(--border);
-      @apply focus-visible:outline-accent focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-dashed my-6 rounded-lg overflow-hidden border shadow-xl;
+      @apply focus-visible:outline-accent my-6 overflow-hidden rounded-lg border shadow-xl focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-dashed;
     }
   }
 
@@ -148,7 +148,7 @@
   .astro-code {
     border-color: var(--border);
     background-color: var(--code-bg);
-    @apply flex border rounded-lg text-(--shiki-light) [&_span]:text-(--shiki-light) p-4 shadow-xl;
+    @apply flex rounded-lg border p-4 text-(--shiki-light) shadow-xl [&_span]:text-(--shiki-light);
   }
 
   html[data-theme="dark"] .astro-code {

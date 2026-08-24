@@ -31,27 +31,35 @@ const homePath = getRelativeLocaleUrl(locale, "");
     class="w-full"
   >
     <!-- MkDocs Slate Hero Section -->
-    <section id="hero" class="doc-card p-5 sm:p-6 mb-6 relative">
-      <div class="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-3 border-b border-[rgba(230,235,245,0.12)]">
+    <section id="hero" class="doc-card relative mb-6 p-5 sm:p-6">
+      <div
+        class="mb-3 flex flex-wrap items-center justify-between gap-2 border-b border-[rgba(230,235,245,0.12)] pb-2.5"
+      >
         <div class="flex items-center gap-2">
           <span class="size-1.5 rounded-full bg-[#a47bea]"></span>
-          <span class="font-mono text-[10px] uppercase tracking-widest text-[#a47bea] font-medium">
+          <span
+            class="font-mono text-[10px] font-medium tracking-widest text-[#a47bea] uppercase"
+          >
             System Architecture &amp; AI Engineering
           </span>
         </div>
-        <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-[#282c35] text-[#9ba0ad] border border-[rgba(230,235,245,0.12)]">
+        <span
+          class="rounded border border-[rgba(230,235,245,0.12)] bg-[#282c35] px-2 py-0.5 font-mono text-[10px] text-[#9ba0ad]"
+        >
           EDITION: 2026.08
         </span>
       </div>
 
-      <div class="flex items-center gap-3 my-1.5">
-        <h1 class="font-sans text-2xl sm:text-3xl font-bold tracking-tight text-white">
+      <div class="my-1.5 flex items-center gap-3">
+        <h1
+          class="font-sans text-2xl font-bold tracking-tight text-white sm:text-3xl"
+        >
           Friction Hunter
         </h1>
         <a
           target="_blank"
           href={`${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`}
-          class="inline-block p-1.5 rounded-md bg-[#282c35] border border-[rgba(230,235,245,0.12)] text-[#a47bea] hover:text-white hover:border-[#a47bea] transition-all"
+          class="inline-block rounded-md border border-[rgba(230,235,245,0.12)] bg-[#282c35] p-1.5 text-[#a47bea] transition-all hover:border-[#a47bea] hover:text-white"
           aria-label="RSS Feed"
           title="RSS Feed"
         >
@@ -64,20 +72,25 @@ const homePath = getRelativeLocaleUrl(locale, "");
         </a>
       </div>
 
-      <p class="text-sm text-[#dce0e8] leading-relaxed font-sans mt-2">
-        Welcome to <strong class="text-white font-semibold">Friction Hunter</strong> — an engineering publication by <strong class="text-[#a47bea] font-medium">Thokchom Lolet Singh</strong> investigating client-side WebGPU architectures, transformer sampling thermodynamics, edge-AI state machines, and incident post-mortems.
+      <p class="mt-2 font-sans text-sm leading-relaxed text-[#dce0e8]">
+        Welcome to <strong class="font-semibold text-white"
+          >Friction Hunter</strong
+        > — an engineering publication by <strong
+          class="font-medium text-[#a47bea]">Thokchom Lolet Singh</strong
+        > investigating client-side WebGPU architectures, transformer sampling thermodynamics,
+        edge-AI state machines, and incident post-mortems.
       </p>
 
       {
         socials.length > 0 && (
-          <div class="mt-4 pt-3 border-t border-[rgba(230,235,245,0.12)] flex flex-wrap items-center justify-between gap-3 font-sans text-xs text-[#9ba0ad]">
+          <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-[rgba(230,235,245,0.12)] pt-3 font-sans text-xs text-[#9ba0ad]">
             <div class="flex items-center gap-2">
-              <span class="text-[#a47bea] font-mono text-xs">&gt;</span>
+              <span class="font-mono text-xs text-[#a47bea]">&gt;</span>
               <span>Connect:</span>
               <Socials />
             </div>
-            <span class="text-emerald-400 flex items-center gap-1.5 font-mono text-[11px]">
-              <span class="size-1.5 rounded-full bg-emerald-400"></span>
+            <span class="flex items-center gap-1.5 font-mono text-[11px] text-emerald-400">
+              <span class="size-1.5 rounded-full bg-emerald-400" />
               ALL_SYSTEMS_OPERATIONAL
             </span>
           </div>
@@ -87,16 +100,15 @@ const homePath = getRelativeLocaleUrl(locale, "");
 
     {
       featuredPosts.length > 0 && (
-        <section
-          id="featured"
-          class="mb-8"
-        >
-          <div class="flex items-center justify-between pb-2 mb-3 border-b border-[rgba(230,235,245,0.10)]">
-            <h2 class="font-sans text-sm font-bold tracking-tight text-white flex items-center gap-2">
-              <span class="text-[#a47bea] font-mono text-xs">//</span>
+        <section id="featured" class="mb-8">
+          <div class="mb-3 flex items-center justify-between border-b border-[rgba(230,235,245,0.10)] pb-2">
+            <h2 class="flex items-center gap-2 font-sans text-sm font-bold tracking-tight text-white">
+              <span class="font-mono text-xs text-[#a47bea]">//</span>
               <span>{t.home.featured}</span>
             </h2>
-            <span class="font-mono text-[10px] text-[#9ba0ad]">{featuredPosts.length} Articles</span>
+            <span class="font-mono text-[10px] text-[#9ba0ad]">
+              {featuredPosts.length} Articles
+            </span>
           </div>
           <ul class="divide-y-0">
             {featuredPosts.map(data => (
@@ -110,9 +122,9 @@ const homePath = getRelativeLocaleUrl(locale, "");
     {
       recentPosts.length > 0 && (
         <section id="recent-posts" class="mb-8">
-          <div class="flex items-center justify-between pb-2 mb-3 border-b border-[rgba(230,235,245,0.10)]">
-            <h2 class="font-sans text-sm font-bold tracking-tight text-white flex items-center gap-2">
-              <span class="text-[#a47bea] font-mono text-xs">//</span>
+          <div class="mb-3 flex items-center justify-between border-b border-[rgba(230,235,245,0.10)] pb-2">
+            <h2 class="flex items-center gap-2 font-sans text-sm font-bold tracking-tight text-white">
+              <span class="font-mono text-xs text-[#a47bea]">//</span>
               <span>{t.home.recentPosts}</span>
             </h2>
             <span class="font-mono text-[10px] text-[#9ba0ad]">Latest</span>
@@ -127,9 +139,9 @@ const homePath = getRelativeLocaleUrl(locale, "");
     }
 
     <div class="my-8 text-center">
-      <LinkButton 
+      <LinkButton
         href={getRelativeLocaleUrl(locale, "posts")}
-        class="doc-badge text-sm px-5 py-2.5 hover:border-[#a47bea] hover:text-white transition-all inline-flex items-center gap-2"
+        class="doc-badge inline-flex items-center gap-2 px-5 py-2.5 text-sm transition-all hover:border-[#a47bea] hover:text-white"
       >
         <span>{t.home.allPosts}</span>
         <IconArrowRight class="inline-block rtl:-rotate-180" />

@@ -7,28 +7,32 @@ const projects = [
     type: "Public website",
     home: "https://thokchomlolet03-cpu.github.io/my-tech-blog/",
     repository: "https://github.com/thokchomlolet03-cpu/my-tech-blog",
-    description: "This Astro publication. It is hosted on GitHub Pages and reports on the wider work without owning product data or infrastructure.",
+    description:
+      "This Astro publication. It is hosted on GitHub Pages and reports on the wider work without owning product data or infrastructure.",
   },
   {
     name: "Friction Hunter engine",
     type: "Private product system",
     home: null,
     repository: "https://github.com/thokchomlolet03-cpu/friction-hunter-engine",
-    description: "The Python automation pipeline, dashboard API, and GCP infrastructure. The publication can embed only its deliberately public, read-only data.",
+    description:
+      "The Python automation pipeline, dashboard API, and GCP infrastructure. The publication can embed only its deliberately public, read-only data.",
   },
   {
     name: "The Token Cosmos",
     type: "Educational AI product",
     home: null,
     repository: "https://github.com/thokchomlolet03-cpu/the-token-cosmos",
-    description: "A separate React/FastAPI product for exploring LLM probability and sampling. Its Cloud Run app and GitHub Pages documentation are independent from Friction Hunter.",
+    description:
+      "A separate React/FastAPI product for exploring LLM probability and sampling. Its Cloud Run app and GitHub Pages documentation are independent from Friction Hunter.",
   },
   {
     name: "Terraform Mastery",
     type: "Learning curriculum",
     home: null,
     repository: null,
-    description: "A standalone Terraform curriculum and lab suite. It teaches infrastructure patterns but does not deploy any product in this ecosystem.",
+    description:
+      "A standalone Terraform curriculum and lab suite. It teaches infrastructure patterns but does not deploy any product in this ecosystem.",
   },
 ];
 ---
@@ -36,35 +40,68 @@ const projects = [
 <Layout title="Ecosystem">
   <main id="main-content" class="w-full space-y-8">
     <section class="doc-card p-6 sm:p-8">
-      <p class="font-mono text-xs uppercase tracking-widest text-[#a47bea]">System map</p>
-      <h1 class="font-sans text-3xl font-bold text-white tracking-tight">Four projects, clear boundaries</h1>
-      <p class="mt-3 text-[#dce0e8] leading-relaxed">
-        These projects share ideas and authorship, not one runtime. Keeping their deployment,
-        data, and security boundaries explicit makes each one easier to understand and safer to operate.
+      <p class="font-mono text-xs tracking-widest text-[#a47bea] uppercase">
+        System map
+      </p>
+      <h1 class="font-sans text-3xl font-bold tracking-tight text-white">
+        Four projects, clear boundaries
+      </h1>
+      <p class="mt-3 leading-relaxed text-[#dce0e8]">
+        These projects share ideas and authorship, not one runtime. Keeping
+        their deployment, data, and security boundaries explicit makes each one
+        easier to understand and safer to operate.
       </p>
     </section>
 
     <section aria-labelledby="relationships">
-      <h2 id="relationships" class="font-sans text-xl font-bold text-white mb-3">Relationships</h2>
-      <div class="doc-card p-5 font-mono text-sm leading-7 text-[#dce0e8] overflow-x-auto">
-        Publication (GitHub Pages) → public Friction Hunter API (Cloud Run)<br />
-        Token Cosmos → separate Cloud Run product + separate GitHub Pages docs<br />
+      <h2
+        id="relationships"
+        class="mb-3 font-sans text-xl font-bold text-white"
+      >
+        Relationships
+      </h2>
+      <div
+        class="doc-card overflow-x-auto p-5 font-mono text-sm leading-7 text-[#dce0e8]"
+      >
+        Publication (GitHub Pages) → public Friction Hunter API (Cloud Run)<br
+        />
+        Token Cosmos → separate Cloud Run product + separate GitHub Pages docs<br
+        />
         Terraform Mastery → standalone learning project; no production connection
       </div>
     </section>
 
     <section class="grid gap-4 sm:grid-cols-2" aria-label="Projects">
-      {projects.map(project => (
-        <article class="doc-card p-5">
-          <p class="font-mono text-xs uppercase tracking-widest text-[#a47bea]">{project.type}</p>
-          <h2 class="font-sans text-xl font-bold text-white mt-1">{project.name}</h2>
-          <p class="mt-2 text-sm leading-relaxed text-[#dce0e8]">{project.description}</p>
-          <div class="mt-4 flex gap-4 text-sm">
-            {project.home && <a class="text-[#cdb9ff] hover:text-white" href={project.home}>Open site</a>}
-            {project.repository && <a class="text-[#cdb9ff] hover:text-white" href={project.repository}>Repository</a>}
-          </div>
-        </article>
-      ))}
+      {
+        projects.map(project => (
+          <article class="doc-card p-5">
+            <p class="font-mono text-xs tracking-widest text-[#a47bea] uppercase">
+              {project.type}
+            </p>
+            <h2 class="mt-1 font-sans text-xl font-bold text-white">
+              {project.name}
+            </h2>
+            <p class="mt-2 text-sm leading-relaxed text-[#dce0e8]">
+              {project.description}
+            </p>
+            <div class="mt-4 flex gap-4 text-sm">
+              {project.home && (
+                <a class="text-[#cdb9ff] hover:text-white" href={project.home}>
+                  Open site
+                </a>
+              )}
+              {project.repository && (
+                <a
+                  class="text-[#cdb9ff] hover:text-white"
+                  href={project.repository}
+                >
+                  Repository
+                </a>
+              )}
+            </div>
+          </article>
+        ))
+      }
     </section>
   </main>
 </Layout>

@@ -47,9 +47,12 @@ const rssHref = getRelativeLocaleUrl(
     <meta name="generator" content={Astro.generator} />
 
     <!-- Google Fonts: Inter & JetBrains Mono -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Primary meta -->
     <title>{title}</title>
@@ -117,17 +120,35 @@ const rssHref = getRelativeLocaleUrl(
     <script is:inline>
       window.MathJax = {
         tex: {
-          inlineMath: [["$", "$"], ["\\(", "\\)"]],
-          displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
           processEscapes: true,
-          processEnvironments: true
+          processEnvironments: true,
         },
         options: {
-          skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
+          skipHtmlTags: [
+            "script",
+            "noscript",
+            "style",
+            "textarea",
+            "pre",
+            "code",
+          ],
+        },
       };
     </script>
-    <script is:inline id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script
+      is:inline
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
     <script is:inline>
       document.addEventListener("astro:page-load", () => {
         if (window.MathJax && window.MathJax.typesetPromise) {
@@ -138,56 +159,61 @@ const rssHref = getRelativeLocaleUrl(
 
     <!-- Mermaid.js for rendering flowchart diagrams -->
     <script is:inline type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
       mermaid.initialize({
         startOnLoad: false,
-        theme: 'dark',
+        theme: "dark",
         themeVariables: {
           darkMode: true,
-          background: '#1e2129',
-          mainBkg: '#242831',
-          nodeBorder: '#7e56c2',
-          primaryColor: '#7e56c2',
-          primaryTextColor: '#ffffff',
-          primaryBorderColor: '#a47bea',
-          lineColor: '#a47bea',
-          secondaryColor: '#282c35',
-          tertiaryColor: '#1e2129'
-        }
+          background: "#1e2129",
+          mainBkg: "#242831",
+          nodeBorder: "#7e56c2",
+          primaryColor: "#7e56c2",
+          primaryTextColor: "#ffffff",
+          primaryBorderColor: "#a47bea",
+          lineColor: "#a47bea",
+          secondaryColor: "#282c35",
+          tertiaryColor: "#1e2129",
+        },
       });
 
       async function renderAllMermaid() {
-        const blocks = document.querySelectorAll('pre.astro-code[data-language="mermaid"], pre > code.language-mermaid, pre.mermaid, code.language-mermaid');
+        const blocks = document.querySelectorAll(
+          'pre.astro-code[data-language="mermaid"], pre > code.language-mermaid, pre.mermaid, code.language-mermaid'
+        );
         for (let i = 0; i < blocks.length; i++) {
           const el = blocks[i];
-          const container = el.tagName === 'CODE' ? el.parentElement : el;
+          const container = el.tagName === "CODE" ? el.parentElement : el;
           if (!container || container.dataset.mermaidRendered) continue;
-          
-          let rawCode = el.textContent || '';
+
+          let rawCode = el.textContent || "";
           rawCode = rawCode
-            .replace(/&gt;/g, '>')
-            .replace(/&lt;/g, '<')
-            .replace(/&amp;/g, '&')
+            .replace(/&gt;/g, ">")
+            .replace(/&lt;/g, "<")
+            .replace(/&amp;/g, "&")
             .trim();
 
           const graphId = `mermaid-svg-${Date.now()}-${i}`;
           try {
             const { svg } = await mermaid.render(graphId, rawCode);
-            const wrapper = document.createElement('div');
-            wrapper.className = 'mermaid-rendered-container my-6 w-full flex justify-center overflow-x-auto rounded-lg bg-[#1c1f26] border border-[rgba(230,235,245,0.10)] p-4 shadow-xl';
+            const wrapper = document.createElement("div");
+            wrapper.className =
+              "mermaid-rendered-container my-6 w-full flex justify-center overflow-x-auto rounded-lg bg-[#1c1f26] border border-[rgba(230,235,245,0.10)] p-4 shadow-xl";
             wrapper.innerHTML = svg;
-            container.dataset.mermaidRendered = 'true';
+            container.dataset.mermaidRendered = "true";
             container.parentNode?.replaceChild(wrapper, container);
           } catch {
-            const errorElement = document.getElementById(graphId) || document.getElementById('d' + graphId);
+            const errorElement =
+              document.getElementById(graphId) ||
+              document.getElementById("d" + graphId);
             if (errorElement) errorElement.remove();
           }
         }
       }
 
-      document.addEventListener('DOMContentLoaded', renderAllMermaid);
-      document.addEventListener('astro:page-load', renderAllMermaid);
+      document.addEventListener("DOMContentLoaded", renderAllMermaid);
+      document.addEventListener("astro:page-load", renderAllMermaid);
     </script>
 
     <ClientRouter />
@@ -196,14 +222,22 @@ const rssHref = getRelativeLocaleUrl(
     class="bg-background font-app text-foreground selection:bg-accent/75 selection:text-accent-foreground flex min-h-svh flex-col"
   >
     <Header />
-    <div class="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[260px_1fr_240px] gap-8 mt-16 pt-6">
-      <aside class="hidden lg:block w-[260px] flex-shrink-0 sticky top-[4.5rem] h-[calc(100vh-4.5rem)] overflow-y-auto">
+    <div
+      class="mx-auto mt-16 grid w-full max-w-[1400px] flex-1 grid-cols-1 gap-8 px-4 pt-6 sm:px-6 lg:grid-cols-[260px_1fr_240px] lg:px-8"
+    >
+      <aside
+        class="sticky top-[4.5rem] hidden h-[calc(100vh-4.5rem)] w-[260px] flex-shrink-0 overflow-y-auto lg:block"
+      >
         <LeftSidebar />
       </aside>
-      <div class="w-full min-w-0 max-w-3xl mx-auto flex flex-col items-start justify-start pb-16">
+      <div
+        class="mx-auto flex w-full max-w-3xl min-w-0 flex-col items-start justify-start pb-16"
+      >
         <slot />
       </div>
-      <aside class="hidden xl:block w-[240px] flex-shrink-0 sticky top-[4.5rem] h-[calc(100vh-4.5rem)] overflow-y-auto">
+      <aside
+        class="sticky top-[4.5rem] hidden h-[calc(100vh-4.5rem)] w-[240px] flex-shrink-0 overflow-y-auto xl:block"
+      >
         <slot name="right-sidebar" />
       </aside>
     </div>

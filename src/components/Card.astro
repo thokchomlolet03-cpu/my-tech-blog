@@ -13,42 +13,50 @@ const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 const { title, description, tags = [], ...props } = data;
 ---
 
-<li class="border-b border-[rgba(230,235,245,0.10)] py-5 first:pt-0 last:border-0 list-none">
+<li
+  class="list-none border-b border-[rgba(230,235,245,0.10)] py-5 first:pt-0 last:border-0"
+>
   <article class="flex flex-col gap-1.5">
     <!-- Title -->
     <a
       href={getPostUrl(id, filePath, Astro.currentLocale)}
-      class="block group focus-visible:outline-accent"
+      class="group focus-visible:outline-accent block"
     >
       <Heading
         transition:name={toTransitionName(title)}
-        class="font-sans text-lg sm:text-xl font-bold tracking-tight text-white group-hover:text-[#a47bea] transition-colors duration-150 leading-snug"
+        class="font-sans text-lg leading-snug font-bold tracking-tight text-white transition-colors duration-150 group-hover:text-[#a47bea] sm:text-xl"
       >
         {title}
       </Heading>
     </a>
 
     <!-- Metadata: Date & Tags -->
-    <div class="flex flex-wrap items-center gap-2 text-xs text-[#9ba0ad] mt-0.5">
+    <div
+      class="mt-0.5 flex flex-wrap items-center gap-2 text-xs text-[#9ba0ad]"
+    >
       <Datetime {...props} />
       <div class="flex flex-wrap items-center gap-1">
-        {tags.map(tag => (
-          <span
-            class:list={[
-              "px-1.5 py-0.5 rounded text-[11px] font-mono border",
-              tag === "post-mortem"
-                ? "bg-rose-950/40 text-rose-300 border-rose-800/40"
-                : "bg-[#282c35] text-[#9ba0ad] border-[rgba(230,235,245,0.12)]"
-            ]}
-          >
-            #{tag}
-          </span>
-        ))}
+        {
+          tags.map(tag => (
+            <span
+              class:list={[
+                "rounded border px-1.5 py-0.5 font-mono text-[11px]",
+                tag === "post-mortem"
+                  ? "border-rose-800/40 bg-rose-950/40 text-rose-300"
+                  : "border-[rgba(230,235,245,0.12)] bg-[#282c35] text-[#9ba0ad]",
+              ]}
+            >
+              #{tag}
+            </span>
+          ))
+        }
       </div>
     </div>
 
     <!-- Excerpt / Body Copy -->
-    <p class="text-sm text-[#9ba0ad] leading-relaxed font-sans mt-0.5 line-clamp-2">
+    <p
+      class="mt-0.5 line-clamp-2 font-sans text-sm leading-relaxed text-[#9ba0ad]"
+    >
       {description}
     </p>
   </article>

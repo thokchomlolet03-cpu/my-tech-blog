@@ -12,8 +12,9 @@
   --color-accent-purple: #a47bea;
   --color-slate-canvas: #1e2129;
   --color-slate-surface: #242831;
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  --font-sans:
+    "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "SF Mono", monospace;
   --font-app: var(--font-sans);
 }
 
@@ -23,9 +24,9 @@
   --background: #1e2129; /* Material Slate Background: hsla(230, 15%, 14%, 1) */
   --foreground: #dce0e8; /* Material Slate Foreground: hsla(230, 15%, 90%, 0.82) */
   --heading: #ffffff;
-  --accent: #a47bea;     /* Material Deep Purple Accent: #a47bea */
+  --accent: #a47bea; /* Material Deep Purple Accent: #a47bea */
   --accent-foreground: #ffffff;
-  --muted: #262a33;      /* Material Slate Elevated Surface: hsla(230, 15%, 18%, 1) */
+  --muted: #262a33; /* Material Slate Elevated Surface: hsla(230, 15%, 18%, 1) */
   --muted-foreground: #9ba0ad; /* Material Muted: hsla(230, 15%, 90%, 0.56) */
   --border: rgba(230, 235, 245, 0.12); /* Material Slate Border */
   --card-bg: #242831;
