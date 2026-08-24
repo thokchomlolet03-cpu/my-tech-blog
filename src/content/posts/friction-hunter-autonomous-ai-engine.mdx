@@ -11,6 +11,8 @@ tags:
   - python
   - cloud-run
   - gcp
+category: friction-hunter
+series: friction-hunter-architecture
 description: "An exhaustive, ground-up architectural, economic, and technical breakdown of how Friction Hunter converts real-world job market friction into AST-verified software assets."
 ---
 
@@ -130,7 +132,7 @@ Below is the complete architectural map of how data moves through the Friction H
 
 ### 5. AST-Verified Code Generator (`pipeline/code_generator.py`)
 - **Architecture**: **Deterministic AST Template Wrapping**.
-- **The AST Sandbox**: After injecting the Pydantic data extraction schema into custom template wrappers ([templates/document_extractor_template.py](file:///Users/lolet/Friction%20Hunter/templates/document_extractor_template.py) and [templates/document_extractor_gui_template.py](file:///Users/lolet/Friction%20Hunter/templates/document_extractor_gui_template.py)), the generator passes the code through Python's Abstract Syntax Tree module (`ast.parse()`).
+- **The AST Sandbox**: After injecting the Pydantic data extraction schema into [the repository templates](https://github.com/thokchomlolet03-cpu/friction-hunter-engine/tree/main/templates), the generator passes the code through Python's Abstract Syntax Tree module (`ast.parse()`).
 - **Zero Syntax Errors**: If the generated code has missing parentheses or invalid syntax, the sandbox catches the exception and automatically prompts Gemini to fix the exact line error.
 
 ### 6. On-The-Fly Binary Compiler (`pipeline/compiler.py`)
