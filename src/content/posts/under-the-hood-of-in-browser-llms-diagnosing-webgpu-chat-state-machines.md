@@ -8,6 +8,8 @@ tags:
   - post-mortem
   - system-architecture
   - the-token-cosmos
+category: ai-systems
+series: browser-ai
 description: "A deep architectural forensic audit of client-side WebGPU inference: uncovering message schema validation traps in @mlc-ai/web-llm, auto-play race conditions, and how to design resilient in-browser LLM state machines."
 ---
 

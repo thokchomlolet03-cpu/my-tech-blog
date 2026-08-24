@@ -8,6 +8,8 @@ tags:
   - system-architecture
   - security
   - the-token-cosmos
+category: ai-systems
+series: token-cosmos
 description: "A technical deep dive into the v6.0 architecture overhaul of The Token Cosmos, the root causes of our edge-AI VRAM failures, and how we secured a critical CI/CD telemetry vulnerability."
 ---
 
