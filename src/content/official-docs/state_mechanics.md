@@ -1,0 +1,1 @@
+Terraform uses state to map real world resources to your configuration, keep track of metadata, and improve performance for large infrastructures.

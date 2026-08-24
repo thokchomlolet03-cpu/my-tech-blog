@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import { getPostUrl } from "@/utils/getPostPaths";
 import { toTransitionName } from "@/utils/toTransitionName";
 import Datetime from "./Datetime.astro";
+import DomainBadge from "./DomainBadge.astro";
 
 type Props = {
   variant?: "h2" | "h3";
@@ -10,13 +11,37 @@ type Props = {
 
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
-const { title, description, tags = [], ...props } = data;
+const {
+  title,
+  description,
+  tags = [],
+  domain,
+  format,
+  series,
+  seriesOrder,
+  seriesTotal,
+  ...props
+} = data;
 ---
 
 <li
   class="list-none border-b border-[rgba(230,235,245,0.10)] py-5 first:pt-0 last:border-0"
 >
-  <article class="flex flex-col gap-1.5">
+  <article class="flex flex-col gap-2">
+    <!-- Top Taxonomy Badges -->
+    <div class="flex items-center justify-between gap-2">
+      <DomainBadge domain={domain} format={format} />
+      {
+        series && (
+          <span class="rounded border border-amber-500/20 bg-amber-500/10 px-2 py-0.5 font-mono text-[9px] text-amber-300 uppercase">
+            {seriesOrder === 0
+              ? "SERIES HUB"
+              : `MODULE ${seriesOrder} / ${seriesTotal}`}
+          </span>
+        )
+      }
+    </div>
+
     <!-- Title -->
     <a
       href={getPostUrl(id, filePath, Astro.currentLocale)}

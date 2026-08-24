@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -37,8 +39,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Verify generated curriculum is current
+        run: pnpm run check:curriculum
+
       - name: Build site
         run: pnpm run build
+        env:
+          PUBLIC_SITE_URL: https://thokchomlolet03-cpu.github.io
+          PUBLIC_BASE_PATH: /my-tech-blog
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3

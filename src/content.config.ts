@@ -24,12 +24,35 @@ const posts = defineCollection({
           "engineering-learning",
         ])
         .default("ai-systems"),
-      series: z.string().optional(),
       ogImage: image().or(z.string()).optional(),
       description: z.string(),
       canonicalURL: z.string().optional(),
       hideEditPost: z.boolean().optional(),
       timezone: z.string().optional(),
+      // 3-Tier Restructuring Taxonomy
+      domain: z
+        .enum(["infrastructure", "ai-systems", "systems", "human"])
+        .default("systems"),
+      format: z
+        .enum(["journey", "blueprint", "breakdown", "field-note"])
+        .default("breakdown"),
+      series: z.string().optional(),
+      seriesOrder: z.number().optional(),
+      seriesTotal: z.number().optional(),
+      generated: z.boolean().optional(),
+      sourceRepository: z
+        .string()
+        .regex(/^https?:\/\/\S+$/)
+        .optional(),
+      sourceRevision: z
+        .string()
+        .regex(/^[0-9a-f]{40}$/)
+        .optional(),
+      sourcePaths: z.array(z.string()).optional(),
+      sourceChecksum: z
+        .string()
+        .regex(/^[0-9a-f]{64}$/)
+        .optional(),
     }),
 });
 

@@ -21,8 +21,10 @@ import { transformerFileName } from "./src/utils/transformers/fileName";
 import config from "./astro-paper.config";
 
 export default defineConfig({
-  site: "https://thokchomlolet03-cpu.github.io",
-  base: "/my-tech-blog",
+  site:
+    process.env.PUBLIC_SITE_URL ??
+    "https://terraform-mastery-textbook-5r2l4cyana-uc.a.run.app",
+  base: process.env.PUBLIC_BASE_PATH ?? "/",
   integrations: [
     react(),
     mdx(),

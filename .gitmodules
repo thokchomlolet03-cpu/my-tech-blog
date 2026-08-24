@@ -1,0 +1,3 @@
+[submodule "curriculum/terraform-mastery"]
+	path = curriculum/terraform-mastery
+	url = https://github.com/thokchomlolet03-cpu/terraform-mastery.git

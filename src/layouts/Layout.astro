@@ -157,53 +157,95 @@ const rssHref = getRelativeLocaleUrl(
       });
     </script>
 
-    <!-- Mermaid.js for rendering flowchart diagrams -->
+    <!-- Mermaid.js for rendering high-precision flowchart and sequence diagrams -->
     <script is:inline type="module">
       import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
 
       mermaid.initialize({
         startOnLoad: false,
         theme: "dark",
+        securityLevel: "loose",
+        fontFamily: "Inter, system-ui, sans-serif",
         themeVariables: {
           darkMode: true,
-          background: "#1e2129",
-          mainBkg: "#242831",
-          nodeBorder: "#7e56c2",
-          primaryColor: "#7e56c2",
-          primaryTextColor: "#ffffff",
+          background: "#13151a",
+          mainBkg: "#1c1f26",
+          nodeBorder: "#a47bea",
+          primaryColor: "#2b1b4d",
+          primaryTextColor: "#f3f4f6",
           primaryBorderColor: "#a47bea",
           lineColor: "#a47bea",
-          secondaryColor: "#282c35",
-          tertiaryColor: "#1e2129",
+          secondaryColor: "#1e2129",
+          tertiaryColor: "#15171c",
+          clusterBkg: "#16181f",
+          clusterBorder: "rgba(230,235,245,0.18)",
+          titleColor: "#ffffff",
+          edgeLabelBackground: "#1c1f26",
+          actorBkg: "#241b35",
+          actorBorder: "#a47bea",
+          actorTextColor: "#ffffff",
+          actorLineColor: "#a47bea",
+          signalColor: "#a47bea",
+          signalTextColor: "#f3f4f6",
+          labelBoxBkgColor: "#1c1f26",
+          labelBoxBorderColor: "#a47bea",
+          labelTextColor: "#ffffff",
+          loopTextColor: "#ffffff",
+          noteBorderColor: "#f59e0b",
+          noteBkgColor: "#291d08",
+          noteTextColor: "#fbbf24",
         },
       });
 
+      function decodeEntities(encodedString) {
+        const textArea = document.createElement("textarea");
+        textArea.innerHTML = encodedString;
+        return textArea.value;
+      }
+
+      function extractMermaidCode(container) {
+        const lineSpans = container.querySelectorAll(".line");
+        if (lineSpans.length > 0) {
+          const lines = Array.from(lineSpans).map(
+            span => span.textContent || ""
+          );
+          return decodeEntities(lines.join("\n")).trim();
+        }
+        return decodeEntities(
+          container.innerText || container.textContent || ""
+        ).trim();
+      }
+
       async function renderAllMermaid() {
         const blocks = document.querySelectorAll(
-          'pre.astro-code[data-language="mermaid"], pre > code.language-mermaid, pre.mermaid, code.language-mermaid'
+          'pre[data-language="mermaid"], pre.astro-code[data-language="mermaid"], code.language-mermaid, pre.mermaid, .mermaid'
         );
         for (let i = 0; i < blocks.length; i++) {
           const el = blocks[i];
           const container = el.tagName === "CODE" ? el.parentElement : el;
-          if (!container || container.dataset.mermaidRendered) continue;
+          if (!container || container.dataset.mermaidRendered === "true")
+            continue;
 
-          let rawCode = el.textContent || "";
-          rawCode = rawCode
-            .replace(/&gt;/g, ">")
-            .replace(/&lt;/g, "<")
-            .replace(/&amp;/g, "&")
-            .trim();
+          const targetToReplace =
+            container.closest(".relative") &&
+            container.closest(".relative").querySelector(".copy-code")
+              ? container.closest(".relative")
+              : container;
 
-          const graphId = `mermaid-svg-${Date.now()}-${i}`;
+          const rawCode = extractMermaidCode(container);
+          if (!rawCode) continue;
+
+          const graphId = `mermaid-svg-${Date.now()}-${i}-${Math.random().toString(36).slice(2, 7)}`;
           try {
             const { svg } = await mermaid.render(graphId, rawCode);
             const wrapper = document.createElement("div");
             wrapper.className =
-              "mermaid-rendered-container my-6 w-full flex justify-center overflow-x-auto rounded-lg bg-[#1c1f26] border border-[rgba(230,235,245,0.10)] p-4 shadow-xl";
+              "mermaid-rendered-container not-prose my-8 w-full flex justify-center overflow-x-auto rounded-2xl bg-[#13151a] border border-[rgba(230,235,245,0.14)] p-6 shadow-2xl";
             wrapper.innerHTML = svg;
             container.dataset.mermaidRendered = "true";
-            container.parentNode?.replaceChild(wrapper, container);
-          } catch {
+            targetToReplace.parentNode?.replaceChild(wrapper, targetToReplace);
+          } catch (e) {
+            console.warn("Mermaid render error for block:", e, rawCode);
             const errorElement =
               document.getElementById(graphId) ||
               document.getElementById("d" + graphId);
@@ -212,8 +254,13 @@ const rssHref = getRelativeLocaleUrl(
         }
       }
 
-      document.addEventListener("DOMContentLoaded", renderAllMermaid);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", renderAllMermaid);
+      } else {
+        renderAllMermaid();
+      }
       document.addEventListener("astro:page-load", renderAllMermaid);
+      document.addEventListener("astro:after-swap", renderAllMermaid);
     </script>
 
     <ClientRouter />

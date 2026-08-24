@@ -11,6 +11,8 @@ tags:
 category: ai-systems
 series: browser-ai
 description: "A deep architectural forensic audit of client-side WebGPU inference: uncovering message schema validation traps in @mlc-ai/web-llm, auto-play race conditions, and how to design resilient in-browser LLM state machines."
+domain: "systems"
+format: "breakdown"
 ---
 
 Client-side in-browser AI inference is rapidly transitioning from experimental demos to enterprise-grade software architectures. By leveraging the **W3C WebGPU API** alongside WASM-compiled inference engines like `@mlc-ai/web-llm`, applications can execute billion-parameter language models directly within a client browser tab—achieving zero backend infrastructure idle costs and absolute privacy by design.

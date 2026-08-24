@@ -1,0 +1,94 @@
+---
+interface Props {
+  domain?: "infrastructure" | "ai-systems" | "systems" | "human" | string;
+  format?: "journey" | "blueprint" | "breakdown" | "field-note" | string;
+  showFormat?: boolean;
+}
+
+const { domain = "systems", format, showFormat = true } = Astro.props;
+
+const DOMAIN_CONFIG = {
+  infrastructure: {
+    label: "Infrastructure & Cloud",
+    shortLabel: "Infrastructure",
+    color: "bg-emerald-950/40 text-emerald-300 border-emerald-800/40",
+    icon: "🌐",
+  },
+  "ai-systems": {
+    label: "Applied AI & Autonomous Systems",
+    shortLabel: "Applied AI",
+    color: "bg-purple-950/40 text-purple-300 border-purple-800/40",
+    icon: "🧠",
+  },
+  systems: {
+    label: "Systems Engineering",
+    shortLabel: "Systems",
+    color: "bg-cyan-950/40 text-cyan-300 border-cyan-800/40",
+    icon: "⚡",
+  },
+  human: {
+    label: "The Human Layer",
+    shortLabel: "Human Layer",
+    color: "bg-amber-950/40 text-amber-300 border-amber-800/40",
+    icon: "🧭",
+  },
+};
+
+const FORMAT_CONFIG = {
+  journey: {
+    label: "CURRICULUM",
+    color:
+      "bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 border-amber-500/30",
+    icon: "🗺️",
+  },
+  blueprint: {
+    label: "BLUEPRINT",
+    color: "bg-indigo-950/40 text-indigo-300 border-indigo-800/40",
+    icon: "📐",
+  },
+  breakdown: {
+    label: "BREAKDOWN",
+    color: "bg-teal-950/40 text-teal-300 border-teal-800/40",
+    icon: "🔬",
+  },
+  "field-note": {
+    label: "FIELD NOTE",
+    color: "bg-rose-950/40 text-rose-300 border-rose-800/40",
+    icon: "📝",
+  },
+};
+
+const currentDomain =
+  DOMAIN_CONFIG[domain as keyof typeof DOMAIN_CONFIG] || DOMAIN_CONFIG.systems;
+const currentFormat = format
+  ? FORMAT_CONFIG[format as keyof typeof FORMAT_CONFIG]
+  : null;
+---
+
+<div class="inline-flex flex-wrap items-center gap-1.5">
+  <!-- Domain Badge -->
+  <span
+    class:list={[
+      "inline-flex items-center gap-1 rounded border px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider uppercase",
+      currentDomain.color,
+    ]}
+  >
+    <span>{currentDomain.icon}</span>
+    <span>{currentDomain.shortLabel}</span>
+  </span>
+
+  <!-- Format Badge -->
+  {
+    showFormat && currentFormat && (
+      <span
+        class:list={[
+          "inline-flex items-center gap-1 rounded border px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-wider uppercase",
+          currentFormat.color,
+        ]}
+      >
+        <span>{currentFormat.icon}</span>
+        <span>{currentFormat.label}</span>
+      </span>
+    )
+  }
+</div>

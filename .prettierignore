@@ -15,3 +15,8 @@
 
 # Ignore MDX files
 *.mdx
+
+# Deterministically generated content (format at the source/generator instead)
+src/content/posts/terraform-mastery-*.md
+src/content/official-docs/
+src/data/officialDocsData.ts

@@ -1,0 +1,1 @@
+Modules are containers for multiple resources that are used together with explicit input parameters.

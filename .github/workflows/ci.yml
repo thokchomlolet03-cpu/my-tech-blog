@@ -24,6 +24,8 @@ jobs:
     steps:
       - name: "☁️ Checkout repository"
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: "📦 Install pnpm"
         uses: pnpm/action-setup@v4
@@ -38,6 +40,9 @@ jobs:
 
       - name: "📦 Install dependencies"
         run: pnpm install --frozen-lockfile
+
+      - name: "📚 Verify Terraform curriculum publication"
+        run: pnpm run check:curriculum
 
       - name: "🔎 Lint code"
         run: pnpm run lint

@@ -14,6 +14,8 @@ import BackButton from "./_components/BackButton.astro";
 import BackToTopButton from "./_components/BackToTopButton.astro";
 import AdjacentPostNav from "./_components/AdjacentPostNav.astro";
 import Comments from "@/components/Comments.astro";
+import DomainBadge from "@/components/DomainBadge.astro";
+import SeriesNavigation from "@/components/SeriesNavigation.astro";
 import config from "@/config";
 
 export async function getStaticPaths() {
@@ -69,6 +71,14 @@ const {
   timezone,
   tags,
   hideEditPost,
+  domain,
+  format,
+  series,
+  seriesOrder,
+  seriesTotal,
+  generated,
+  sourceRepository,
+  sourceRevision,
 } = post.data;
 
 const { Content, headings } = await render(post);
@@ -111,12 +121,20 @@ const ogImage = ogImageUrl
     class:list={["w-full", { "mt-4": !config.features.showBackButton }]}
     data-pagefind-body
   >
-    <div class="doc-card mb-8 p-6 sm:p-8">
+    <div class="doc-card mb-6 p-6 sm:p-8">
       <div
-        class="mb-3 flex items-center gap-2 border-b border-[rgba(230,235,245,0.12)] pb-3 font-mono text-xs text-[#a47bea]"
+        class="mb-3 flex items-center justify-between gap-2 border-b border-[rgba(230,235,245,0.12)] pb-3"
       >
-        <span class="size-1.5 rounded-full bg-[#a47bea]"></span>
-        <span>TECHNICAL ARTICLE</span>
+        <DomainBadge domain={domain} format={format} />
+        {
+          series && (
+            <span class="rounded border border-amber-500/20 bg-amber-500/10 px-2 py-0.5 font-mono text-[10px] text-amber-300 uppercase">
+              {seriesOrder === 0
+                ? "SERIES HUB"
+                : `MODULE ${seriesOrder} / ${seriesTotal}`}
+            </span>
+          )
+        }
       </div>
 
       <h1
@@ -145,7 +163,32 @@ const ogImage = ogImageUrl
       <ul class="mt-4 flex flex-wrap gap-2">
         {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
       </ul>
+
+      {
+        generated && sourceRepository && sourceRevision && (
+          <div class="mt-4 rounded-lg border border-emerald-500/20 bg-emerald-500/5 px-3 py-2 font-mono text-xs text-emerald-200">
+            Generated from the reviewed curriculum at
+            <a
+              class="ml-1 underline decoration-emerald-500/50 underline-offset-4 hover:text-white"
+              href={`${sourceRepository}/commit/${sourceRevision}`}
+            >
+              {sourceRevision.slice(0, 12)}
+            </a>
+          </div>
+        )
+      }
     </div>
+
+    <!-- Series Interactive Roadmap (Top) -->
+    {
+      series && (
+        <SeriesNavigation
+          series={series}
+          seriesOrder={seriesOrder}
+          seriesTotal={seriesTotal}
+        />
+      )
+    }
 
     <article
       id="article"
@@ -157,6 +200,17 @@ const ogImage = ogImageUrl
     >
       <Content />
     </article>
+
+    <!-- Series Interactive Roadmap (Bottom) -->
+    {
+      series && (
+        <SeriesNavigation
+          series={series}
+          seriesOrder={seriesOrder}
+          seriesTotal={seriesTotal}
+        />
+      )
+    }
 
     <hr class="my-8 border-[rgba(230,235,245,0.12)]" />
 
@@ -231,7 +285,11 @@ const ogImage = ogImageUrl
 
   function attachCopyButtons() {
     const copyButtonLabel = "Copy";
-    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+    const codeBlocks = Array.from(
+      document.querySelectorAll(
+        "pre:not([data-language='mermaid']):not(.mermaid)"
+      )
+    );
 
     for (const codeBlock of codeBlocks) {
       const wrapper = document.createElement("div");

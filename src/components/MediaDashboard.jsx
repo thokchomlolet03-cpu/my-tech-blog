@@ -67,11 +67,10 @@ export default function MediaDashboard({
           <div className="flex flex-grow items-center justify-center">
             {/* Spotify embed: uses lazy loading and standard height for compact player */}
             <iframe
-              style={{ borderRadius: "12px" }}
+              style={{ border: 0, borderRadius: "12px" }}
               src={spotifyEmbedUrl}
               width="100%"
               height="152"
-              frameBorder="0"
               allowFullScreen
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
@@ -102,7 +101,6 @@ export default function MediaDashboard({
                 className="absolute top-0 left-0 h-full w-full"
                 src={youtubeEmbedUrl}
                 title="YouTube Video Embed"
-                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen

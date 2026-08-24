@@ -1,0 +1,1 @@
+HCL configuration syntax consists of blocks, arguments, and expressions in declarative format.

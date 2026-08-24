@@ -1,0 +1,1 @@
+Resource blocks declare infrastructure objects with type, name, and provider-specific attributes.

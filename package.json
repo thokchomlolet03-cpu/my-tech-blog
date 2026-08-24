@@ -7,9 +7,12 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/sync-terraform-curriculum.mjs && node scripts/sync-tf-docs.mjs",
     "build": "astro check && astro build && pagefind --site dist && cp -r dist/pagefind public/",
     "preview": "astro preview",
     "sync": "astro sync",
+    "sync:curriculum": "node scripts/sync-terraform-curriculum.mjs",
+    "check:curriculum": "node scripts/sync-terraform-curriculum.mjs --check",
     "astro": "astro",
     "format:check": "prettier --check .",
     "format": "prettier --write .",

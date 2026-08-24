@@ -17,6 +17,16 @@ export default [
       parser: tsParser,
     },
   },
-  { rules: { "no-console": "error" } },
+  {
+    rules: {
+      "no-console": ["error", { allow: ["warn", "error"] }],
+    },
+  },
+  {
+    files: ["scripts/**/*.mjs"],
+    rules: {
+      "no-console": "off",
+    },
+  },
   { ignores: ["dist/**", ".astro/**", "public/pagefind/**"] },
 ];
