@@ -179,8 +179,7 @@ const rssHref = getRelativeLocaleUrl(
             wrapper.innerHTML = svg;
             container.dataset.mermaidRendered = 'true';
             container.parentNode?.replaceChild(wrapper, container);
-          } catch (e) {
-            console.warn('Mermaid render error:', e);
+          } catch {
             const errorElement = document.getElementById(graphId) || document.getElementById('d' + graphId);
             if (errorElement) errorElement.remove();
           }

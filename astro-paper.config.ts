@@ -2,7 +2,7 @@ import { defineAstroPaperConfig } from "./src/types/config";
 
 export default defineAstroPaperConfig({
   site: {
-    url: "https://lolet03.github.io/my-tech-blog",
+    url: "https://thokchomlolet03-cpu.github.io/my-tech-blog",
     title: "Friction Hunter",
     description: "Engineering, system architecture, site reliability, and the neuroscience of learning.",
     author: "Thokchom Lolet Singh",
