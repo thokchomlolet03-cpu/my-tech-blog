@@ -21,7 +21,7 @@ import { transformerFileName } from "./src/utils/transformers/fileName";
 import config from "./astro-paper.config";
 
 export default defineConfig({
-  site: "https://lolet03.github.io",
+  site: "https://thokchomlolet03-cpu.github.io",
   base: "/my-tech-blog",
   integrations: [
     react(),
